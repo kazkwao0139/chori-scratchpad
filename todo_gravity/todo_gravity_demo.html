@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Todo Gravity</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Consolas', 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+.container { width: 100%; max-width: 640px; }
+h1 { font-size: 24px; font-weight: normal; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 14px; margin-bottom: 30px; }
+
+/* Input */
+.input-area { position: relative; margin-bottom: 8px; }
+#todo-input {
+    width: 100%;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    color: #e0e0e0;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+#todo-input:focus { border-color: #444; }
+#todo-input::placeholder { color: #444; }
+
+/* Live metrics */
+.metrics {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: #444;
+    margin-bottom: 24px;
+    height: 16px;
+}
+.metrics span { transition: color 0.3s; }
+.metrics span.active { color: #888; }
+
+/* Baseline indicator */
+.baseline {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    background: #111;
+    border-left: 2px solid #333;
+}
+.baseline .count { color: #888; }
+
+/* Todo list */
+.todo-list { list-style: none; }
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid #1a1a1a;
+    transition: transform 0.4s ease, opacity 0.3s, background 0.2s;
+    cursor: default;
+}
+.todo-item:hover { background: #111; }
+.todo-item.entering {
+    animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.mass-bar {
+    width: 60px;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 3px;
+    margin-right: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.mass-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+.mass-value {
+    font-size: 11px;
+    color: #555;
+    width: 36px;
+    text-align: right;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+.todo-text { flex: 1; font-size: 14px; }
+.todo-actions {
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    gap: 8px;
+}
+.todo-item:hover .todo-actions { opacity: 1; }
+.btn {
+    background: none;
+    border: 1px solid #333;
+    color: #666;
+    font-family: inherit;
+    font-size: 11px;
+    padding: 2px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn:hover { border-color: #666; color: #aaa; }
+.btn.done:hover { border-color: #4a7; color: #4a7; }
+.btn.del:hover { border-color: #a44; color: #a44; }
+
+/* Empty state */
+.empty {
+    text-align: center;
+    color: #333;
+    padding: 60px 0;
+    font-size: 14px;
+}
+
+/* Info */
+.info {
+    margin-top: 40px;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.8;
+}
+.info strong { color: #555; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Todo Gravity</h1>
+    <p class="subtitle">무거운 일이 먼저 온다</p>
+
+    <div class="input-area">
+        <input type="text" id="todo-input" placeholder="할 일을 입력하세요" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="metrics" id="metrics">
+        <span id="m-hold">hold: —</span>
+        <span id="m-flight">flight: —</span>
+        <span id="m-speed">speed: —</span>
+        <span id="m-bs">bs: —</span>
+    </div>
+
+    <div class="baseline" id="baseline-info">
+        베이스라인 수집 중 — <span class="count" id="baseline-count">0</span>/5 입력 필요
+    </div>
+
+    <ul class="todo-list" id="todo-list"></ul>
+    <div class="empty" id="empty-state">타이핑 패턴에서 중요도를 읽습니다</div>
+
+    <div class="info">
+        <strong>원리:</strong> 키스트로크 타이밍(hold time, flight time)을 측정합니다.<br>
+        평소 타이핑 패턴 대비 |z-score|가 높을수록 각성 상태 — 중요한 일입니다.<br>
+        방향은 상관없습니다. 급해서 빨라져도, 고민해서 느려져도, 평소와 다르면 중요합니다.<br>
+        <br>
+        <strong>근거:</strong> Epp et al. (CHI 2011) — 키스트로크 리듬으로 감정 상태 77-88% 정확도 분류<br>
+        PLOS ONE (2015) — 각성(arousal)이 타이핑 타이밍에 유의미한 영향, 방향(valence)은 아님
+    </div>
+</div>
+
+<script>
+// ─── Keystroke Measurement ───────────────────────────
+
+const input = document.getElementById('todo-input');
+const mHold = document.getElementById('m-hold');
+const mFlight = document.getElementById('m-flight');
+const mSpeed = document.getElementById('m-speed');
+const mBs = document.getElementById('m-bs');
+
+let holdTimes = [];
+let flightTimes = [];
+let keyDownMap = {};
+let lastKeyUpTime = null;
+let backspaceCount = 0;
+let charCount = 0;
+let inputStartTime = null;
+
+function resetMetrics() {
+    holdTimes = [];
+    flightTimes = [];
+    keyDownMap = {};
+    lastKeyUpTime = null;
+    backspaceCount = 0;
+    charCount = 0;
+    inputStartTime = null;
+    mHold.textContent = 'hold: —';
+    mFlight.textContent = 'flight: —';
+    mSpeed.textContent = 'speed: —';
+    mBs.textContent = 'bs: —';
+    mHold.className = '';
+    mFlight.className = '';
+    mSpeed.className = '';
+    mBs.className = '';
+}
+
+input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') return;
+
+    const now = performance.now();
+    if (!inputStartTime) inputStartTime = now;
+
+    if (e.key === 'Backspace') {
+        backspaceCount++;
+        mBs.textContent = `bs: ${backspaceCount}`;
+        mBs.className = 'active';
+        return;
+    }
+
+    // Record keydown time (ignore IME composing duplicates)
+    if (!e.isComposing) {
+        keyDownMap[e.key] = now;
+    }
+
+    // Flight time: time since last keyup
+    if (lastKeyUpTime !== null) {
+        const flight = now - lastKeyUpTime;
+        if (flight < 2000) { // ignore pauses > 2s
+            flightTimes.push(flight);
+            mFlight.textContent = `flight: ${flight.toFixed(0)}ms`;
+            mFlight.className = 'active';
+        }
+    }
+
+    charCount++;
+    if (inputStartTime) {
+        const elapsed = (now - inputStartTime) / 1000;
+        if (elapsed > 0) {
+            mSpeed.textContent = `speed: ${(charCount / elapsed).toFixed(1)}/s`;
+            mSpeed.className = 'active';
+        }
+    }
+});
+
+input.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter' || e.key === 'Backspace') return;
+
+    const now = performance.now();
+    lastKeyUpTime = now;
+
+    // Hold time
+    if (keyDownMap[e.key]) {
+        const hold = now - keyDownMap[e.key];
+        if (hold < 1000) { // ignore held keys > 1s
+            holdTimes.push(hold);
+            mHold.textContent = `hold: ${hold.toFixed(0)}ms`;
+            mHold.className = 'active';
+        }
+        delete keyDownMap[e.key];
+    }
+});
+
+// Also handle compositionend for Korean IME
+input.addEventListener('compositionend', (e) => {
+    const now = performance.now();
+    if (lastKeyUpTime !== null) {
+        const flight = now - lastKeyUpTime;
+        if (flight < 2000) {
+            flightTimes.push(flight);
+        }
+    }
+    lastKeyUpTime = now;
+});
+
+
+// ─── Scoring ─────────────────────────────────────────
+
+function mean(arr) {
+    if (arr.length === 0) return 0;
+    return arr.reduce((a, b) => a + b, 0) / arr.length;
+}
+
+function std(arr) {
+    if (arr.length < 2) return 1;
+    const m = mean(arr);
+    return Math.sqrt(arr.reduce((s, v) => s + (v - m) ** 2, 0) / (arr.length - 1));
+}
+
+// Baseline: running stats of all previous entries
+let allEntryStats = []; // { meanHold, meanFlight, speed, bsRatio }
+
+function computeEntryFeatures() {
+    const elapsed = inputStartTime ? (performance.now() - inputStartTime) / 1000 : 1;
+    return {
+        meanHold: mean(holdTimes),
+        meanFlight: mean(flightTimes),
+        speed: charCount / Math.max(elapsed, 0.1),
+        bsRatio: charCount > 0 ? backspaceCount / charCount : 0,
+    };
+}
+
+function computeImportance(features) {
+    if (allEntryStats.length < 5) return null; // still collecting baseline
+
+    const zScores = [];
+    const keys = ['meanHold', 'meanFlight', 'speed', 'bsRatio'];
+    const weights = [0.3, 0.3, 0.25, 0.15]; // from paper: hold & flight most predictive
+
+    for (let i = 0; i < keys.length; i++) {
+        const k = keys[i];
+        const values = allEntryStats.map(s => s[k]);
+        const m = mean(values);
+        const s = std(values);
+        if (s > 0.001) {
+            const z = Math.abs((features[k] - m) / s);
+            zScores.push(z * weights[i]);
+        }
+    }
+
+    if (zScores.length === 0) return 0;
+    return zScores.reduce((a, b) => a + b, 0) / weights.slice(0, zScores.length).reduce((a, b) => a + b, 0);
+}
+
+
+// ─── Todo List ───────────────────────────────────────
+
+let todos = JSON.parse(localStorage.getItem('todo-gravity') || '[]');
+let nextId = todos.length > 0 ? Math.max(...todos.map(t => t.id)) + 1 : 1;
+
+// Restore baseline from saved todos
+todos.forEach(t => {
+    if (t.features) allEntryStats.push(t.features);
+});
+
+function saveTodos() {
+    localStorage.setItem('todo-gravity', JSON.stringify(todos));
+}
+
+function addTodo(text) {
+    const features = computeEntryFeatures();
+    const importance = computeImportance(features);
+
+    const todo = {
+        id: nextId++,
+        text: text,
+        features: features,
+        importance: importance,
+        created: Date.now(),
+    };
+
+    allEntryStats.push(features);
+
+    // If we just hit 5 entries, recalculate all previous importances
+    if (allEntryStats.length >= 5) {
+        todos.forEach(t => {
+            if (t.features) {
+                t.importance = computeImportance(t.features);
+            }
+        });
+    }
+
+    todos.push(todo);
+    todos.sort((a, b) => {
+        // null importance (baseline) goes to bottom
+        const ia = a.importance ?? -1;
+        const ib = b.importance ?? -1;
+        return ib - ia;
+    });
+
+    saveTodos();
+    render(todo.id);
+}
+
+function completeTodo(id) {
+    todos = todos.filter(t => t.id !== id);
+    saveTodos();
+    render();
+}
+
+function deleteTodo(id) {
+    todos = todos.filter(t => t.id !== id);
+    saveTodos();
+    render();
+}
+
+
+// ─── Render ──────────────────────────────────────────
+
+const listEl = document.getElementById('todo-list');
+const emptyEl = document.getElementById('empty-state');
+const baselineEl = document.getElementById('baseline-info');
+const baselineCount = document.getElementById('baseline-count');
+
+function getColor(importance) {
+    if (importance === null || importance === undefined) return '#333';
+    const t = Math.min(importance / 2.5, 1); // normalize roughly
+    const r = Math.round(80 + t * 175);
+    const g = Math.round(80 + (1 - t) * 100);
+    const b = Math.round(80);
+    return `rgb(${r},${g},${b})`;
+}
+
+function render(newId) {
+    listEl.innerHTML = '';
+    emptyEl.style.display = todos.length ? 'none' : 'block';
+
+    // Update baseline info
+    const count = allEntryStats.length;
+    if (count < 5) {
+        baselineEl.style.display = 'block';
+        baselineCount.textContent = count;
+    } else {
+        baselineEl.style.display = 'none';
+    }
+
+    // Find max importance for normalization
+    const maxImp = Math.max(...todos.map(t => t.importance ?? 0), 0.01);
+
+    todos.forEach(t => {
+        const li = document.createElement('li');
+        li.className = 'todo-item' + (t.id === newId ? ' entering' : '');
+
+        const imp = t.importance ?? 0;
+        const norm = Math.min(imp / Math.max(maxImp, 0.01), 1);
+        const color = getColor(t.importance);
+
+        li.innerHTML = `
+            <div class="mass-bar"><div class="mass-fill" style="width:${norm * 100}%;background:${color}"></div></div>
+            <span class="mass-value" style="color:${color}">${t.importance !== null ? imp.toFixed(2) : '...'}</span>
+            <span class="todo-text">${escapeHtml(t.text)}</span>
+            <span class="todo-actions">
+                <button class="btn done" onclick="completeTodo(${t.id})">done</button>
+                <button class="btn del" onclick="deleteTodo(${t.id})">del</button>
+            </span>
+        `;
+
+        listEl.appendChild(li);
+    });
+}
+
+function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+}
+
+
+// ─── Input Handler ───────────────────────────────────
+
+input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.isComposing) {
+        const text = input.value.trim();
+        if (text) {
+            addTodo(text);
+            input.value = '';
+            resetMetrics();
+        }
+    }
+});
+
+// Initial render
+render();
+</script>
+</body>
+</html>
