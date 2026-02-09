@@ -115,27 +115,16 @@ McIntire 데이터셋(Real 200건 + Fake 200건)과 BBC/NPR RSS 실시간 뉴스
 
 ```
 viral/
-├── README.md                    # 이 문서
-├── LICENSE                      # MIT License
-├── viral_marketing_memo.md      # 최초 아이디어 메모
-├── traffic_signal_memo.md       # 신호등 제어 메모 (다음 프로젝트)
-│
-├── reaction_diffusion_grid.py   # 원본: 배달 플랫폼 반응-확산 시뮬레이터
+├── README.md
+├── .gitignore
 ├── viral_marketing_sim.py       # 소셜 그래프 확산 시뮬레이터
 ├── viral_marketing_demo.html    # 웹 인터랙티브 데모
 ├── news_data_collector.py       # 실제 뉴스 데이터 수집 & 분석
 ├── diffusion_intervention.py    # 차단 전략 시뮬레이션 & 검증
-│
-├── data/
-│   ├── mcintire_news.json       # Real/Fake 뉴스 데이터 (캐시)
-│   └── analysis_summary.json    # 분석 수치 요약
-│
 └── output/
     ├── viral_marketing_analysis.png       # 시뮬레이터 6-panel
     ├── news_cosine_spectral_analysis.png  # 실데이터 스펙트럼 분석
-    ├── intervention_analysis.png          # 차단 전략 분석 8-panel
-    ├── snapshots_normal_content.png       # 정상 확산 스냅샷
-    └── snapshots_fake_news.png            # 가짜 확산 스냅샷
+    └── intervention_analysis.png          # 차단 전략 분석 8-panel
 ```
 
 ## 실행 방법
