@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viral Marketing Simulator</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0a0e17;
+  color: #e0e0e0;
+  overflow: hidden;
+  height: 100vh;
+}
+#app {
+  display: flex;
+  height: 100vh;
+}
+#sidebar {
+  width: 300px;
+  background: #111827;
+  border-right: 1px solid #1e293b;
+  padding: 20px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+#canvas-wrap {
+  flex: 1;
+  position: relative;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+h1 {
+  font-size: 18px;
+  color: #60a5fa;
+  margin-bottom: 4px;
+}
+.subtitle {
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+.section {
+  margin-bottom: 18px;
+}
+.section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #d1d5db;
+}
+label span.val {
+  color: #60a5fa;
+  font-weight: 600;
+  min-width: 36px;
+  text-align: right;
+}
+input[type="range"] {
+  width: 100%;
+  accent-color: #3b82f6;
+  margin-bottom: 4px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 6px;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+.btn-primary:hover { background: #2563eb; }
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+.btn-danger:hover { background: #dc2626; }
+.btn-secondary {
+  background: #374151;
+  color: #d1d5db;
+}
+.btn-secondary:hover { background: #4b5563; }
+.btn-active {
+  background: #10b981;
+  color: white;
+}
+.toggle-group {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.toggle-group button {
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.toggle-group .active {
+  background: #3b82f6;
+  color: white;
+}
+.toggle-group .inactive {
+  background: #1f2937;
+  color: #9ca3af;
+}
+#stats {
+  font-size: 12px;
+  line-height: 1.8;
+}
+#stats .stat-row {
+  display: flex;
+  justify-content: space-between;
+}
+#stats .stat-val {
+  color: #60a5fa;
+  font-weight: 600;
+}
+#influencer-list {
+  font-size: 12px;
+  line-height: 1.8;
+}
+#influencer-list .inf-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+#influencer-list .inf-row:hover {
+  background: #1f2937;
+}
+.inf-rank {
+  color: #f59e0b;
+  font-weight: 700;
+}
+.inf-id { color: #d1d5db; }
+.inf-score { color: #10b981; font-weight: 600; }
+.legend {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+.tooltip {
+  position: absolute;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  pointer-events: none;
+  display: none;
+  z-index: 10;
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="sidebar">
+    <h1>Viral Marketing Sim</h1>
+    <div class="subtitle">Cosine-Similarity Laplacian Diffusion</div>
+
+    <div class="section">
+      <div class="section-title">Graph</div>
+      <label>Nodes <span class="val" id="v-nodes">60</span></label>
+      <input type="range" id="s-nodes" min="20" max="120" value="60">
+      <label>BA edges/node <span class="val" id="v-ba">3</span></label>
+      <input type="range" id="s-ba" min="1" max="6" value="3">
+      <label>Feature dim <span class="val" id="v-dim">6</span></label>
+      <input type="range" id="s-dim" min="2" max="12" value="6">
+    </div>
+
+    <div class="section">
+      <div class="section-title">Diffusion Mode</div>
+      <div class="toggle-group">
+        <button id="btn-normal" class="active" onclick="setMode('normal')">Normal</button>
+        <button id="btn-fake" class="inactive" onclick="setMode('fake')">Fake News</button>
+      </div>
+      <label>Diffusion coeff <span class="val" id="v-diff">0.05</span></label>
+      <input type="range" id="s-diff" min="1" max="20" value="5">
+      <label>Speed <span class="val" id="v-speed">1.0</span></label>
+      <input type="range" id="s-speed" min="1" max="10" value="1">
+    </div>
+
+    <div class="section">
+      <div class="section-title">Controls</div>
+      <button class="btn-primary" onclick="regenerate()">Regenerate Graph</button>
+      <button class="btn-secondary" onclick="resetDiffusion()">Reset Diffusion</button>
+      <button class="btn-danger" id="btn-play" onclick="togglePlay()">▶ Start</button>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Top Influencers</div>
+      <div id="influencer-list"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Statistics</div>
+      <div id="stats"></div>
+    </div>
+
+    <div class="legend">
+      Click a node to set as seed user.<br>
+      Node size = eigenvector centrality.<br>
+      Color = infection level (green→red).<br>
+      Red rings = top influencers.
+    </div>
+  </div>
+
+  <div id="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  State
+// ============================================================
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+let N, M, FEAT_DIM;
+let nodes, edges, adj, features, cosSim, Lcos, Lrand;
+let pos, centrality, topInf, fiedler;
+let u; // infection vector
+let mode = 'normal';
+let playing = false;
+let animId = null;
+let hoveredNode = -1;
+let diffCoeff = 0.05;
+let speed = 1;
+
+// ============================================================
+//  Slider bindings
+// ============================================================
+function bindSlider(id, valId, parser, cb) {
+  const s = document.getElementById(id);
+  const v = document.getElementById(valId);
+  s.addEventListener('input', () => {
+    const val = parser(s.value);
+    v.textContent = val;
+    if (cb) cb(val);
+  });
+}
+bindSlider('s-nodes', 'v-nodes', Number);
+bindSlider('s-ba', 'v-ba', Number);
+bindSlider('s-dim', 'v-dim', Number);
+bindSlider('s-diff', 'v-diff', v => (v / 100).toFixed(2), v => { diffCoeff = parseFloat(v); });
+bindSlider('s-speed', 'v-speed', v => (v / 1).toFixed(1), v => { speed = parseFloat(v); });
+
+// ============================================================
+//  Math utilities
+// ============================================================
+function dot(a, b) {
+  let s = 0;
+  for (let i = 0; i < a.length; i++) s += a[i] * b[i];
+  return s;
+}
+
+function norm(a) {
+  return Math.sqrt(dot(a, a));
+}
+
+function cosineSim(a, b) {
+  const na = norm(a), nb = norm(b);
+  if (na < 1e-10 || nb < 1e-10) return 0.5;
+  // [-1, 1] → [0, 1] 선형 변환
+  return (dot(a, b) / (na * nb) + 1) / 2;
+}
+
+// Matrix-vector multiply (dense, small n)
+function matvec(M, v) {
+  const n = v.length;
+  const r = new Float64Array(n);
+  for (let i = 0; i < n; i++) {
+    let s = 0;
+    for (let j = 0; j < n; j++) s += M[i * n + j] * v[j];
+    r[i] = s;
+  }
+  return r;
+}
+
+// ============================================================
+//  Graph generation (BA model)
+// ============================================================
+function generateBA(n, m) {
+  const edgeList = [];
+  const degree = new Float64Array(n);
+
+  // Initial clique of m+1 nodes
+  for (let i = 0; i <= m; i++) {
+    for (let j = i + 1; j <= m; j++) {
+      edgeList.push([i, j]);
+      degree[i]++;
+      degree[j]++;
+    }
+  }
+
+  for (let newNode = m + 1; newNode < n; newNode++) {
+    // Build CDF for preferential attachment
+    let totalDeg = 0;
+    for (let i = 0; i < newNode; i++) totalDeg += degree[i];
+
+    const selected = new Set();
+    let attempts = 0;
+    while (selected.size < m && attempts < m * 20) {
+      let r = Math.random() * totalDeg;
+      for (let i = 0; i < newNode; i++) {
+        r -= degree[i];
+        if (r <= 0) {
+          selected.add(i);
+          break;
+        }
+      }
+      attempts++;
+    }
+
+    for (const t of selected) {
+      edgeList.push([newNode, t]);
+      degree[newNode]++;
+      degree[t]++;
+    }
+  }
+
+  return edgeList;
+}
+
+// ============================================================
+//  Build everything
+// ============================================================
+function build() {
+  N = parseInt(document.getElementById('s-nodes').value);
+  M = parseInt(document.getElementById('s-ba').value);
+  FEAT_DIM = parseInt(document.getElementById('s-dim').value);
+
+  // Generate graph
+  edges = generateBA(N, M);
+  adj = new Float64Array(N * N);
+  for (const [i, j] of edges) {
+    adj[i * N + j] = 1;
+    adj[j * N + i] = 1;
+  }
+
+  // User features (3 clusters)
+  features = [];
+  const nClusters = 3;
+  const centers = [];
+  for (let c = 0; c < nClusters; c++) {
+    const center = [];
+    for (let d = 0; d < FEAT_DIM; d++) center.push((Math.random() - 0.5) * 4);
+    centers.push(center);
+  }
+  for (let i = 0; i < N; i++) {
+    const c = Math.floor(Math.random() * nClusters);
+    const feat = [];
+    for (let d = 0; d < FEAT_DIM; d++) {
+      feat.push(centers[c][d] + (Math.random() - 0.5));
+    }
+    const n = norm(feat) || 1;
+    features.push(feat.map(x => x / n));
+  }
+
+  // Cosine similarity
+  cosSim = new Float64Array(N * N);
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      const s = cosineSim(features[i], features[j]);
+      cosSim[i * N + j] = s;
+      cosSim[j * N + i] = s;
+    }
+  }
+
+  // Laplacians
+  Lcos = new Float64Array(N * N);
+  Lrand = new Float64Array(N * N);
+  for (let i = 0; i < N; i++) {
+    let dCos = 0, dRand = 0;
+    for (let j = 0; j < N; j++) {
+      if (adj[i * N + j] > 0) {
+        const w = cosSim[i * N + j];
+        Lcos[i * N + j] = -w;
+        dCos += w;
+        Lrand[i * N + j] = -1;
+        dRand += 1;
+      }
+    }
+    Lcos[i * N + i] = dCos;
+    Lrand[i * N + i] = dRand;
+  }
+
+  // Eigenvector centrality via power iteration on A_cos
+  centrality = new Float64Array(N);
+  let ev = new Float64Array(N);
+  for (let i = 0; i < N; i++) ev[i] = 1;
+  for (let iter = 0; iter < 50; iter++) {
+    const nev = new Float64Array(N);
+    for (let i = 0; i < N; i++) {
+      let s = 0;
+      for (let j = 0; j < N; j++) {
+        if (adj[i * N + j] > 0) s += cosSim[i * N + j] * ev[j];
+      }
+      nev[i] = s;
+    }
+    let maxVal = 0;
+    for (let i = 0; i < N; i++) if (Math.abs(nev[i]) > maxVal) maxVal = Math.abs(nev[i]);
+    if (maxVal > 0) for (let i = 0; i < N; i++) nev[i] /= maxVal;
+    ev = nev;
+  }
+  for (let i = 0; i < N; i++) centrality[i] = Math.abs(ev[i]);
+
+  // Top influencers
+  const indices = Array.from({length: N}, (_, i) => i);
+  indices.sort((a, b) => centrality[b] - centrality[a]);
+  topInf = indices.slice(0, 5);
+
+  // Layout (force-directed)
+  computeLayout();
+
+  // Init infection
+  u = new Float64Array(N);
+
+  updateInfluencerList();
+  updateStats();
+}
+
+// ============================================================
+//  Force-directed layout
+// ============================================================
+function computeLayout() {
+  pos = [];
+  for (let i = 0; i < N; i++) {
+    pos.push([Math.random(), Math.random()]);
+  }
+
+  const k = 1.0 / Math.sqrt(N);
+  const iterations = 80;
+
+  for (let it = 0; it < iterations; it++) {
+    const disp = Array.from({length: N}, () => [0, 0]);
+    const temp = Math.max(0.05, 1.0 - it / iterations);
+
+    // Repulsion
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        let dx = pos[i][0] - pos[j][0];
+        let dy = pos[i][1] - pos[j][1];
+        let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        let f = (k * k) / dist;
+        let fx = f * dx / dist;
+        let fy = f * dy / dist;
+        disp[i][0] += fx;
+        disp[i][1] += fy;
+        disp[j][0] -= fx;
+        disp[j][1] -= fy;
+      }
+    }
+
+    // Attraction
+    for (const [i, j] of edges) {
+      let dx = pos[j][0] - pos[i][0];
+      let dy = pos[j][1] - pos[i][1];
+      let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+      let f = dist / k;
+      let fx = f * dx / dist;
+      let fy = f * dy / dist;
+      disp[i][0] += fx;
+      disp[i][1] += fy;
+      disp[j][0] -= fx;
+      disp[j][1] -= fy;
+    }
+
+    for (let i = 0; i < N; i++) {
+      let dn = Math.sqrt(disp[i][0] ** 2 + disp[i][1] ** 2) || 0.01;
+      let scale = Math.min(temp * 0.05, dn) / dn;
+      pos[i][0] += disp[i][0] * scale;
+      pos[i][1] += disp[i][1] * scale;
+      pos[i][0] = Math.max(0.05, Math.min(0.95, pos[i][0]));
+      pos[i][1] = Math.max(0.05, Math.min(0.95, pos[i][1]));
+    }
+  }
+}
+
+// ============================================================
+//  Diffusion step
+// ============================================================
+function diffusionStep() {
+  const L = mode === 'normal' ? Lcos : Lrand;
+  const Lu = matvec(L, u);
+  const dt = 0.001 * speed;
+  for (let i = 0; i < N; i++) {
+    u[i] -= diffCoeff * dt * Lu[i];
+    if (u[i] < 0) u[i] = 0;
+  }
+}
+
+// ============================================================
+//  Drawing
+// ============================================================
+function resize() {
+  const wrap = document.getElementById('canvas-wrap');
+  canvas.width = wrap.clientWidth * devicePixelRatio;
+  canvas.height = wrap.clientHeight * devicePixelRatio;
+  canvas.style.width = wrap.clientWidth + 'px';
+  canvas.style.height = wrap.clientHeight + 'px';
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+
+function toScreen(p) {
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  const margin = 40;
+  return [
+    margin + p[0] * (w - 2 * margin),
+    margin + p[1] * (h - 2 * margin)
+  ];
+}
+
+function draw() {
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  ctx.clearRect(0, 0, w, h);
+
+  // Background
+  ctx.fillStyle = '#0a0e17';
+  ctx.fillRect(0, 0, w, h);
+
+  // Edges
+  for (const [i, j] of edges) {
+    const [x1, y1] = toScreen(pos[i]);
+    const [x2, y2] = toScreen(pos[j]);
+    const sim = cosSim[i * N + j];
+    const infLevel = Math.max(u[i], u[j]);
+    if (infLevel > 0.01) {
+      ctx.strokeStyle = `rgba(239, 68, 68, ${Math.min(0.6, infLevel * 0.8)})`;
+      ctx.lineWidth = 1 + infLevel * 2;
+    } else {
+      ctx.strokeStyle = `rgba(100, 116, 139, ${0.08 + sim * 0.15})`;
+      ctx.lineWidth = 0.5 + sim;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  }
+
+  // Nodes
+  const maxCent = Math.max(...centrality) || 1;
+  for (let i = 0; i < N; i++) {
+    const [x, y] = toScreen(pos[i]);
+    const r = 4 + (centrality[i] / maxCent) * 12;
+    const inf = Math.min(u[i], 1);
+
+    // Color: green (0) → yellow (0.5) → red (1)
+    let red, green, blue;
+    if (inf < 0.5) {
+      const t = inf * 2;
+      red = Math.round(80 + t * 175);
+      green = Math.round(200 - t * 50);
+      blue = Math.round(80 - t * 60);
+    } else {
+      const t = (inf - 0.5) * 2;
+      red = Math.round(255);
+      green = Math.round(150 - t * 150);
+      blue = Math.round(20);
+    }
+    const color = `rgb(${red},${green},${blue})`;
+
+    // Glow for infected
+    if (inf > 0.05) {
+      const grad = ctx.createRadialGradient(x, y, r, x, y, r * 3);
+      grad.addColorStop(0, `rgba(${red},${green},${blue},0.3)`);
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, r * 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Node circle
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // White border
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Influencer ring
+    if (topInf.includes(i)) {
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(x, y, r + 4, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Hovered node
+    if (i === hoveredNode) {
+      ctx.strokeStyle = '#60a5fa';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, y, r + 6, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  // Mode indicator
+  ctx.fillStyle = mode === 'normal' ? '#10b981' : '#ef4444';
+  ctx.font = 'bold 14px system-ui';
+  ctx.fillText(mode === 'normal' ? '● Normal Content' : '● Fake News', 15, 25);
+
+  // Time / total infection
+  const totalInf = u.reduce((a, b) => a + b, 0);
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px system-ui';
+  ctx.fillText(`Total infection: ${totalInf.toFixed(3)}  |  Nodes: ${N}  |  Edges: ${edges.length}`, 15, h - 15);
+}
+
+// ============================================================
+//  Animation loop
+// ============================================================
+function animate() {
+  if (playing) {
+    for (let i = 0; i < 5; i++) diffusionStep();
+    updateStats();
+  }
+  draw();
+  animId = requestAnimationFrame(animate);
+}
+
+// ============================================================
+//  UI
+// ============================================================
+function setMode(m) {
+  mode = m;
+  document.getElementById('btn-normal').className = m === 'normal' ? 'active' : 'inactive';
+  document.getElementById('btn-fake').className = m === 'fake' ? 'active' : 'inactive';
+}
+
+function togglePlay() {
+  playing = !playing;
+  const btn = document.getElementById('btn-play');
+  if (playing) {
+    btn.textContent = '⏸ Pause';
+    btn.className = 'btn-active';
+  } else {
+    btn.textContent = '▶ Start';
+    btn.className = 'btn-danger';
+  }
+}
+
+function regenerate() {
+  playing = false;
+  document.getElementById('btn-play').textContent = '▶ Start';
+  document.getElementById('btn-play').className = 'btn-danger';
+  build();
+}
+
+function resetDiffusion() {
+  u = new Float64Array(N);
+  playing = false;
+  document.getElementById('btn-play').textContent = '▶ Start';
+  document.getElementById('btn-play').className = 'btn-danger';
+  updateStats();
+}
+
+function updateInfluencerList() {
+  const el = document.getElementById('influencer-list');
+  let html = '';
+  for (let rank = 0; rank < topInf.length; rank++) {
+    const idx = topInf[rank];
+    const deg = adj.reduce((s, v, j) => {
+      return j >= idx * N && j < (idx + 1) * N ? s + v : s;
+    }, 0);
+    html += `<div class="inf-row" onclick="seedNode(${idx})" style="cursor:pointer">
+      <span><span class="inf-rank">#${rank + 1}</span> <span class="inf-id">User ${idx}</span></span>
+      <span class="inf-score">${centrality[idx].toFixed(3)}</span>
+    </div>`;
+  }
+  el.innerHTML = html;
+}
+
+function updateStats() {
+  const el = document.getElementById('stats');
+  const totalInf = u.reduce((a, b) => a + b, 0);
+  const infected = u.filter(v => v > 0.01).length;
+  const maxInf = Math.max(...u);
+  const avgDeg = edges.length * 2 / N;
+
+  el.innerHTML = `
+    <div class="stat-row"><span>Total infection</span><span class="stat-val">${totalInf.toFixed(3)}</span></div>
+    <div class="stat-row"><span>Infected nodes</span><span class="stat-val">${infected} / ${N}</span></div>
+    <div class="stat-row"><span>Max infection</span><span class="stat-val">${maxInf.toFixed(3)}</span></div>
+    <div class="stat-row"><span>Avg degree</span><span class="stat-val">${avgDeg.toFixed(1)}</span></div>
+    <div class="stat-row"><span>Mode</span><span class="stat-val">${mode === 'normal' ? 'Normal' : 'Fake'}</span></div>
+  `;
+}
+
+function seedNode(idx) {
+  u[idx] = 1.0;
+  updateStats();
+}
+
+// ============================================================
+//  Mouse interaction
+// ============================================================
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  hoveredNode = -1;
+  const maxCent = Math.max(...centrality) || 1;
+  for (let i = 0; i < N; i++) {
+    const [x, y] = toScreen(pos[i]);
+    const r = 4 + (centrality[i] / maxCent) * 12;
+    const dx = mx - x, dy = my - y;
+    if (dx * dx + dy * dy < (r + 4) * (r + 4)) {
+      hoveredNode = i;
+      break;
+    }
+  }
+
+  if (hoveredNode >= 0) {
+    const i = hoveredNode;
+    const deg = Array.from({length: N}, (_, j) => adj[i * N + j]).reduce((a, b) => a + b, 0);
+    tooltip.style.display = 'block';
+    tooltip.style.left = (e.clientX - 280) + 'px';
+    tooltip.style.top = (e.clientY + 15) + 'px';
+    tooltip.innerHTML = `<b>User #${i}</b><br>
+      Centrality: ${centrality[i].toFixed(4)}<br>
+      Degree: ${deg}<br>
+      Infection: ${u[i].toFixed(4)}<br>
+      ${topInf.includes(i) ? '<span style="color:#f59e0b">★ Influencer</span>' : ''}`;
+  } else {
+    tooltip.style.display = 'none';
+  }
+});
+
+canvas.addEventListener('click', (e) => {
+  if (hoveredNode >= 0) {
+    seedNode(hoveredNode);
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hoveredNode = -1;
+  tooltip.style.display = 'none';
+});
+
+// ============================================================
+//  Init
+// ============================================================
+window.addEventListener('resize', () => { resize(); });
+resize();
+build();
+animate();
+</script>
+</body>
+</html>
