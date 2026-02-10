@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Hello World Entropy — 정보이론적 하한</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #0a0a0f;
+    color: #e6edf3;
+    font-family: 'Consolas', 'Courier New', monospace;
+    min-height: 100vh;
+    padding: 40px;
+    line-height: 1.6;
+}
+h1 { font-size: 24px; margin-bottom: 8px; color: #f0f6fc; }
+.subtitle { color: #8b949e; font-size: 14px; margin-bottom: 30px; }
+.section { margin-bottom: 32px; }
+.section-title { font-size: 16px; color: #58a6ff; margin-bottom: 12px; }
+
+.input-row {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.input-row input {
+    background: #161b22; border: 1px solid #30363d; color: #f0f6fc;
+    padding: 10px 16px; border-radius: 6px; font-size: 18px;
+    font-family: 'Consolas', monospace; width: 400px; outline: none;
+}
+.input-row input:focus { border-color: #58a6ff; }
+.input-row button {
+    background: #238636; border: none; color: #fff; padding: 10px 20px;
+    border-radius: 6px; cursor: pointer; font-size: 14px; font-family: inherit;
+}
+.input-row button:hover { background: #2ea043; }
+
+/* 비교 바 */
+.comparison { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.bar-row { display: flex; align-items: center; gap: 12px; }
+.bar-label { width: 140px; text-align: right; font-size: 13px; color: #8b949e; }
+.bar-container { flex: 1; height: 32px; background: #161b22; border-radius: 4px; position: relative; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 10px; font-size: 13px; font-weight: bold; }
+.bar-value { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #8b949e; }
+
+/* 글자별 테이블 */
+table { border-collapse: collapse; width: 100%; max-width: 900px; }
+th, td { padding: 8px 12px; text-align: center; border-bottom: 1px solid #21262d; }
+th { color: #58a6ff; font-size: 12px; font-weight: normal; text-transform: uppercase; }
+td { font-size: 14px; }
+td.char { font-size: 20px; color: #f0f6fc; font-weight: bold; }
+td.bits { color: #f97583; }
+td.prob { color: #7ee787; }
+.highlight { background: rgba(88, 166, 255, 0.08); }
+
+/* 압축 결과 */
+.compressed-box {
+    background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+    padding: 20px; margin-top: 16px; max-width: 900px;
+}
+.compressed-box .label { color: #8b949e; font-size: 12px; margin-bottom: 6px; }
+.compressed-box .value { font-size: 16px; color: #f97583; word-break: break-all; }
+.compressed-box .decoded { font-size: 16px; color: #7ee787; margin-top: 12px; }
+
+/* 요약 */
+.summary {
+    background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+    padding: 20px; max-width: 900px; margin-top: 20px;
+}
+.summary h3 { color: #f0f6fc; font-size: 15px; margin-bottom: 10px; }
+.summary p { color: #8b949e; font-size: 13px; line-height: 1.8; }
+.summary .num { color: #f97583; font-weight: bold; }
+.summary .green { color: #7ee787; font-weight: bold; }
+
+/* 산술 부호화 시각화 */
+.arith-viz {
+    max-width: 900px; margin-top: 16px;
+}
+.interval-step {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 6px;
+    font-size: 13px;
+}
+.interval-step .step-char {
+    width: 30px; font-size: 18px; font-weight: bold; color: #f0f6fc; text-align: center;
+}
+.interval-step .step-bar-container {
+    flex: 1; height: 20px; background: #161b22; border-radius: 3px;
+    position: relative; overflow: hidden;
+}
+.interval-step .step-bar {
+    position: absolute; height: 100%; background: #58a6ff; border-radius: 3px;
+    transition: all 0.4s ease; opacity: 0.7;
+}
+.interval-step .step-info {
+    width: 200px; font-size: 11px; color: #8b949e; text-align: right;
+}
+</style>
+</head>
+<body>
+
+<h1>Hello World Entropy</h1>
+<div class="subtitle">"Hello World"를 출력하는 데 필요한 최소 정보량은 몇 bits인가?</div>
+
+<div class="input-row">
+    <input type="text" id="inputStr" value="Hello World" placeholder="아무 문자열 입력..." />
+    <button onclick="analyze()">분석</button>
+</div>
+
+<div class="section">
+    <div class="section-title">모델별 정보량 비교</div>
+    <div class="comparison" id="comparison"></div>
+</div>
+
+<div class="section">
+    <div class="section-title">글자별 정보량 분해 (Bigram Model)</div>
+    <table id="charTable">
+        <thead>
+            <tr><th>#</th><th>문자</th><th>조건</th><th>P(c|prev)</th><th>-log₂(P)</th><th>누적 bits</th></tr>
+        </thead>
+        <tbody id="charBody"></tbody>
+    </table>
+</div>
+
+<div class="section">
+    <div class="section-title">산술 부호화 — 구간 수축 시각화</div>
+    <div class="arith-viz" id="arithViz"></div>
+</div>
+
+<div class="section">
+    <div class="section-title">압축 결과</div>
+    <div class="compressed-box" id="compressedBox"></div>
+</div>
+
+<div class="summary" id="summary"></div>
+
+<script>
+// ========== BIGRAM DATA (Google Corpus) ==========
+const BIGRAM_RAW = [["th",100272945963],["he",86697336727],["in",68595215308],["er",57754162106],["an",55974567611],["re",52285662239],["on",49570981965],["at",41920838452],["en",41004903554],["nd",38129777631],["ti",37856196209],["es",37766388079],["or",35994097756],["te",33973261529],["of",33130341561],["ed",32937140633],["is",31817918249],["it",31672532308],["al",30662410438],["ar",30308513014],["st",29704461829],["to",29360205581],["nt",29359771944],["ng",26871805511],["se",26282488562],["ha",26103411208],["as",24561944198],["ou",24531132241],["io",23542263265],["le",23382173640],["ve",23270129573],["co",22384167777],["me",22360109325],["de",21565300071],["hi",21520845924],["ri",20516398905],["ro",20491179118],["ic",19701195496],["ne",19504235770],["ea",19403941063],["ra",19332539912],["ce",18367773425],["li",17604626629],["ch",16854985236],["ll",16257360474],["be",16249257887],["ma",15938689768],["si",15509759748],["om",15402602484],["ur",15303657594],["ca",15174413181],["el",14952716079],["ta",14941000711],["la",14874551789],["ns",14350320288],["di",13899990598],["fo",13753006196],["ho",13672603513],["pe",13477683504],["ec",13457763533],["pr",13378480175],["no",13099447521],["ct",12997849406],["us",12808517567],["ac",12625666388],["ot",12465822481],["il",12167821320],["tr",12006693396],["ly",11983948242],["nc",11722631112],["et",11634161334],["ut",11423899818],["ss",11421755201],["so",11214705934],["rs",11180732354],["un",11121118166],["lo",10908830081],["wa",10865206430],["ge",10861045622],["ie",10845731320],["wh",10680697684],["ee",10647199443],["wi",10557401491],["em",10536054813],["ad",10375130449],["ol",10305660447],["rt",10198055461],["po",10189505383],["we",10176141608],["na",9790855551],["ul",9751225781],["ni",9564648232],["ts",9516029773],["mo",9498813191],["ow",9318366591],["pa",9123652775],["im",8959759181],["mi",8957825538],["ai",8922759715],["sh",8888705287],["ir",8886799024],["su",8774129154],["id",8332214014],["os",8176085241],["iv",8116349309],["ia",8072199471],["am",8032259916],["fi",8024355222],["ci",7936922442],["vi",7600241898],["pl",7415349106],["ig",7189051323],["tu",7187510085],["ev",7184041787],["ld",7122648226],["ry",6985436186],["mp",6743935008],["fe",6670566518],["bl",6581097936],["ab",6479202253],["gh",6414827751],["ty",6408447994],["op",6313536754],["wo",6252724050],["sa",6147356936],["ay",6128842727],["ex",6035335807],["ke",6027536039],["fr",6011200185],["oo",5928601045],["av",5778409728],["ag",5772552144],["if",5731148470],["ap",5719570727],["gr",5548472398],["od",5511014957],["bo",5509918152],["sp",5392724233],["rd",5338083783],["do",5307591560],["uc",5291161134],["bu",5214802738],["ei",5169898489],["ov",5021440160],["by",4975814759],["rm",4938158020],["ep",4837800987],["tt",4812693687],["oc",4692062395],["fa",4624241031],["ef",4588497002],["cu",4585165906],["rn",4521640992],["sc",4363410770],["gi",4275639800],["da",4259590348],["yo",4226720021],["cr",4214150542],["cl",4201617719],["du",4186093215],["ga",4175274057],["qu",4160167957],["ue",4158448570],["ff",4125634219],["ba",4122472992],["ey",4053144855],["ls",3990203351],["va",3946966167],["um",3901923211],["pp",3850125519],["ua",3844138094],["up",3835093459],["lu",3811884104],["go",3725558729],["ht",3670802795],["ru",3618438291],["ug",3606562400],["ds",3560125353],["lt",3486149365],["pi",3470838749],["rc",3422694015],["rr",3404547067],["eg",3370515965],["au",3356322923],["ck",3316660134],["ew",3293529190],["mu",3231856188],["br",3145611704],["bi",3005679357],["pt",2982699529],["ak",2952167845],["pu",2947681332],["ui",2852182384],["rg",2813274913],["ib",2780268452],["tl",2775935006],["ny",2760941827],["ki",2759841743],["rk",2736041446],["ys",2730343336],["ob",2725791138],["mm",2708822249],["fu",2706168901],["ph",2661480326],["og",2651165734],["ms",2617582287],["ye",2612941418],["ud",2577213760],["mb",2544901434],["ip",2515455253],["ub",2497666762],["oi",2474275212],["rl",2432373251],["gu",2418410978],["dr",2409399231],["hr",2379584978],["cc",2344219345],["tw",2322619238],["ft",2302659749],["wn",2227183930],["nu",2217508482],["af",2092395523],["hu",2077887429],["nn",2051719074],["eo",2044268477],["vo",2004982879],["rv",1953555667],["nf",1894270041],["xp",1885334638],["gn",1850801359],["sm",1838392669],["fl",1830098844],["iz",1814164135],["ok",1813376076],["nl",1798491132],["my",1753447198],["gl",1709752272],["aw",1689436638],["ju",1655210582],["oa",1620913259],["eq",1614312175],["sy",1602829285],["sl",1575646777],["ps",1538723474],["jo",1516687319],["lf",1507867867],["nv",1466426243],["je",1463052212],["nk",1455100124],["kn",1450401608],["gs",1443474876],["dy",1421751251],["hy",1412343465],["ze",1402290616],["ks",1339590722],["xt",1315669490],["bs",1292319275],["ik",1209994695],["dd",1205446875],["cy",1176324279],["rp",1173542093],["sk",1112771273],["xi",1111463633],["oe",1089254517],["oy",1020190223],["ws",989253674],["lv",984229060],["dl",911886482],["rf",909634941],["eu",878402090],["dg",874188188],["wr",867361010],["wo",6252724050]];
+
+// Build bigram count map and unigram counts
+const bigramCounts = {};
+const unigramAsFirst = {};  // total count of bigrams starting with char
+const totalBigrams = { sum: 0 };
+
+for (const [bg, count] of BIGRAM_RAW) {
+    const a = bg[0], b = bg[1];
+    if (!bigramCounts[a]) bigramCounts[a] = {};
+    bigramCounts[a][b] = (bigramCounts[a][b] || 0) + count;
+    unigramAsFirst[a] = (unigramAsFirst[a] || 0) + count;
+    totalBigrams.sum += count;
+}
+
+// Unigram frequencies (as second char)
+const unigramCounts = {};
+let unigramTotal = 0;
+for (const a in bigramCounts) {
+    for (const b in bigramCounts[a]) {
+        unigramCounts[b] = (unigramCounts[b] || 0) + bigramCounts[a][b];
+        unigramTotal += bigramCounts[a][b];
+    }
+}
+// Also add as first char
+for (const a in unigramAsFirst) {
+    if (!unigramCounts[a]) unigramCounts[a] = unigramAsFirst[a];
+}
+
+// P(char) - unigram
+function pUnigram(c) {
+    c = c.toLowerCase();
+    if (c === ' ') return 0.18; // space frequency in English text
+    const count = unigramCounts[c] || 0;
+    if (count === 0) return 1 / 95; // fallback uniform
+    return count / unigramTotal;
+}
+
+// P(char | prev) - bigram
+function pBigram(c, prev) {
+    c = c.toLowerCase();
+    prev = prev.toLowerCase();
+    if (prev === ' ' || prev === '^') {
+        // Start of word - use unigram as approx
+        return pUnigram(c) * 1.5; // slight boost for common starters
+    }
+    if (c === ' ') {
+        // Space after a letter - rough estimate
+        return 0.15; // ~15% chance of space after any letter
+    }
+    const prevCounts = bigramCounts[prev];
+    if (!prevCounts) return pUnigram(c);
+    const total = unigramAsFirst[prev] || 1;
+    const count = prevCounts[c.toLowerCase()] || 0;
+    if (count === 0) return Math.max(pUnigram(c) * 0.01, 1e-8);
+    return count / total;
+}
+
+// Uniform probability
+function pUniform() { return 1 / 95; }
+
+// Information content in bits
+function infoBits(p) { return -Math.log2(Math.max(p, 1e-15)); }
+
+// ========== ARITHMETIC CODING ==========
+// Using BigInt for precision
+const PRECISION = 48n;
+const WHOLE = 1n << PRECISION;
+const HALF = WHOLE >> 1n;
+const QUARTER = WHOLE >> 2n;
+
+function buildCDF(prevChar, alphabet) {
+    // Build cumulative distribution for arithmetic coding
+    const probs = [];
+    let sum = 0;
+    for (const c of alphabet) {
+        const p = pBigram(c, prevChar);
+        probs.push({ char: c, prob: p });
+        sum += p;
+    }
+    // Normalize
+    for (const p of probs) p.prob /= sum;
+
+    // Build CDF with BigInt ranges
+    const cdf = [];
+    let cumBig = 0n;
+    for (const p of probs) {
+        const start = cumBig;
+        const width = BigInt(Math.max(1, Math.round(Number(WHOLE) * p.prob)));
+        cumBig += width;
+        cdf.push({ char: p.char, lo: start, hi: start + width, prob: p.prob });
+    }
+    // Fix last to cover whole range
+    if (cdf.length > 0) cdf[cdf.length - 1].hi = WHOLE;
+    return cdf;
+}
+
+function arithmeticEncode(str) {
+    const alphabet = [];
+    // Build alphabet from printable ASCII
+    for (let i = 32; i <= 126; i++) alphabet.push(String.fromCharCode(i));
+
+    let lo = 0n, hi = WHOLE;
+    let bits = [];
+    let pending = 0;
+    const intervals = [];
+
+    for (let i = 0; i < str.length; i++) {
+        const prev = i === 0 ? '^' : str[i - 1];
+        const c = str[i];
+        const cdf = buildCDF(prev, alphabet);
+
+        const range = hi - lo;
+        const entry = cdf.find(e => e.char.toLowerCase() === c.toLowerCase() || e.char === c);
+        if (!entry) continue;
+
+        const newLo = lo + (range * entry.lo) / WHOLE;
+        const newHi = lo + (range * entry.hi) / WHOLE;
+        lo = newLo;
+        hi = newHi;
+
+        intervals.push({
+            char: c,
+            lo: Number(lo) / Number(WHOLE),
+            hi: Number(hi) / Number(WHOLE),
+            width: Number(hi - lo) / Number(WHOLE)
+        });
+
+        // Renormalization
+        while (true) {
+            if (hi <= HALF) {
+                bits.push(0);
+                for (let j = 0; j < pending; j++) bits.push(1);
+                pending = 0;
+                lo = lo << 1n;
+                hi = hi << 1n;
+            } else if (lo >= HALF) {
+                bits.push(1);
+                for (let j = 0; j < pending; j++) bits.push(0);
+                pending = 0;
+                lo = (lo - HALF) << 1n;
+                hi = (hi - HALF) << 1n;
+            } else if (lo >= QUARTER && hi <= 3n * QUARTER) {
+                pending++;
+                lo = (lo - QUARTER) << 1n;
+                hi = (hi - QUARTER) << 1n;
+            } else {
+                break;
+            }
+        }
+    }
+
+    // Flush
+    pending++;
+    if (lo < QUARTER) {
+        bits.push(0);
+        for (let j = 0; j < pending; j++) bits.push(1);
+    } else {
+        bits.push(1);
+        for (let j = 0; j < pending; j++) bits.push(0);
+    }
+
+    return { bits, intervals };
+}
+
+function bitsToNumber(bits) {
+    let result = 0n;
+    for (const b of bits) {
+        result = (result << 1n) | BigInt(b);
+    }
+    return result;
+}
+
+// ========== ANALYSIS ==========
+function analyze() {
+    const str = document.getElementById('inputStr').value;
+    if (!str) return;
+
+    const n = str.length;
+
+    // 1. Compute per-character information for each model
+    let uniformTotal = 0, unigramTotal2 = 0, bigramTotal = 0;
+    const charData = [];
+
+    for (let i = 0; i < n; i++) {
+        const c = str[i];
+        const prev = i === 0 ? '^' : str[i - 1];
+
+        const pUni = pUniform();
+        const pUng = pUnigram(c);
+        const pBig = pBigram(c, prev);
+
+        const bUni = infoBits(pUni);
+        const bUng = infoBits(pUng);
+        const bBig = infoBits(pBig);
+
+        uniformTotal += bUni;
+        unigramTotal2 += bUng;
+        bigramTotal += bBig;
+
+        charData.push({
+            index: i + 1,
+            char: c,
+            prev: prev === '^' ? 'START' : `'${prev}'`,
+            pBig: pBig,
+            bitsBig: bBig,
+            cumBig: bigramTotal,
+        });
+    }
+
+    const asciiTotal = n * 8;
+
+    // 2. Arithmetic coding
+    const { bits: encBits, intervals } = arithmeticEncode(str);
+    const compressedNum = bitsToNumber(encBits);
+
+    // 3. Render comparison bars
+    const maxBits = asciiTotal;
+    const models = [
+        { label: 'ASCII (8 bits/char)', bits: asciiTotal, color: '#484f58' },
+        { label: `Uniform (log₂95)`, bits: uniformTotal, color: '#6e7681' },
+        { label: 'Unigram (문자 빈도)', bits: unigramTotal2, color: '#d29922' },
+        { label: 'Bigram (조건부 확률)', bits: bigramTotal, color: '#58a6ff' },
+        { label: '산술 부호화 (실제)', bits: encBits.length, color: '#f97583' },
+        { label: `Shannon 하한 (≈1.0 b/c)`, bits: n * 1.0, color: '#7ee787' },
+    ];
+
+    let compHtml = '';
+    for (const m of models) {
+        const pct = Math.max(2, (m.bits / maxBits) * 100);
+        compHtml += `
+        <div class="bar-row">
+            <div class="bar-label">${m.label}</div>
+            <div class="bar-container">
+                <div class="bar-fill" style="width:${pct}%; background:${m.color};">
+                    ${m.bits.toFixed(1)} bits
+                </div>
+            </div>
+        </div>`;
+    }
+    document.getElementById('comparison').innerHTML = compHtml;
+
+    // 4. Render character table
+    let tbody = '';
+    for (const d of charData) {
+        const displayChar = d.char === ' ' ? '␣' : d.char;
+        tbody += `<tr>
+            <td>${d.index}</td>
+            <td class="char">${displayChar}</td>
+            <td>${d.prev}</td>
+            <td class="prob">${d.pBig.toFixed(4)}</td>
+            <td class="bits">${d.bitsBig.toFixed(2)}</td>
+            <td>${d.cumBig.toFixed(2)}</td>
+        </tr>`;
+    }
+    document.getElementById('charBody').innerHTML = tbody;
+
+    // 5. Render arithmetic coding visualization
+    let vizHtml = '';
+    for (let i = 0; i < intervals.length; i++) {
+        const iv = intervals[i];
+        const displayChar = iv.char === ' ' ? '␣' : iv.char;
+        const leftPct = (iv.lo * 100).toFixed(6);
+        const widthPct = Math.max(0.5, iv.width * 100).toFixed(6);
+        vizHtml += `
+        <div class="interval-step">
+            <div class="step-char">${displayChar}</div>
+            <div class="step-bar-container">
+                <div class="step-bar" style="left:${leftPct}%; width:${widthPct}%;"></div>
+            </div>
+            <div class="step-info">[${iv.lo.toExponential(3)}, ${iv.hi.toExponential(3)}]</div>
+        </div>`;
+    }
+    document.getElementById('arithViz').innerHTML = vizHtml;
+
+    // 6. Compressed result
+    const bitStr = encBits.join('');
+    document.getElementById('compressedBox').innerHTML = `
+        <div class="label">압축된 비트열 (${encBits.length} bits)</div>
+        <div class="value">${bitStr}</div>
+        <div class="label" style="margin-top:12px;">10진수</div>
+        <div class="value">${compressedNum.toString()}</div>
+        <div class="label" style="margin-top:12px;">16진수</div>
+        <div class="value">0x${compressedNum.toString(16).toUpperCase()}</div>
+    `;
+
+    // 7. Summary
+    const ratio = ((1 - encBits.length / asciiTotal) * 100).toFixed(1);
+    const kolmogorov = `print("${str}")`;
+    const kolBits = kolmogorov.length * 8;
+
+    document.getElementById('summary').innerHTML = `
+        <h3>결론</h3>
+        <p>
+        "<span class="green">${str}</span>"의 정보량:<br><br>
+
+        &bull; ASCII 원문: <span class="num">${asciiTotal} bits</span> (${n} chars &times; 8 bits)<br>
+        &bull; Uniform 모델 (95종 균등): <span class="num">${uniformTotal.toFixed(1)} bits</span> (${(uniformTotal/n).toFixed(2)} bits/char)<br>
+        &bull; Unigram 모델 (영어 문자 빈도): <span class="num">${unigramTotal2.toFixed(1)} bits</span> (${(unigramTotal2/n).toFixed(2)} bits/char)<br>
+        &bull; Bigram 모델 (조건부 확률): <span class="num">${bigramTotal.toFixed(1)} bits</span> (${(bigramTotal/n).toFixed(2)} bits/char)<br>
+        &bull; 산술 부호화 실측: <span class="num">${encBits.length} bits</span> &larr; 실제 압축 결과<br>
+        &bull; Shannon 하한 (~1.0 bits/char): <span class="num">${(n * 1.0).toFixed(1)} bits</span> (완벽한 영어 모델 필요)<br>
+        &bull; Kolmogorov: <span class="num">${kolBits} bits</span> (<code>${kolmogorov}</code>)<br><br>
+
+        압축률: ASCII 대비 <span class="green">${ratio}% 절감</span><br><br>
+
+        <strong>해석</strong>: "${str}"의 <span class="num">${asciiTotal} bits</span> 중
+        <span class="green">${(asciiTotal - encBits.length)} bits</span>는 영어의 통계적 구조(redundancy)다.
+        진짜 고유한 정보는 <span class="num">${encBits.length} bits</span>뿐이다.
+        그마저도 bigram이라는 원시적 모델로 달성한 것이고,
+        더 좋은 모델(trigram, 단어 모델, LLM)을 쓰면 Shannon 하한 <span class="num">${(n * 1.0).toFixed(1)} bits</span>에 접근한다.
+        </p>
+    `;
+}
+
+// Auto-run on load
+window.addEventListener('load', () => setTimeout(analyze, 100));
+</script>
+
+</body>
+</html>
