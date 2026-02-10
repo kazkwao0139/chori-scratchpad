@@ -275,6 +275,21 @@ Three Laws:
 
 G = 17.3 같은 정밀한 수치가 필요한 것이 아니라, **부호(sign)만 판정하면 된다.**
 
+> **"수술은 단기적으로 해롭지 않은가?"**
+
+적분하면 된다.
+
+```
+수술:
+  t=0~1:  delta_G > 0 (고통, 비용)
+  t=1~∞:  delta_G < 0 (건강 회복, 안정화)
+
+  ∫ delta_G dt < 0 → net benefit
+```
+
+단일 시점이 아니라 trajectory 전체를 본다.
+이것도 EntropyAdam에서 이미 한 것이다 — 단일 스텝이 아니라 윈도우로 판단한다.
+
 아시모프 원본은 "해"의 **정의 자체가 없다.** 측정은커녕 정의도 불가능하다.
 delta_G는 최소한 방향을 정의했고, 방향은 대부분의 경우 자명하다.
 
@@ -562,6 +577,21 @@ Does hitting someone make delta_G > 0? No calculation needed.
 Does education make delta_G < 0? No calculation needed.
 
 You don't need a precise value like G = 17.3. You only need to determine the **sign**.
+
+> **"Surgery is harmful in the short term, isn't it?"**
+
+Integrate.
+
+```
+Surgery:
+  t=0~1:  delta_G > 0 (pain, cost)
+  t=1~∞:  delta_G < 0 (recovery, stabilization)
+
+  ∫ delta_G dt < 0 → net benefit
+```
+
+Judge by the full trajectory, not a single point.
+This is what EntropyAdam already does — it evaluates over a window, not a single step.
 
 Asimov's original has **no definition of "harm" at all.** Not just unmeasurable — undefined.
 delta_G at least defines the direction, and the direction is almost always obvious.
