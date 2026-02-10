@@ -13,3 +13,4 @@
 | [`todo_gravity/`](./todo_gravity/) | 키스트로크 타이밍의 \|z-score\|로 투두 중요도를 자동 추정 |
 | [`hello_world/`](./hello_world/) | 압축 = 예측 = 이해 — 텍스트의 압축률로 수신자의 지식을 역산한다 |
 | [`entropy_adam/`](./entropy_adam/) | loss trajectory의 Shannon bigram entropy로 학습률을 적응 — Adam 전승 |
+| [`three_laws/`](./three_laws/) | entropy_adam에서 이어지는 사고실험 — AI 윤리란 무엇일까? harm = delta_S > 0 |
