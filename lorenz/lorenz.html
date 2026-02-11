@@ -53,13 +53,18 @@ for (let i = 0; i < N; i++) {
     });
 }
 
+function deriv(x, y, z) {
+    return [sigma * (y - x), x * (rho - z) - y, x * y - beta * z];
+}
+
 function step(t) {
-    const dx = sigma * (t.y - t.x);
-    const dy = t.x * (rho - t.z) - t.y;
-    const dz = t.x * t.y - beta * t.z;
-    t.x += dx * dt;
-    t.y += dy * dt;
-    t.z += dz * dt;
+    const [k1x, k1y, k1z] = deriv(t.x, t.y, t.z);
+    const [k2x, k2y, k2z] = deriv(t.x + k1x*dt/2, t.y + k1y*dt/2, t.z + k1z*dt/2);
+    const [k3x, k3y, k3z] = deriv(t.x + k2x*dt/2, t.y + k2y*dt/2, t.z + k2z*dt/2);
+    const [k4x, k4y, k4z] = deriv(t.x + k3x*dt, t.y + k3y*dt, t.z + k3z*dt);
+    t.x += (k1x + 2*k2x + 2*k3x + k4x) * dt / 6;
+    t.y += (k1y + 2*k2y + 2*k3y + k4y) * dt / 6;
+    t.z += (k1z + 2*k2z + 2*k3z + k4z) * dt / 6;
 }
 
 // slow rotation
