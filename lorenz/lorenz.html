@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>lorenz</title>
+<style>
+* { margin: 0; padding: 0; }
+body { background: #050508; overflow: hidden; cursor: none; }
+canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+let W, H;
+
+function resize() {
+    W = c.width = innerWidth;
+    H = c.height = innerHeight;
+}
+resize();
+onresize = resize;
+
+// lorenz params
+const sigma = 10;
+const rho = 28;
+const beta = 8 / 3;
+const dt = 0.003;
+
+// multiple trails with slightly different ICs
+const trails = [];
+const N = 5;
+const palette = [
+    [80, 140, 255],
+    [255, 90, 120],
+    [100, 230, 180],
+    [230, 180, 80],
+    [180, 120, 255],
+];
+
+for (let i = 0; i < N; i++) {
+    trails.push({
+        x: 1 + i * 0.001,
+        y: 1,
+        z: 1,
+        pts: [],
+        color: palette[i],
+        maxPts: 1800,
+    });
+}
+
+function step(t) {
+    const dx = sigma * (t.y - t.x);
+    const dy = t.x * (rho - t.z) - t.y;
+    const dz = t.x * t.y - beta * t.z;
+    t.x += dx * dt;
+    t.y += dy * dt;
+    t.z += dz * dt;
+}
+
+// slow rotation
+let angle = 0;
+
+function project(x, y, z) {
+    const ca = Math.cos(angle);
+    const sa = Math.sin(angle);
+    const rx = x * ca - y * sa;
+    const ry = x * sa + y * ca;
+    const scale = 9;
+    return [
+        W / 2 + rx * scale,
+        H / 2 - (z - 25) * scale + ry * 0.3,
+    ];
+}
+
+function draw() {
+    ctx.fillStyle = 'rgba(5, 5, 8, 0.04)';
+    ctx.fillRect(0, 0, W, H);
+
+    angle += 0.0004;
+
+    for (const t of trails) {
+        for (let i = 0; i < 4; i++) step(t);
+
+        const [px, py] = project(t.x, t.y, t.z);
+        t.pts.push([px, py]);
+        if (t.pts.length > t.maxPts) t.pts.shift();
+
+        const len = t.pts.length;
+        ctx.beginPath();
+        for (let i = 1; i < len; i++) {
+            const a = i / len;
+            const [x0, y0] = t.pts[i - 1];
+            const [x1, y1] = t.pts[i];
+            ctx.strokeStyle = `rgba(${t.color[0]}, ${t.color[1]}, ${t.color[2]}, ${a * 0.6})`;
+            ctx.lineWidth = a * 1.8;
+            ctx.beginPath();
+            ctx.moveTo(x0, y0);
+            ctx.lineTo(x1, y1);
+            ctx.stroke();
+        }
+
+        // glow at head
+        const [hx, hy] = t.pts[len - 1];
+        const grad = ctx.createRadialGradient(hx, hy, 0, hx, hy, 12);
+        grad.addColorStop(0, `rgba(${t.color[0]}, ${t.color[1]}, ${t.color[2]}, 0.6)`);
+        grad.addColorStop(1, `rgba(${t.color[0]}, ${t.color[1]}, ${t.color[2]}, 0)`);
+        ctx.fillStyle = grad;
+        ctx.fillRect(hx - 12, hy - 12, 24, 24);
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
