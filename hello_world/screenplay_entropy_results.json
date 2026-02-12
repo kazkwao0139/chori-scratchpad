@@ -1,0 +1,3154 @@
+{
+  "summary": {
+    "years_analyzed": 22,
+    "winner_avg_var": 0.03359,
+    "nominee_avg_var": 0.033784,
+    "win_rate": "15/22"
+  },
+  "per_year": [
+    {
+      "year": 1950,
+      "is_winner": false,
+      "analysis": {
+        "title": "All About Eve",
+        "n_characters": 15,
+        "entropy_mean": 3.249755,
+        "entropy_var": 0.024833,
+        "entropy_std": 0.157586,
+        "top_characters": [
+          {
+            "name": "MARGO",
+            "entropy": 3.456128520707068,
+            "chars": 25619
+          },
+          {
+            "name": "BILL",
+            "entropy": 3.4214323743670683,
+            "chars": 12414
+          },
+          {
+            "name": "LLOYD",
+            "entropy": 3.4027045312547557,
+            "chars": 8609
+          },
+          {
+            "name": "ADDISON",
+            "entropy": 3.388707787509717,
+            "chars": 12439
+          },
+          {
+            "name": "BIRDIE",
+            "entropy": 3.3528490019693833,
+            "chars": 2789
+          }
+        ]
+      }
+    },
+    {
+      "year": 1960,
+      "is_winner": true,
+      "analysis": {
+        "title": "The Apartment",
+        "n_characters": 14,
+        "entropy_mean": 3.201086,
+        "entropy_var": 0.029955,
+        "entropy_std": 0.173076,
+        "top_characters": [
+          {
+            "name": "BUD",
+            "entropy": 3.411591435404337,
+            "chars": 33718
+          },
+          {
+            "name": "KIRKEBY",
+            "entropy": 3.4086101838735363,
+            "chars": 4143
+          },
+          {
+            "name": "FRAN",
+            "entropy": 3.3810791820677903,
+            "chars": 13337
+          },
+          {
+            "name": "SHELDRAKE",
+            "entropy": 3.3236473463727694,
+            "chars": 12316
+          },
+          {
+            "name": "DOBISCH",
+            "entropy": 3.318411626525904,
+            "chars": 2819
+          }
+        ]
+      }
+    },
+    {
+      "year": 1967,
+      "is_winner": false,
+      "analysis": {
+        "title": "Bonnie and Clyde",
+        "n_characters": 9,
+        "entropy_mean": 3.283819,
+        "entropy_var": 0.036913,
+        "entropy_std": 0.192127,
+        "top_characters": [
+          {
+            "name": "BUCK",
+            "entropy": 3.484153587572404,
+            "chars": 8293
+          },
+          {
+            "name": "CLYDE",
+            "entropy": 3.458694074480057,
+            "chars": 18814
+          },
+          {
+            "name": "C.W.",
+            "entropy": 3.456676701956889,
+            "chars": 4062
+          },
+          {
+            "name": "BONNIE",
+            "entropy": 3.4562924427342487,
+            "chars": 11230
+          },
+          {
+            "name": "BLANCHE",
+            "entropy": 3.3705422855540337,
+            "chars": 3355
+          }
+        ]
+      }
+    },
+    {
+      "year": 1967,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Graduate",
+        "n_characters": 10,
+        "entropy_mean": 3.074435,
+        "entropy_var": 0.029973,
+        "entropy_std": 0.173127,
+        "top_characters": [
+          {
+            "name": "BEN",
+            "entropy": 3.295621726106872,
+            "chars": 23058
+          },
+          {
+            "name": "MR. BRADDOCK",
+            "entropy": 3.2710844744281826,
+            "chars": 2942
+          },
+          {
+            "name": "MR. ROBINSON",
+            "entropy": 3.2071004117291095,
+            "chars": 3531
+          },
+          {
+            "name": "MRS. ROBINSON",
+            "entropy": 3.189768831925682,
+            "chars": 7696
+          },
+          {
+            "name": "BEN'S VOICE",
+            "entropy": 3.1436041624370294,
+            "chars": 1253
+          }
+        ]
+      }
+    },
+    {
+      "year": 1972,
+      "is_winner": true,
+      "analysis": {
+        "title": "The Godfather",
+        "n_characters": 21,
+        "entropy_mean": 3.133341,
+        "entropy_var": 0.026112,
+        "entropy_std": 0.161591,
+        "top_characters": [
+          {
+            "name": "HAGEN",
+            "entropy": 3.3995411763483965,
+            "chars": 7723
+          },
+          {
+            "name": "MICHAEL",
+            "entropy": 3.373815661643908,
+            "chars": 13036
+          },
+          {
+            "name": "CLEMENZA",
+            "entropy": 3.3472309666721047,
+            "chars": 4355
+          },
+          {
+            "name": "SONNY",
+            "entropy": 3.3462493707140695,
+            "chars": 6754
+          },
+          {
+            "name": "DON CORLEONE",
+            "entropy": 3.343974060945978,
+            "chars": 11319
+          }
+        ]
+      }
+    },
+    {
+      "year": 1974,
+      "is_winner": true,
+      "analysis": {
+        "title": "Chinatown",
+        "n_characters": 12,
+        "entropy_mean": 3.135284,
+        "entropy_var": 0.02824,
+        "entropy_std": 0.168047,
+        "top_characters": [
+          {
+            "name": "GITTES",
+            "entropy": 3.4111571324119807,
+            "chars": 30246
+          },
+          {
+            "name": "ESCOBAR",
+            "entropy": 3.3184987997010382,
+            "chars": 4248
+          },
+          {
+            "name": "CROSS",
+            "entropy": 3.3165602192869983,
+            "chars": 4917
+          },
+          {
+            "name": "EVELYN",
+            "entropy": 3.3144199864657478,
+            "chars": 8527
+          },
+          {
+            "name": "YELBURTON",
+            "entropy": 3.174787731287919,
+            "chars": 1618
+          }
+        ]
+      }
+    },
+    {
+      "year": 1976,
+      "is_winner": false,
+      "analysis": {
+        "title": "Rocky",
+        "n_characters": 16,
+        "entropy_mean": 3.137764,
+        "entropy_var": 0.034488,
+        "entropy_std": 0.185708,
+        "top_characters": [
+          {
+            "name": "ROCKY",
+            "entropy": 3.4152127977133246,
+            "chars": 16758
+          },
+          {
+            "name": "MICKEY",
+            "entropy": 3.3923937135049207,
+            "chars": 7562
+          },
+          {
+            "name": "APOLLO",
+            "entropy": 3.348641679900502,
+            "chars": 4786
+          },
+          {
+            "name": "PAULIE",
+            "entropy": 3.3238591702567275,
+            "chars": 5011
+          },
+          {
+            "name": "COMMENTATOR",
+            "entropy": 3.3000399873077386,
+            "chars": 1845
+          }
+        ]
+      }
+    },
+    {
+      "year": 1976,
+      "is_winner": false,
+      "analysis": {
+        "title": "Taxi Driver",
+        "n_characters": 12,
+        "entropy_mean": 3.166546,
+        "entropy_var": 0.037097,
+        "entropy_std": 0.192606,
+        "top_characters": [
+          {
+            "name": "TRAVIS",
+            "entropy": 3.445919856545814,
+            "chars": 18276
+          },
+          {
+            "name": "BETSY",
+            "entropy": 3.331330727580738,
+            "chars": 5661
+          },
+          {
+            "name": "TOM",
+            "entropy": 3.2681186200063452,
+            "chars": 2252
+          },
+          {
+            "name": "WIZARD",
+            "entropy": 3.264255224509206,
+            "chars": 3603
+          },
+          {
+            "name": "ANDY",
+            "entropy": 3.257826374196584,
+            "chars": 2758
+          }
+        ]
+      }
+    },
+    {
+      "year": 1977,
+      "is_winner": true,
+      "analysis": {
+        "title": "Annie Hall",
+        "n_characters": 15,
+        "entropy_mean": 3.148631,
+        "entropy_var": 0.045489,
+        "entropy_std": 0.213281,
+        "top_characters": [
+          {
+            "name": "ALVY",
+            "entropy": 3.488083174843362,
+            "chars": 49301
+          },
+          {
+            "name": "ANNIE",
+            "entropy": 3.407615670224804,
+            "chars": 23856
+          },
+          {
+            "name": "ALVY'S VOICE",
+            "entropy": 3.3440928114072794,
+            "chars": 2534
+          },
+          {
+            "name": "ROB",
+            "entropy": 3.301449497204308,
+            "chars": 3341
+          },
+          {
+            "name": "MAN IN LINE",
+            "entropy": 3.275027298586665,
+            "chars": 1608
+          }
+        ]
+      }
+    },
+    {
+      "year": 1977,
+      "is_winner": false,
+      "analysis": {
+        "title": "Star Wars",
+        "n_characters": 18,
+        "entropy_mean": 3.08175,
+        "entropy_var": 0.042641,
+        "entropy_std": 0.206496,
+        "top_characters": [
+          {
+            "name": "HAN",
+            "entropy": 3.36601076583129,
+            "chars": 9624
+          },
+          {
+            "name": "THREEPIO",
+            "entropy": 3.365952843832424,
+            "chars": 8417
+          },
+          {
+            "name": "LUKE",
+            "entropy": 3.321473645065577,
+            "chars": 13381
+          },
+          {
+            "name": "BEN",
+            "entropy": 3.287207090397483,
+            "chars": 5431
+          },
+          {
+            "name": "LEIA",
+            "entropy": 3.251053248483161,
+            "chars": 3558
+          }
+        ]
+      }
+    },
+    {
+      "year": 1979,
+      "is_winner": true,
+      "analysis": {
+        "title": "Kramer vs. Kramer",
+        "n_characters": 12,
+        "entropy_mean": 3.131367,
+        "entropy_var": 0.053538,
+        "entropy_std": 0.231384,
+        "top_characters": [
+          {
+            "name": "TED",
+            "entropy": 3.4214280028557496,
+            "chars": 27193
+          },
+          {
+            "name": "THELMA",
+            "entropy": 3.320753205972316,
+            "chars": 4897
+          },
+          {
+            "name": "O'CONNOR",
+            "entropy": 3.3116501902796838,
+            "chars": 4593
+          },
+          {
+            "name": "JOANNA",
+            "entropy": 3.2962598669570364,
+            "chars": 7740
+          },
+          {
+            "name": "SHAUNESSY",
+            "entropy": 3.292384807024156,
+            "chars": 5211
+          }
+        ]
+      }
+    },
+    {
+      "year": 1979,
+      "is_winner": false,
+      "analysis": {
+        "title": "Apocalypse Now",
+        "n_characters": 20,
+        "entropy_mean": 3.113759,
+        "entropy_var": 0.034143,
+        "entropy_std": 0.184778,
+        "top_characters": [
+          {
+            "name": "WILLARD",
+            "entropy": 3.391343506300208,
+            "chars": 19543
+          },
+          {
+            "name": "KILGORE",
+            "entropy": 3.3471941646748173,
+            "chars": 6887
+          },
+          {
+            "name": "KURTZ",
+            "entropy": 3.3406477403385133,
+            "chars": 4168
+          },
+          {
+            "name": "CHEF",
+            "entropy": 3.301295861168168,
+            "chars": 3707
+          },
+          {
+            "name": "CHIEF",
+            "entropy": 3.271011078221672,
+            "chars": 3028
+          }
+        ]
+      }
+    },
+    {
+      "year": 1980,
+      "is_winner": true,
+      "analysis": {
+        "title": "Ordinary People",
+        "n_characters": 13,
+        "entropy_mean": 3.129516,
+        "entropy_var": 0.028373,
+        "entropy_std": 0.168444,
+        "top_characters": [
+          {
+            "name": "CONRAD",
+            "entropy": 3.337237385755988,
+            "chars": 16674
+          },
+          {
+            "name": "CALVIN",
+            "entropy": 3.332085105854357,
+            "chars": 11356
+          },
+          {
+            "name": "BETH",
+            "entropy": 3.322505393641975,
+            "chars": 10182
+          },
+          {
+            "name": "DR BERGER",
+            "entropy": 3.24842858801419,
+            "chars": 6784
+          },
+          {
+            "name": "JEANNINE",
+            "entropy": 3.2163400415431247,
+            "chars": 2002
+          }
+        ]
+      }
+    },
+    {
+      "year": 1980,
+      "is_winner": false,
+      "analysis": {
+        "title": "Raging Bull",
+        "n_characters": 13,
+        "entropy_mean": 2.998411,
+        "entropy_var": 0.043568,
+        "entropy_std": 0.20873,
+        "top_characters": [
+          {
+            "name": "JAKE",
+            "entropy": 3.4081911997528165,
+            "chars": 32165
+          },
+          {
+            "name": "JOEY",
+            "entropy": 3.2866645342305554,
+            "chars": 11226
+          },
+          {
+            "name": "VICKIE",
+            "entropy": 3.213192797924158,
+            "chars": 5389
+          },
+          {
+            "name": "COMO",
+            "entropy": 3.197070565687522,
+            "chars": 2061
+          },
+          {
+            "name": "SALVY",
+            "entropy": 2.998174524989925,
+            "chars": 1153
+          }
+        ]
+      }
+    },
+    {
+      "year": 1982,
+      "is_winner": true,
+      "analysis": {
+        "title": "Gandhi",
+        "n_characters": 23,
+        "entropy_mean": 3.149824,
+        "entropy_var": 0.021297,
+        "entropy_std": 0.145936,
+        "top_characters": [
+          {
+            "name": "GANDHI",
+            "entropy": 3.385224645014209,
+            "chars": 30624
+          },
+          {
+            "name": "PATEL",
+            "entropy": 3.3727984244413025,
+            "chars": 3801
+          },
+          {
+            "name": "NEHRU",
+            "entropy": 3.331982104059692,
+            "chars": 5366
+          },
+          {
+            "name": "WALKER",
+            "entropy": 3.3269844097014327,
+            "chars": 2212
+          },
+          {
+            "name": "CHARLIE",
+            "entropy": 3.2601812096682927,
+            "chars": 2355
+          }
+        ]
+      }
+    },
+    {
+      "year": 1984,
+      "is_winner": true,
+      "analysis": {
+        "title": "Amadeus",
+        "n_characters": 22,
+        "entropy_mean": 3.10003,
+        "entropy_var": 0.045907,
+        "entropy_std": 0.214259,
+        "top_characters": [
+          {
+            "name": "MOZART",
+            "entropy": 3.427112756076402,
+            "chars": 21040
+          },
+          {
+            "name": "OLD SALIERI",
+            "entropy": 3.391342409415628,
+            "chars": 14060
+          },
+          {
+            "name": "SALIERI",
+            "entropy": 3.3526983973748776,
+            "chars": 10432
+          },
+          {
+            "name": "SCHIKANEDER",
+            "entropy": 3.3009255150793457,
+            "chars": 3797
+          },
+          {
+            "name": "CONSTANZE",
+            "entropy": 3.2929869254659607,
+            "chars": 7293
+          }
+        ]
+      }
+    },
+    {
+      "year": 1986,
+      "is_winner": true,
+      "analysis": {
+        "title": "Platoon",
+        "n_characters": 17,
+        "entropy_mean": 3.224464,
+        "entropy_var": 0.020066,
+        "entropy_std": 0.141655,
+        "top_characters": [
+          {
+            "name": "CHRIS",
+            "entropy": 3.4087483852757354,
+            "chars": 9098
+          },
+          {
+            "name": "ELIAS",
+            "entropy": 3.386841139964609,
+            "chars": 6331
+          },
+          {
+            "name": "BARNES",
+            "entropy": 3.386762406144702,
+            "chars": 5989
+          },
+          {
+            "name": "RHAH",
+            "entropy": 3.364360368294013,
+            "chars": 4565
+          },
+          {
+            "name": "KING",
+            "entropy": 3.3579056468765947,
+            "chars": 4630
+          }
+        ]
+      }
+    },
+    {
+      "year": 1986,
+      "is_winner": false,
+      "analysis": {
+        "title": "Top Gun",
+        "n_characters": 13,
+        "entropy_mean": 3.082072,
+        "entropy_var": 0.053308,
+        "entropy_std": 0.230886,
+        "top_characters": [
+          {
+            "name": "VIPER",
+            "entropy": 3.3776985820903755,
+            "chars": 9778
+          },
+          {
+            "name": "GOOSE",
+            "entropy": 3.347301484266167,
+            "chars": 6000
+          },
+          {
+            "name": "MAVERICK",
+            "entropy": 3.334631495959791,
+            "chars": 10403
+          },
+          {
+            "name": "CHARLIE",
+            "entropy": 3.293369357978411,
+            "chars": 7732
+          },
+          {
+            "name": "HOLLYWOOD",
+            "entropy": 3.2299171675186447,
+            "chars": 1394
+          }
+        ]
+      }
+    },
+    {
+      "year": 1988,
+      "is_winner": false,
+      "analysis": {
+        "title": "Die Hard",
+        "n_characters": 16,
+        "entropy_mean": 3.20139,
+        "entropy_var": 0.030766,
+        "entropy_std": 0.175404,
+        "top_characters": [
+          {
+            "name": "MCCLANE",
+            "entropy": 3.466823135111289,
+            "chars": 10893
+          },
+          {
+            "name": "HANS",
+            "entropy": 3.4527858887453275,
+            "chars": 9246
+          },
+          {
+            "name": "POWELL",
+            "entropy": 3.4273744584354424,
+            "chars": 4725
+          },
+          {
+            "name": "HOLLY",
+            "entropy": 3.323542477822363,
+            "chars": 3023
+          },
+          {
+            "name": "ELLIS",
+            "entropy": 3.298328796647491,
+            "chars": 2927
+          }
+        ]
+      }
+    },
+    {
+      "year": 1989,
+      "is_winner": true,
+      "analysis": {
+        "title": "Dead Poets Society",
+        "n_characters": 15,
+        "entropy_mean": 3.182619,
+        "entropy_var": 0.023739,
+        "entropy_std": 0.154074,
+        "top_characters": [
+          {
+            "name": "KEATING",
+            "entropy": 3.39111136255368,
+            "chars": 14472
+          },
+          {
+            "name": "NEIL",
+            "entropy": 3.365335913356234,
+            "chars": 9398
+          },
+          {
+            "name": "CHARLIE",
+            "entropy": 3.361777471884128,
+            "chars": 5762
+          },
+          {
+            "name": "CAMERON",
+            "entropy": 3.3312033280480966,
+            "chars": 3487
+          },
+          {
+            "name": "MR. NOLAN",
+            "entropy": 3.274804364632937,
+            "chars": 3785
+          }
+        ]
+      }
+    },
+    {
+      "year": 1990,
+      "is_winner": true,
+      "analysis": {
+        "title": "Dances with Wolves",
+        "n_characters": 14,
+        "entropy_mean": 2.985205,
+        "entropy_var": 0.032402,
+        "entropy_std": 0.180007,
+        "top_characters": [
+          {
+            "name": "DUNBAR",
+            "entropy": 3.2744170143754725,
+            "chars": 7230
+          },
+          {
+            "name": "DANCES WITH WOLVES",
+            "entropy": 3.1944563323243593,
+            "chars": 4284
+          },
+          {
+            "name": "TEN BEARS",
+            "entropy": 3.107014612294351,
+            "chars": 3458
+          },
+          {
+            "name": "KICKING BIRD",
+            "entropy": 3.103143218803501,
+            "chars": 3679
+          },
+          {
+            "name": "WIND IN HIS HAIR",
+            "entropy": 3.099780220627869,
+            "chars": 3211
+          }
+        ]
+      }
+    },
+    {
+      "year": 1991,
+      "is_winner": false,
+      "analysis": {
+        "title": "JFK",
+        "n_characters": 36,
+        "entropy_mean": 3.147741,
+        "entropy_var": 0.046462,
+        "entropy_std": 0.215551,
+        "top_characters": [
+          {
+            "name": "JIM",
+            "entropy": 3.4875368048691757,
+            "chars": 70143
+          },
+          {
+            "name": "SUSIE",
+            "entropy": 3.4855953191787092,
+            "chars": 11551
+          },
+          {
+            "name": "LOU",
+            "entropy": 3.4302233708037146,
+            "chars": 7996
+          },
+          {
+            "name": "FERRIE",
+            "entropy": 3.428164590108576,
+            "chars": 9945
+          },
+          {
+            "name": "BILL",
+            "entropy": 3.4187994434023055,
+            "chars": 6532
+          }
+        ]
+      }
+    },
+    {
+      "year": 1992,
+      "is_winner": false,
+      "analysis": {
+        "title": "A Few Good Men",
+        "n_characters": 19,
+        "entropy_mean": 3.180071,
+        "entropy_var": 0.025834,
+        "entropy_std": 0.160731,
+        "top_characters": [
+          {
+            "name": "KAFFEE",
+            "entropy": 3.4502156576789464,
+            "chars": 39671
+          },
+          {
+            "name": "JO",
+            "entropy": 3.417584347702794,
+            "chars": 13619
+          },
+          {
+            "name": "ROSS",
+            "entropy": 3.3830401497074463,
+            "chars": 10966
+          },
+          {
+            "name": "SAM",
+            "entropy": 3.365923482529234,
+            "chars": 5487
+          },
+          {
+            "name": "JESSEP",
+            "entropy": 3.343608482195487,
+            "chars": 11084
+          }
+        ]
+      }
+    },
+    {
+      "year": 1993,
+      "is_winner": true,
+      "analysis": {
+        "title": "Schindler's List",
+        "n_characters": 8,
+        "entropy_mean": 3.061043,
+        "entropy_var": 0.036012,
+        "entropy_std": 0.189767,
+        "top_characters": [
+          {
+            "name": "SCHINDLER",
+            "entropy": 3.337392933971491,
+            "chars": 18762
+          },
+          {
+            "name": "GOETH",
+            "entropy": 3.2782550814539353,
+            "chars": 5605
+          },
+          {
+            "name": "STERN",
+            "entropy": 3.274702518311986,
+            "chars": 3158
+          },
+          {
+            "name": "SCHERNER",
+            "entropy": 2.9984983602849624,
+            "chars": 742
+          },
+          {
+            "name": "PFEFFERBERG",
+            "entropy": 2.9809513307105333,
+            "chars": 1087
+          }
+        ]
+      }
+    },
+    {
+      "year": 1993,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Fugitive",
+        "n_characters": 15,
+        "entropy_mean": 3.070883,
+        "entropy_var": 0.034598,
+        "entropy_std": 0.186006,
+        "top_characters": [
+          {
+            "name": "GERARD",
+            "entropy": 3.3649960861460007,
+            "chars": 7157
+          },
+          {
+            "name": "KIMBLE",
+            "entropy": 3.3475768591247643,
+            "chars": 5842
+          },
+          {
+            "name": "RENFRO",
+            "entropy": 3.240041373143556,
+            "chars": 1877
+          },
+          {
+            "name": "NEWMAN",
+            "entropy": 3.2055587706163258,
+            "chars": 1122
+          },
+          {
+            "name": "BIGGS",
+            "entropy": 3.1878748475205976,
+            "chars": 1116
+          }
+        ]
+      }
+    },
+    {
+      "year": 1993,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Piano",
+        "n_characters": 6,
+        "entropy_mean": 3.173746,
+        "entropy_var": 0.011605,
+        "entropy_std": 0.107727,
+        "top_characters": [
+          {
+            "name": "BAINES",
+            "entropy": 3.256734362533667,
+            "chars": 4043
+          },
+          {
+            "name": "STEWART",
+            "entropy": 3.256115653808655,
+            "chars": 7298
+          },
+          {
+            "name": "AUNT MORAG",
+            "entropy": 3.2485420740549653,
+            "chars": 2183
+          },
+          {
+            "name": "FLORA",
+            "entropy": 3.226206816050014,
+            "chars": 3429
+          },
+          {
+            "name": "HIRA",
+            "entropy": 3.076435438260079,
+            "chars": 1292
+          }
+        ]
+      }
+    },
+    {
+      "year": 1994,
+      "is_winner": true,
+      "analysis": {
+        "title": "Forrest Gump",
+        "n_characters": 17,
+        "entropy_mean": 2.938106,
+        "entropy_var": 0.06148,
+        "entropy_std": 0.247952,
+        "top_characters": [
+          {
+            "name": "FORREST",
+            "entropy": 3.375212488762565,
+            "chars": 28302
+          },
+          {
+            "name": "LT. DAN",
+            "entropy": 3.3068552610421835,
+            "chars": 6414
+          },
+          {
+            "name": "JENNY",
+            "entropy": 3.164585512779194,
+            "chars": 4986
+          },
+          {
+            "name": "BUBBA",
+            "entropy": 3.164346228037211,
+            "chars": 2591
+          },
+          {
+            "name": "MRS. GUMP",
+            "entropy": 3.14428736513224,
+            "chars": 2630
+          }
+        ]
+      }
+    },
+    {
+      "year": 1994,
+      "is_winner": false,
+      "analysis": {
+        "title": "Pulp Fiction",
+        "n_characters": 19,
+        "entropy_mean": 3.11628,
+        "entropy_var": 0.053637,
+        "entropy_std": 0.231598,
+        "top_characters": [
+          {
+            "name": "JULES",
+            "entropy": 3.398742337400457,
+            "chars": 17863
+          },
+          {
+            "name": "MIA",
+            "entropy": 3.390453926504177,
+            "chars": 5739
+          },
+          {
+            "name": "VINCENT",
+            "entropy": 3.381260229403944,
+            "chars": 13627
+          },
+          {
+            "name": "BUTCH",
+            "entropy": 3.366661435286759,
+            "chars": 6627
+          },
+          {
+            "name": "FABIENNE",
+            "entropy": 3.3161611970663643,
+            "chars": 3754
+          }
+        ]
+      }
+    },
+    {
+      "year": 1994,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Shawshank Redemption",
+        "n_characters": 10,
+        "entropy_mean": 3.23711,
+        "entropy_var": 0.048404,
+        "entropy_std": 0.220008,
+        "top_characters": [
+          {
+            "name": "RED",
+            "entropy": 3.4276635970351887,
+            "chars": 24210
+          },
+          {
+            "name": "NORTON",
+            "entropy": 3.398011034849899,
+            "chars": 6163
+          },
+          {
+            "name": "ANDY",
+            "entropy": 3.383825535280161,
+            "chars": 13825
+          },
+          {
+            "name": "HEYWOOD",
+            "entropy": 3.370783741891055,
+            "chars": 2700
+          },
+          {
+            "name": "BROOKS",
+            "entropy": 3.3182089686065086,
+            "chars": 2872
+          }
+        ]
+      }
+    },
+    {
+      "year": 1995,
+      "is_winner": true,
+      "analysis": {
+        "title": "Braveheart",
+        "n_characters": 16,
+        "entropy_mean": 3.117519,
+        "entropy_var": 0.014759,
+        "entropy_std": 0.121485,
+        "top_characters": [
+          {
+            "name": "WALLACE",
+            "entropy": 3.2780877806977458,
+            "chars": 7870
+          },
+          {
+            "name": "PRINCESS",
+            "entropy": 3.244554423915857,
+            "chars": 4508
+          },
+          {
+            "name": "LONGSHANKS",
+            "entropy": 3.238665933585233,
+            "chars": 2725
+          },
+          {
+            "name": "ROBERT",
+            "entropy": 3.2029352449631037,
+            "chars": 2537
+          },
+          {
+            "name": "STEPHEN",
+            "entropy": 3.1811211730964217,
+            "chars": 1206
+          }
+        ]
+      }
+    },
+    {
+      "year": 1995,
+      "is_winner": false,
+      "analysis": {
+        "title": "Sense and Sensibility",
+        "n_characters": 17,
+        "entropy_mean": 3.21122,
+        "entropy_var": 0.022975,
+        "entropy_std": 0.151577,
+        "top_characters": [
+          {
+            "name": "MARIANNE",
+            "entropy": 3.3697314536809846,
+            "chars": 10522
+          },
+          {
+            "name": "COLONEL BRANDON",
+            "entropy": 3.3507745477848365,
+            "chars": 5069
+          },
+          {
+            "name": "ELINOR",
+            "entropy": 3.339706031017259,
+            "chars": 12969
+          },
+          {
+            "name": "EDWARD",
+            "entropy": 3.338492383001628,
+            "chars": 5385
+          },
+          {
+            "name": "WILLOUGHBY",
+            "entropy": 3.3340528346785527,
+            "chars": 3862
+          }
+        ]
+      }
+    },
+    {
+      "year": 1995,
+      "is_winner": false,
+      "analysis": {
+        "title": "Usual Suspects",
+        "n_characters": 14,
+        "entropy_mean": 3.162438,
+        "entropy_var": 0.022485,
+        "entropy_std": 0.149949,
+        "top_characters": [
+          {
+            "name": "VERBAL",
+            "entropy": 3.376841146395787,
+            "chars": 12995
+          },
+          {
+            "name": "KOBAYASHI",
+            "entropy": 3.3515851686099687,
+            "chars": 5243
+          },
+          {
+            "name": "BAER",
+            "entropy": 3.3282358397006466,
+            "chars": 3020
+          },
+          {
+            "name": "KUJAN",
+            "entropy": 3.321680544405536,
+            "chars": 9491
+          },
+          {
+            "name": "KEATON",
+            "entropy": 3.3029338324268185,
+            "chars": 5976
+          }
+        ]
+      }
+    },
+    {
+      "year": 1996,
+      "is_winner": true,
+      "analysis": {
+        "title": "The English Patient",
+        "n_characters": 10,
+        "entropy_mean": 3.229873,
+        "entropy_var": 0.034173,
+        "entropy_std": 0.18486,
+        "top_characters": [
+          {
+            "name": "KATHARINE",
+            "entropy": 3.392694779589542,
+            "chars": 8843
+          },
+          {
+            "name": "CARAVAGGIO",
+            "entropy": 3.3683924982814832,
+            "chars": 6235
+          },
+          {
+            "name": "FENELON-BARNES",
+            "entropy": 3.3673069312496673,
+            "chars": 2542
+          },
+          {
+            "name": "MADOX",
+            "entropy": 3.366330973263704,
+            "chars": 3822
+          },
+          {
+            "name": "HANA",
+            "entropy": 3.34039293657497,
+            "chars": 8804
+          }
+        ]
+      }
+    },
+    {
+      "year": 1996,
+      "is_winner": false,
+      "analysis": {
+        "title": "Fargo",
+        "n_characters": 13,
+        "entropy_mean": 3.130764,
+        "entropy_var": 0.020249,
+        "entropy_std": 0.142299,
+        "top_characters": [
+          {
+            "name": "MARGE",
+            "entropy": 3.380537700387592,
+            "chars": 9187
+          },
+          {
+            "name": "CARL",
+            "entropy": 3.3364122988162004,
+            "chars": 6013
+          },
+          {
+            "name": "JERRY",
+            "entropy": 3.278582119062848,
+            "chars": 8727
+          },
+          {
+            "name": "VOICE",
+            "entropy": 3.273203729370741,
+            "chars": 2618
+          },
+          {
+            "name": "WADE",
+            "entropy": 3.191598421132465,
+            "chars": 2889
+          }
+        ]
+      }
+    },
+    {
+      "year": 1996,
+      "is_winner": false,
+      "analysis": {
+        "title": "Jerry Maguire",
+        "n_characters": 14,
+        "entropy_mean": 3.208247,
+        "entropy_var": 0.032461,
+        "entropy_std": 0.18017,
+        "top_characters": [
+          {
+            "name": "JERRY",
+            "entropy": 3.4653923038194736,
+            "chars": 23159
+          },
+          {
+            "name": "DOROTHY",
+            "entropy": 3.422183258178215,
+            "chars": 10508
+          },
+          {
+            "name": "TIDWELL",
+            "entropy": 3.3684392455745686,
+            "chars": 7921
+          },
+          {
+            "name": "SUGAR",
+            "entropy": 3.3449172428648946,
+            "chars": 2938
+          },
+          {
+            "name": "MARCEE",
+            "entropy": 3.338869343137781,
+            "chars": 2951
+          }
+        ]
+      }
+    },
+    {
+      "year": 1997,
+      "is_winner": true,
+      "analysis": {
+        "title": "Good Will Hunting",
+        "n_characters": 10,
+        "entropy_mean": 3.215155,
+        "entropy_var": 0.023382,
+        "entropy_std": 0.152912,
+        "top_characters": [
+          {
+            "name": "WILL",
+            "entropy": 3.4262280048161813,
+            "chars": 22703
+          },
+          {
+            "name": "CHUCKIE",
+            "entropy": 3.350498914861301,
+            "chars": 10890
+          },
+          {
+            "name": "SEAN",
+            "entropy": 3.3452035542024303,
+            "chars": 15495
+          },
+          {
+            "name": "LAMBEAU",
+            "entropy": 3.3390557315815217,
+            "chars": 12548
+          },
+          {
+            "name": "SKYLAR",
+            "entropy": 3.2866632974732024,
+            "chars": 7447
+          }
+        ]
+      }
+    },
+    {
+      "year": 1997,
+      "is_winner": false,
+      "analysis": {
+        "title": "As Good as It Gets",
+        "n_characters": 7,
+        "entropy_mean": 3.207264,
+        "entropy_var": 0.01982,
+        "entropy_std": 0.140782,
+        "top_characters": [
+          {
+            "name": "MELVIN",
+            "entropy": 3.371519447108246,
+            "chars": 19099
+          },
+          {
+            "name": "SIMON",
+            "entropy": 3.345986149428201,
+            "chars": 10914
+          },
+          {
+            "name": "CAROL",
+            "entropy": 3.3348969237893367,
+            "chars": 15505
+          },
+          {
+            "name": "FRANK",
+            "entropy": 3.229850539370409,
+            "chars": 2787
+          },
+          {
+            "name": "BEVERLY",
+            "entropy": 3.1014249671048733,
+            "chars": 1114
+          }
+        ]
+      }
+    },
+    {
+      "year": 1998,
+      "is_winner": true,
+      "analysis": {
+        "title": "Shakespeare in Love",
+        "n_characters": 18,
+        "entropy_mean": 3.139285,
+        "entropy_var": 0.023241,
+        "entropy_std": 0.152451,
+        "top_characters": [
+          {
+            "name": "WILL",
+            "entropy": 3.413853770105872,
+            "chars": 13425
+          },
+          {
+            "name": "VIOLA",
+            "entropy": 3.341511290064793,
+            "chars": 6434
+          },
+          {
+            "name": "WESSEX",
+            "entropy": 3.3407380364521724,
+            "chars": 4085
+          },
+          {
+            "name": "HENSLOWE",
+            "entropy": 3.2950988816500515,
+            "chars": 4729
+          },
+          {
+            "name": "FENNYMAN",
+            "entropy": 3.2697155317040636,
+            "chars": 2380
+          }
+        ]
+      }
+    },
+    {
+      "year": 1998,
+      "is_winner": false,
+      "analysis": {
+        "title": "Saving Private Ryan",
+        "n_characters": 9,
+        "entropy_mean": 3.278143,
+        "entropy_var": 0.019878,
+        "entropy_std": 0.14099,
+        "top_characters": [
+          {
+            "name": "MILLER",
+            "entropy": 3.4178313568004595,
+            "chars": 22860
+          },
+          {
+            "name": "SARGE",
+            "entropy": 3.4056800903905162,
+            "chars": 4106
+          },
+          {
+            "name": "JACKSON",
+            "entropy": 3.402758037215693,
+            "chars": 5035
+          },
+          {
+            "name": "REIBEN",
+            "entropy": 3.384765991286422,
+            "chars": 8648
+          },
+          {
+            "name": "UPHAM",
+            "entropy": 3.306476930167333,
+            "chars": 3221
+          }
+        ]
+      }
+    },
+    {
+      "year": 1998,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Truman Show",
+        "n_characters": 12,
+        "entropy_mean": 3.142053,
+        "entropy_var": 0.042651,
+        "entropy_std": 0.206521,
+        "top_characters": [
+          {
+            "name": "TRUMAN",
+            "entropy": 3.464641180929083,
+            "chars": 15666
+          },
+          {
+            "name": "CHRISTOF",
+            "entropy": 3.4502291826570914,
+            "chars": 10707
+          },
+          {
+            "name": "MARLON",
+            "entropy": 3.348123851090225,
+            "chars": 4927
+          },
+          {
+            "name": "MERYL",
+            "entropy": 3.3067661770157577,
+            "chars": 2834
+          },
+          {
+            "name": "CHLOE",
+            "entropy": 3.2001287086771395,
+            "chars": 1966
+          }
+        ]
+      }
+    },
+    {
+      "year": 1999,
+      "is_winner": true,
+      "analysis": {
+        "title": "American Beauty",
+        "n_characters": 8,
+        "entropy_mean": 3.28464,
+        "entropy_var": 0.009821,
+        "entropy_std": 0.099102,
+        "top_characters": [
+          {
+            "name": "LESTER",
+            "entropy": 3.409340700914331,
+            "chars": 14201
+          },
+          {
+            "name": "CAROLYN",
+            "entropy": 3.407212053987501,
+            "chars": 7586
+          },
+          {
+            "name": "JANE",
+            "entropy": 3.3452300834720012,
+            "chars": 4785
+          },
+          {
+            "name": "RICKY",
+            "entropy": 3.3074450021790893,
+            "chars": 6447
+          },
+          {
+            "name": "ANGELA",
+            "entropy": 3.303741139130785,
+            "chars": 5280
+          }
+        ]
+      }
+    },
+    {
+      "year": 1999,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Sixth Sense",
+        "n_characters": 7,
+        "entropy_mean": 3.175497,
+        "entropy_var": 0.02179,
+        "entropy_std": 0.147615,
+        "top_characters": [
+          {
+            "name": "MALCOLM",
+            "entropy": 3.34399789189973,
+            "chars": 13756
+          },
+          {
+            "name": "COLE",
+            "entropy": 3.3208660799277143,
+            "chars": 7525
+          },
+          {
+            "name": "LYNN",
+            "entropy": 3.2763314289036662,
+            "chars": 4119
+          },
+          {
+            "name": "ANNA",
+            "entropy": 3.264029371005809,
+            "chars": 2959
+          },
+          {
+            "name": "MR. CUNNINGHAM",
+            "entropy": 3.02742197474369,
+            "chars": 1203
+          }
+        ]
+      }
+    },
+    {
+      "year": 1999,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Green Mile",
+        "n_characters": 15,
+        "entropy_mean": 3.205878,
+        "entropy_var": 0.02999,
+        "entropy_std": 0.173175,
+        "top_characters": [
+          {
+            "name": "PAUL",
+            "entropy": 3.3970143281551093,
+            "chars": 20259
+          },
+          {
+            "name": "BILLY",
+            "entropy": 3.3609577180410777,
+            "chars": 2453
+          },
+          {
+            "name": "BRUTAL",
+            "entropy": 3.3345029282679515,
+            "chars": 5490
+          },
+          {
+            "name": "COFFEY",
+            "entropy": 3.3108934517127815,
+            "chars": 5159
+          },
+          {
+            "name": "HAL",
+            "entropy": 3.3070720552859774,
+            "chars": 3519
+          }
+        ]
+      }
+    },
+    {
+      "year": 2000,
+      "is_winner": true,
+      "analysis": {
+        "title": "Almost Famous",
+        "n_characters": 22,
+        "entropy_mean": 3.200789,
+        "entropy_var": 0.039153,
+        "entropy_std": 0.197872,
+        "top_characters": [
+          {
+            "name": "WILLIAM",
+            "entropy": 3.4717348097784533,
+            "chars": 14477
+          },
+          {
+            "name": "ELAINE",
+            "entropy": 3.4210795813258965,
+            "chars": 6448
+          },
+          {
+            "name": "RUSSELL",
+            "entropy": 3.4073743575535276,
+            "chars": 14703
+          },
+          {
+            "name": "DICK",
+            "entropy": 3.3869360571466585,
+            "chars": 3818
+          },
+          {
+            "name": "JEFF",
+            "entropy": 3.359798847063381,
+            "chars": 4930
+          }
+        ]
+      }
+    },
+    {
+      "year": 2000,
+      "is_winner": false,
+      "analysis": {
+        "title": "Gladiator",
+        "n_characters": 13,
+        "entropy_mean": 3.123284,
+        "entropy_var": 0.0276,
+        "entropy_std": 0.166133,
+        "top_characters": [
+          {
+            "name": "COMMODUS",
+            "entropy": 3.3257791190250496,
+            "chars": 10788
+          },
+          {
+            "name": "MAXIMUS",
+            "entropy": 3.3103071887258615,
+            "chars": 6895
+          },
+          {
+            "name": "PROXIMO",
+            "entropy": 3.2833909916570074,
+            "chars": 6236
+          },
+          {
+            "name": "LUCILLA",
+            "entropy": 3.2817657449528874,
+            "chars": 6268
+          },
+          {
+            "name": "MARCUS",
+            "entropy": 3.265849736437136,
+            "chars": 4372
+          }
+        ]
+      }
+    },
+    {
+      "year": 2000,
+      "is_winner": false,
+      "analysis": {
+        "title": "Erin Brockovich",
+        "n_characters": 16,
+        "entropy_mean": 3.091276,
+        "entropy_var": 0.032195,
+        "entropy_std": 0.179431,
+        "top_characters": [
+          {
+            "name": "ERIN",
+            "entropy": 3.4428841971141266,
+            "chars": 34592
+          },
+          {
+            "name": "ED",
+            "entropy": 3.3952322359106084,
+            "chars": 13814
+          },
+          {
+            "name": "GEORGE",
+            "entropy": 3.357931940616077,
+            "chars": 6159
+          },
+          {
+            "name": "DONNA",
+            "entropy": 3.2577941577720804,
+            "chars": 3874
+          },
+          {
+            "name": "BRENDA",
+            "entropy": 3.1308232563781413,
+            "chars": 877
+          }
+        ]
+      }
+    },
+    {
+      "year": 2002,
+      "is_winner": true,
+      "analysis": {
+        "title": "The Pianist",
+        "n_characters": 17,
+        "entropy_mean": 3.06555,
+        "entropy_var": 0.029707,
+        "entropy_std": 0.172359,
+        "top_characters": [
+          {
+            "name": "SZPILMAN",
+            "entropy": 3.3618491037055604,
+            "chars": 5974
+          },
+          {
+            "name": "HENRYK",
+            "entropy": 3.2924633017216394,
+            "chars": 3520
+          },
+          {
+            "name": "JEHUDA",
+            "entropy": 3.2456881394675285,
+            "chars": 2140
+          },
+          {
+            "name": "DOROTA",
+            "entropy": 3.2343923421472063,
+            "chars": 1628
+          },
+          {
+            "name": "MAJOREK",
+            "entropy": 3.2022688326378437,
+            "chars": 1268
+          }
+        ]
+      }
+    },
+    {
+      "year": 2002,
+      "is_winner": false,
+      "analysis": {
+        "title": "Gangs of New York",
+        "n_characters": 19,
+        "entropy_mean": 3.137108,
+        "entropy_var": 0.023762,
+        "entropy_std": 0.154149,
+        "top_characters": [
+          {
+            "name": "BOSS TWEED",
+            "entropy": 3.3575740517184958,
+            "chars": 10762
+          },
+          {
+            "name": "TWEED",
+            "entropy": 3.3434886644437856,
+            "chars": 3300
+          },
+          {
+            "name": "BILL THE BUTCHER",
+            "entropy": 3.3190714022290395,
+            "chars": 9644
+          },
+          {
+            "name": "AMSTERDAM",
+            "entropy": 3.2906457782703966,
+            "chars": 15555
+          },
+          {
+            "name": "JOHNNY",
+            "entropy": 3.2769134448310253,
+            "chars": 6987
+          }
+        ]
+      }
+    },
+    {
+      "year": 2002,
+      "is_winner": false,
+      "analysis": {
+        "title": "Minority Report",
+        "n_characters": 14,
+        "entropy_mean": 3.071885,
+        "entropy_var": 0.032156,
+        "entropy_std": 0.179322,
+        "top_characters": [
+          {
+            "name": "ANDERSON",
+            "entropy": 3.402108548580085,
+            "chars": 11107
+          },
+          {
+            "name": "WITWER",
+            "entropy": 3.334532799055889,
+            "chars": 6799
+          },
+          {
+            "name": "LISA",
+            "entropy": 3.2885180887658523,
+            "chars": 4435
+          },
+          {
+            "name": "DOC",
+            "entropy": 3.1730104670203993,
+            "chars": 1226
+          },
+          {
+            "name": "FRANK D'IGNAZIO",
+            "entropy": 3.1723304625364768,
+            "chars": 1142
+          }
+        ]
+      }
+    },
+    {
+      "year": 2003,
+      "is_winner": true,
+      "analysis": {
+        "title": "Lost in Translation",
+        "n_characters": 7,
+        "entropy_mean": 3.089448,
+        "entropy_var": 0.030246,
+        "entropy_std": 0.173913,
+        "top_characters": [
+          {
+            "name": "CHARLOTTE",
+            "entropy": 3.3318898095851686,
+            "chars": 6091
+          },
+          {
+            "name": "BOB",
+            "entropy": 3.2636738959826688,
+            "chars": 5340
+          },
+          {
+            "name": "JOHN",
+            "entropy": 3.168607226711451,
+            "chars": 1534
+          },
+          {
+            "name": "KELLY",
+            "entropy": 3.133249721396866,
+            "chars": 1478
+          },
+          {
+            "name": "LYDIA",
+            "entropy": 2.9805663885993225,
+            "chars": 1074
+          }
+        ]
+      }
+    },
+    {
+      "year": 2003,
+      "is_winner": false,
+      "analysis": {
+        "title": "Finding Nemo",
+        "n_characters": 16,
+        "entropy_mean": 3.166584,
+        "entropy_var": 0.017864,
+        "entropy_std": 0.133657,
+        "top_characters": [
+          {
+            "name": "DORY",
+            "entropy": 3.387749887224931,
+            "chars": 9800
+          },
+          {
+            "name": "MARLIN",
+            "entropy": 3.3551385571732233,
+            "chars": 17427
+          },
+          {
+            "name": "NIGEL",
+            "entropy": 3.303702215164225,
+            "chars": 2062
+          },
+          {
+            "name": "GILL",
+            "entropy": 3.2360640133197056,
+            "chars": 3955
+          },
+          {
+            "name": "DENTIST",
+            "entropy": 3.232717957292316,
+            "chars": 1720
+          }
+        ]
+      }
+    },
+    {
+      "year": 2003,
+      "is_winner": false,
+      "analysis": {
+        "title": "Master and Commander",
+        "n_characters": 14,
+        "entropy_mean": 3.094061,
+        "entropy_var": 0.038635,
+        "entropy_std": 0.196558,
+        "top_characters": [
+          {
+            "name": "JACK",
+            "entropy": 3.422792711915689,
+            "chars": 15654
+          },
+          {
+            "name": "STEPHEN",
+            "entropy": 3.415701887752953,
+            "chars": 9418
+          },
+          {
+            "name": "BLAKENEY",
+            "entropy": 3.2979960951963956,
+            "chars": 2557
+          },
+          {
+            "name": "MOWETT",
+            "entropy": 3.2304852932157035,
+            "chars": 1307
+          },
+          {
+            "name": "HOLLOM",
+            "entropy": 3.152834591691487,
+            "chars": 1005
+          }
+        ]
+      }
+    },
+    {
+      "year": 2004,
+      "is_winner": true,
+      "analysis": {
+        "title": "Eternal Sunshine",
+        "n_characters": 14,
+        "entropy_mean": 3.152829,
+        "entropy_var": 0.035169,
+        "entropy_std": 0.187534,
+        "top_characters": [
+          {
+            "name": "CLEMENTINE",
+            "entropy": 3.437424783246125,
+            "chars": 21536
+          },
+          {
+            "name": "MARY",
+            "entropy": 3.4037411652806306,
+            "chars": 6139
+          },
+          {
+            "name": "JOEL",
+            "entropy": 3.3451822279180026,
+            "chars": 15236
+          },
+          {
+            "name": "PATRICK",
+            "entropy": 3.2857100189844344,
+            "chars": 2195
+          },
+          {
+            "name": "STAN",
+            "entropy": 3.2790645817803146,
+            "chars": 2961
+          }
+        ]
+      }
+    },
+    {
+      "year": 2004,
+      "is_winner": false,
+      "analysis": {
+        "title": "Hotel Rwanda",
+        "n_characters": 20,
+        "entropy_mean": 2.97631,
+        "entropy_var": 0.034996,
+        "entropy_std": 0.187072,
+        "top_characters": [
+          {
+            "name": "PAUL",
+            "entropy": 3.353846824354769,
+            "chars": 23554
+          },
+          {
+            "name": "COLONEL OLIVER",
+            "entropy": 3.2980997731670834,
+            "chars": 3232
+          },
+          {
+            "name": "GLORIA",
+            "entropy": 3.258148294489686,
+            "chars": 1799
+          },
+          {
+            "name": "GENERAL BIZIMUNGU",
+            "entropy": 3.2232632308337816,
+            "chars": 2592
+          },
+          {
+            "name": "TATIANA",
+            "entropy": 3.2085823357810783,
+            "chars": 3219
+          }
+        ]
+      }
+    },
+    {
+      "year": 2005,
+      "is_winner": true,
+      "analysis": {
+        "title": "Crash",
+        "n_characters": 5,
+        "entropy_mean": 3.243715,
+        "entropy_var": 0.007683,
+        "entropy_std": 0.087652,
+        "top_characters": [
+          {
+            "name": "VAUGHAN",
+            "entropy": 3.3555554076836063,
+            "chars": 4597
+          },
+          {
+            "name": "HELEN",
+            "entropy": 3.285726289474153,
+            "chars": 2738
+          },
+          {
+            "name": "CATHERINE",
+            "entropy": 3.252474571622807,
+            "chars": 3531
+          },
+          {
+            "name": "JAMES",
+            "entropy": 3.2360437417278756,
+            "chars": 4381
+          },
+          {
+            "name": "RENATA",
+            "entropy": 3.0887773494297237,
+            "chars": 876
+          }
+        ]
+      }
+    },
+    {
+      "year": 2006,
+      "is_winner": true,
+      "analysis": {
+        "title": "The Departed",
+        "n_characters": 16,
+        "entropy_mean": 3.190695,
+        "entropy_var": 0.034129,
+        "entropy_std": 0.184742,
+        "top_characters": [
+          {
+            "name": "COLIN",
+            "entropy": 3.4094507624772263,
+            "chars": 15720
+          },
+          {
+            "name": "ELLERBY",
+            "entropy": 3.3895562254050025,
+            "chars": 5001
+          },
+          {
+            "name": "COSTELLO",
+            "entropy": 3.3819768445060343,
+            "chars": 11269
+          },
+          {
+            "name": "BILLY",
+            "entropy": 3.3709258539451286,
+            "chars": 13478
+          },
+          {
+            "name": "SGT. DIGNAM",
+            "entropy": 3.3530433636457118,
+            "chars": 2955
+          }
+        ]
+      }
+    },
+    {
+      "year": 2006,
+      "is_winner": false,
+      "analysis": {
+        "title": "Babel",
+        "n_characters": 22,
+        "entropy_mean": 2.962422,
+        "entropy_var": 0.024726,
+        "entropy_std": 0.157246,
+        "top_characters": [
+          {
+            "name": "AMELIA",
+            "entropy": 3.2543432824644762,
+            "chars": 6266
+          },
+          {
+            "name": "RICHARD",
+            "entropy": 3.19114853968489,
+            "chars": 6837
+          },
+          {
+            "name": "POLICE OFFICER",
+            "entropy": 3.1252683251324194,
+            "chars": 1220
+          },
+          {
+            "name": "ANWAR",
+            "entropy": 3.124454062104201,
+            "chars": 3037
+          },
+          {
+            "name": "KENJI",
+            "entropy": 3.069061693479564,
+            "chars": 1605
+          }
+        ]
+      }
+    },
+    {
+      "year": 2007,
+      "is_winner": true,
+      "analysis": {
+        "title": "Juno",
+        "n_characters": 10,
+        "entropy_mean": 3.210933,
+        "entropy_var": 0.034689,
+        "entropy_std": 0.186251,
+        "top_characters": [
+          {
+            "name": "JUNO",
+            "entropy": 3.463869904871797,
+            "chars": 24574
+          },
+          {
+            "name": "MARK",
+            "entropy": 3.375307654152805,
+            "chars": 6583
+          },
+          {
+            "name": "LEAH",
+            "entropy": 3.342493675880135,
+            "chars": 3289
+          },
+          {
+            "name": "BREN",
+            "entropy": 3.3108842628094455,
+            "chars": 2999
+          },
+          {
+            "name": "BLEEKER",
+            "entropy": 3.28035192963334,
+            "chars": 3425
+          }
+        ]
+      }
+    },
+    {
+      "year": 2008,
+      "is_winner": true,
+      "analysis": {
+        "title": "Slumdog Millionaire",
+        "n_characters": 11,
+        "entropy_mean": 3.149748,
+        "entropy_var": 0.042184,
+        "entropy_std": 0.205387,
+        "top_characters": [
+          {
+            "name": "JAMAL",
+            "entropy": 3.4775181113407583,
+            "chars": 9476
+          },
+          {
+            "name": "PREM",
+            "entropy": 3.3979213524737335,
+            "chars": 14400
+          },
+          {
+            "name": "INSPECTOR",
+            "entropy": 3.349607867043628,
+            "chars": 2985
+          },
+          {
+            "name": "SALIM",
+            "entropy": 3.3264286366212126,
+            "chars": 4825
+          },
+          {
+            "name": "LATIKA",
+            "entropy": 3.19460476321355,
+            "chars": 2009
+          }
+        ]
+      }
+    },
+    {
+      "year": 2008,
+      "is_winner": false,
+      "analysis": {
+        "title": "Milk",
+        "n_characters": 18,
+        "entropy_mean": 3.169591,
+        "entropy_var": 0.022517,
+        "entropy_std": 0.150056,
+        "top_characters": [
+          {
+            "name": "HARVEY MILK",
+            "entropy": 3.4577513530346455,
+            "chars": 44578
+          },
+          {
+            "name": "CLEVE JONES",
+            "entropy": 3.349784684155221,
+            "chars": 4799
+          },
+          {
+            "name": "DAN WHITE",
+            "entropy": 3.3414454364080255,
+            "chars": 5625
+          },
+          {
+            "name": "SCOTT SMITH",
+            "entropy": 3.312562245247573,
+            "chars": 5312
+          },
+          {
+            "name": "ANNE KRONENBERG",
+            "entropy": 3.2725383062337143,
+            "chars": 1440
+          }
+        ]
+      }
+    },
+    {
+      "year": 2009,
+      "is_winner": true,
+      "analysis": {
+        "title": "The Hurt Locker",
+        "n_characters": 9,
+        "entropy_mean": 3.107247,
+        "entropy_var": 0.046059,
+        "entropy_std": 0.214613,
+        "top_characters": [
+          {
+            "name": "ELDRIDGE",
+            "entropy": 3.3569968013912668,
+            "chars": 4638
+          },
+          {
+            "name": "JAMES",
+            "entropy": 3.356330170448016,
+            "chars": 9436
+          },
+          {
+            "name": "SANBORN",
+            "entropy": 3.343497347705166,
+            "chars": 6122
+          },
+          {
+            "name": "AMBASSADOR GEDDES",
+            "entropy": 3.2149488634591252,
+            "chars": 1483
+          },
+          {
+            "name": "COLONEL REED",
+            "entropy": 3.099574285216192,
+            "chars": 1172
+          }
+        ]
+      }
+    },
+    {
+      "year": 2009,
+      "is_winner": false,
+      "analysis": {
+        "title": "Inglourious Basterds",
+        "n_characters": 47,
+        "entropy_mean": 3.119104,
+        "entropy_var": 0.035127,
+        "entropy_std": 0.187423,
+        "top_characters": [
+          {
+            "name": "LT.HICOX",
+            "entropy": 3.4388069756507966,
+            "chars": 5801
+          },
+          {
+            "name": "GOEBBELS",
+            "entropy": 3.4083337720830227,
+            "chars": 5245
+          },
+          {
+            "name": "FREDRICK",
+            "entropy": 3.4050967621463593,
+            "chars": 5965
+          },
+          {
+            "name": "SHOSANNA",
+            "entropy": 3.3899013204480815,
+            "chars": 8398
+          },
+          {
+            "name": "COL LANDA",
+            "entropy": 3.3824688929528204,
+            "chars": 14160
+          }
+        ]
+      }
+    },
+    {
+      "year": 2009,
+      "is_winner": false,
+      "analysis": {
+        "title": "Up",
+        "n_characters": 9,
+        "entropy_mean": 3.207716,
+        "entropy_var": 0.041261,
+        "entropy_std": 0.203129,
+        "top_characters": [
+          {
+            "name": "RUSSELL",
+            "entropy": 3.426940329906966,
+            "chars": 10276
+          },
+          {
+            "name": "CARL",
+            "entropy": 3.3997086077833343,
+            "chars": 10909
+          },
+          {
+            "name": "MUNTZ",
+            "entropy": 3.3647175541839354,
+            "chars": 4218
+          },
+          {
+            "name": "YOUNG ELLIE",
+            "entropy": 3.297348707242685,
+            "chars": 2384
+          },
+          {
+            "name": "NEWSREEL ANNOUNCER",
+            "entropy": 3.260146930104172,
+            "chars": 1698
+          }
+        ]
+      }
+    },
+    {
+      "year": 2010,
+      "is_winner": true,
+      "analysis": {
+        "title": "The King's Speech",
+        "n_characters": 13,
+        "entropy_mean": 3.234014,
+        "entropy_var": 0.050487,
+        "entropy_std": 0.224694,
+        "top_characters": [
+          {
+            "name": "BERTIE",
+            "entropy": 3.4782472036630914,
+            "chars": 22459
+          },
+          {
+            "name": "LIONEL",
+            "entropy": 3.472457314056669,
+            "chars": 18919
+          },
+          {
+            "name": "WINSTON CHURCHILL",
+            "entropy": 3.441719122485766,
+            "chars": 5202
+          },
+          {
+            "name": "ELIZABETH",
+            "entropy": 3.4250791459820675,
+            "chars": 3604
+          },
+          {
+            "name": "COSMO LANG",
+            "entropy": 3.4170726123158954,
+            "chars": 5453
+          }
+        ]
+      }
+    },
+    {
+      "year": 2010,
+      "is_winner": false,
+      "analysis": {
+        "title": "Black Swan",
+        "n_characters": 4,
+        "entropy_mean": 3.263227,
+        "entropy_var": 0.003061,
+        "entropy_std": 0.055329,
+        "top_characters": [
+          {
+            "name": "LEROY",
+            "entropy": 3.3517866946400074,
+            "chars": 7411
+          },
+          {
+            "name": "LILY",
+            "entropy": 3.256252198953309,
+            "chars": 2986
+          },
+          {
+            "name": "NINA",
+            "entropy": 3.2450813962373215,
+            "chars": 4116
+          },
+          {
+            "name": "ERICA",
+            "entropy": 3.199788083251935,
+            "chars": 3015
+          }
+        ]
+      }
+    },
+    {
+      "year": 2010,
+      "is_winner": false,
+      "analysis": {
+        "title": "Inception",
+        "n_characters": 10,
+        "entropy_mean": 3.238872,
+        "entropy_var": 0.010644,
+        "entropy_std": 0.10317,
+        "top_characters": [
+          {
+            "name": "ARTHUR",
+            "entropy": 3.367369739629509,
+            "chars": 7049
+          },
+          {
+            "name": "EAMES",
+            "entropy": 3.3622176248320326,
+            "chars": 5281
+          },
+          {
+            "name": "COBB",
+            "entropy": 3.3579555740611173,
+            "chars": 27101
+          },
+          {
+            "name": "SAITO",
+            "entropy": 3.3003467316854254,
+            "chars": 4146
+          },
+          {
+            "name": "ARIADNE",
+            "entropy": 3.2528277046390848,
+            "chars": 7063
+          }
+        ]
+      }
+    },
+    {
+      "year": 2010,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Fighter",
+        "n_characters": 11,
+        "entropy_mean": 3.116073,
+        "entropy_var": 0.083082,
+        "entropy_std": 0.288239,
+        "top_characters": [
+          {
+            "name": "DICKY",
+            "entropy": 3.4781401406394297,
+            "chars": 23488
+          },
+          {
+            "name": "MICKY",
+            "entropy": 3.4637047883316336,
+            "chars": 12357
+          },
+          {
+            "name": "ALICE",
+            "entropy": 3.3812924783566167,
+            "chars": 7457
+          },
+          {
+            "name": "CHARLENE",
+            "entropy": 3.3737274558545094,
+            "chars": 6489
+          },
+          {
+            "name": "MICKEY O'KEEFE",
+            "entropy": 3.278938549024931,
+            "chars": 3038
+          }
+        ]
+      }
+    },
+    {
+      "year": 2010,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Kids Are All Right",
+        "n_characters": 8,
+        "entropy_mean": 3.285625,
+        "entropy_var": 0.019134,
+        "entropy_std": 0.138326,
+        "top_characters": [
+          {
+            "name": "NIC",
+            "entropy": 3.4445809553922357,
+            "chars": 11729
+          },
+          {
+            "name": "JULES",
+            "entropy": 3.4234724152361253,
+            "chars": 11792
+          },
+          {
+            "name": "PAUL",
+            "entropy": 3.3925698630018117,
+            "chars": 9986
+          },
+          {
+            "name": "JONI",
+            "entropy": 3.337532569581457,
+            "chars": 4571
+          },
+          {
+            "name": "LASER",
+            "entropy": 3.3330359479842393,
+            "chars": 3718
+          }
+        ]
+      }
+    },
+    {
+      "year": 2011,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Descendants",
+        "n_characters": 16,
+        "entropy_mean": 3.150222,
+        "entropy_var": 0.021764,
+        "entropy_std": 0.147527,
+        "top_characters": [
+          {
+            "name": "MATT",
+            "entropy": 3.4033536884276376,
+            "chars": 32639
+          },
+          {
+            "name": "SID",
+            "entropy": 3.3667303134218236,
+            "chars": 4723
+          },
+          {
+            "name": "ALEXANDRA",
+            "entropy": 3.32342637798559,
+            "chars": 8401
+          },
+          {
+            "name": "SCOTTIE",
+            "entropy": 3.280942534484275,
+            "chars": 4398
+          },
+          {
+            "name": "JULIE",
+            "entropy": 3.205877402042804,
+            "chars": 2598
+          }
+        ]
+      }
+    },
+    {
+      "year": 2011,
+      "is_winner": false,
+      "analysis": {
+        "title": "Moneyball",
+        "n_characters": 20,
+        "entropy_mean": 3.043532,
+        "entropy_var": 0.03328,
+        "entropy_std": 0.182428,
+        "top_characters": [
+          {
+            "name": "BILLY",
+            "entropy": 3.3882368369102895,
+            "chars": 37299
+          },
+          {
+            "name": "PETER",
+            "entropy": 3.3718092681160985,
+            "chars": 11513
+          },
+          {
+            "name": "GRADY",
+            "entropy": 3.310436312382028,
+            "chars": 4683
+          },
+          {
+            "name": "SCHOTT",
+            "entropy": 3.1996859377974567,
+            "chars": 3315
+          },
+          {
+            "name": "JOHN",
+            "entropy": 3.18273576710921,
+            "chars": 1679
+          }
+        ]
+      }
+    },
+    {
+      "year": 2011,
+      "is_winner": false,
+      "analysis": {
+        "title": "Drive",
+        "n_characters": 9,
+        "entropy_mean": 3.103421,
+        "entropy_var": 0.028451,
+        "entropy_std": 0.168675,
+        "top_characters": [
+          {
+            "name": "BERNIE ROSE",
+            "entropy": 3.291104744478872,
+            "chars": 6960
+          },
+          {
+            "name": "SHANNON",
+            "entropy": 3.278261890489476,
+            "chars": 4240
+          },
+          {
+            "name": "STANDARD",
+            "entropy": 3.235164141881889,
+            "chars": 3466
+          },
+          {
+            "name": "NINO",
+            "entropy": 3.2141622078524277,
+            "chars": 2601
+          },
+          {
+            "name": "DRIVER",
+            "entropy": 3.1680682502239117,
+            "chars": 4683
+          }
+        ]
+      }
+    },
+    {
+      "year": 2012,
+      "is_winner": true,
+      "analysis": {
+        "title": "Argo",
+        "n_characters": 20,
+        "entropy_mean": 3.101123,
+        "entropy_var": 0.032175,
+        "entropy_std": 0.179375,
+        "top_characters": [
+          {
+            "name": "MENDEZ",
+            "entropy": 3.419724642418903,
+            "chars": 9455
+          },
+          {
+            "name": "SIEGEL",
+            "entropy": 3.4075073972904737,
+            "chars": 4673
+          },
+          {
+            "name": "O'DONNELL",
+            "entropy": 3.3584824991688405,
+            "chars": 5731
+          },
+          {
+            "name": "CHAMBERS",
+            "entropy": 3.2803023516590852,
+            "chars": 2079
+          },
+          {
+            "name": "J STAFFORD",
+            "entropy": 3.204839106854229,
+            "chars": 1938
+          }
+        ]
+      }
+    },
+    {
+      "year": 2012,
+      "is_winner": false,
+      "analysis": {
+        "title": "Django Unchained",
+        "n_characters": 32,
+        "entropy_mean": 3.113905,
+        "entropy_var": 0.037611,
+        "entropy_std": 0.193937,
+        "top_characters": [
+          {
+            "name": "CALVIN CANDIE",
+            "entropy": 3.4750417648972123,
+            "chars": 23109
+          },
+          {
+            "name": "DJANGO",
+            "entropy": 3.4253870504098263,
+            "chars": 35134
+          },
+          {
+            "name": "STEPHEN",
+            "entropy": 3.3915384191038966,
+            "chars": 10560
+          },
+          {
+            "name": "ACE WOODY",
+            "entropy": 3.3522641719386863,
+            "chars": 6150
+          },
+          {
+            "name": "BROOMHILDA",
+            "entropy": 3.3192188486905185,
+            "chars": 2289
+          }
+        ]
+      }
+    },
+    {
+      "year": 2012,
+      "is_winner": false,
+      "analysis": {
+        "title": "Silver Linings Playbook",
+        "n_characters": 12,
+        "entropy_mean": 3.16159,
+        "entropy_var": 0.051818,
+        "entropy_std": 0.227636,
+        "top_characters": [
+          {
+            "name": "PAT",
+            "entropy": 3.3695493283914093,
+            "chars": 31472
+          },
+          {
+            "name": "TIFFANY",
+            "entropy": 3.33909353723039,
+            "chars": 14507
+          },
+          {
+            "name": "PAT SR.",
+            "entropy": 3.2667088031243465,
+            "chars": 12276
+          },
+          {
+            "name": "DANNY",
+            "entropy": 3.2604736941806887,
+            "chars": 3334
+          },
+          {
+            "name": "RONNIE",
+            "entropy": 3.2492541595204587,
+            "chars": 3879
+          }
+        ]
+      }
+    },
+    {
+      "year": 2012,
+      "is_winner": false,
+      "analysis": {
+        "title": "Lincoln",
+        "n_characters": 25,
+        "entropy_mean": 3.118375,
+        "entropy_var": 0.024159,
+        "entropy_std": 0.155431,
+        "top_characters": [
+          {
+            "name": "LINCOLN",
+            "entropy": 3.424407307180385,
+            "chars": 19929
+          },
+          {
+            "name": "SEWARD",
+            "entropy": 3.363918867435858,
+            "chars": 5477
+          },
+          {
+            "name": "THADDEUS STEVENS",
+            "entropy": 3.3490927174420184,
+            "chars": 5176
+          },
+          {
+            "name": "MARY",
+            "entropy": 3.342652763450773,
+            "chars": 5062
+          },
+          {
+            "name": "W.N. BILBO",
+            "entropy": 3.275662936344184,
+            "chars": 1551
+          }
+        ]
+      }
+    },
+    {
+      "year": 2013,
+      "is_winner": true,
+      "analysis": {
+        "title": "12 Years a Slave",
+        "n_characters": 27,
+        "entropy_mean": 3.170529,
+        "entropy_var": 0.025566,
+        "entropy_std": 0.159894,
+        "top_characters": [
+          {
+            "name": "EPPS",
+            "entropy": 3.4234170284677203,
+            "chars": 11700
+          },
+          {
+            "name": "SOLOMON",
+            "entropy": 3.383250078723697,
+            "chars": 16177
+          },
+          {
+            "name": "TIBEATS",
+            "entropy": 3.314233273101379,
+            "chars": 5512
+          },
+          {
+            "name": "FREEMAN",
+            "entropy": 3.288837519495858,
+            "chars": 2780
+          },
+          {
+            "name": "PATSEY",
+            "entropy": 3.2879212763579413,
+            "chars": 2162
+          }
+        ]
+      }
+    },
+    {
+      "year": 2013,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Wolf of Wall Street",
+        "n_characters": 15,
+        "entropy_mean": 3.108927,
+        "entropy_var": 0.093016,
+        "entropy_std": 0.304986,
+        "top_characters": [
+          {
+            "name": "JORDAN",
+            "entropy": 3.4838568349822503,
+            "chars": 46977
+          },
+          {
+            "name": "DONNIE",
+            "entropy": 3.3855589814662763,
+            "chars": 5123
+          },
+          {
+            "name": "NAOMI",
+            "entropy": 3.318435892494647,
+            "chars": 3647
+          },
+          {
+            "name": "MARK HANNA",
+            "entropy": 3.3088174632424363,
+            "chars": 1907
+          },
+          {
+            "name": "SAUREL",
+            "entropy": 3.2450193688002593,
+            "chars": 1637
+          }
+        ]
+      }
+    },
+    {
+      "year": 2013,
+      "is_winner": false,
+      "analysis": {
+        "title": "Her",
+        "n_characters": 11,
+        "entropy_mean": 3.075981,
+        "entropy_var": 0.05652,
+        "entropy_std": 0.23774,
+        "top_characters": [
+          {
+            "name": "THEODORE",
+            "entropy": 3.3621732934666495,
+            "chars": 22536
+          },
+          {
+            "name": "SAMANTHA",
+            "entropy": 3.3532672089198083,
+            "chars": 21573
+          },
+          {
+            "name": "AMY",
+            "entropy": 3.3207520116834877,
+            "chars": 5400
+          },
+          {
+            "name": "TEXT VOICE",
+            "entropy": 3.233770904044756,
+            "chars": 1237
+          },
+          {
+            "name": "PAUL",
+            "entropy": 3.191741731531332,
+            "chars": 1423
+          }
+        ]
+      }
+    },
+    {
+      "year": 2014,
+      "is_winner": true,
+      "analysis": {
+        "title": "Birdman",
+        "n_characters": 11,
+        "entropy_mean": 3.228022,
+        "entropy_var": 0.023776,
+        "entropy_std": 0.154195,
+        "top_characters": [
+          {
+            "name": "RIGGAN",
+            "entropy": 3.368522684912058,
+            "chars": 19178
+          },
+          {
+            "name": "MIKE",
+            "entropy": 3.340699475037011,
+            "chars": 10039
+          },
+          {
+            "name": "SAM",
+            "entropy": 3.339826813349886,
+            "chars": 5859
+          },
+          {
+            "name": "LAURA",
+            "entropy": 3.320639061937181,
+            "chars": 3636
+          },
+          {
+            "name": "JAKE",
+            "entropy": 3.3057592735228316,
+            "chars": 5990
+          }
+        ]
+      }
+    },
+    {
+      "year": 2014,
+      "is_winner": false,
+      "analysis": {
+        "title": "Whiplash",
+        "n_characters": 9,
+        "entropy_mean": 3.143605,
+        "entropy_var": 0.025076,
+        "entropy_std": 0.158353,
+        "top_characters": [
+          {
+            "name": "FLETCHER",
+            "entropy": 3.4734869360766516,
+            "chars": 22976
+          },
+          {
+            "name": "ANDREW",
+            "entropy": 3.3579258681976154,
+            "chars": 11436
+          },
+          {
+            "name": "NICOLE",
+            "entropy": 3.182241845939742,
+            "chars": 2191
+          },
+          {
+            "name": "JIM",
+            "entropy": 3.1420815971183327,
+            "chars": 1574
+          },
+          {
+            "name": "UNCLE FRANK",
+            "entropy": 3.0629443688383837,
+            "chars": 1229
+          }
+        ]
+      }
+    },
+    {
+      "year": 2014,
+      "is_winner": false,
+      "analysis": {
+        "title": "Interstellar",
+        "n_characters": 16,
+        "entropy_mean": 3.102296,
+        "entropy_var": 0.017435,
+        "entropy_std": 0.13204,
+        "top_characters": [
+          {
+            "name": "COOPER",
+            "entropy": 3.305005247302759,
+            "chars": 13509
+          },
+          {
+            "name": "BRAND",
+            "entropy": 3.285150127266583,
+            "chars": 10897
+          },
+          {
+            "name": "CASE",
+            "entropy": 3.2811440082535155,
+            "chars": 4786
+          },
+          {
+            "name": "DONALD",
+            "entropy": 3.2092117919503966,
+            "chars": 1679
+          },
+          {
+            "name": "ROTH",
+            "entropy": 3.2052742841057835,
+            "chars": 4495
+          }
+        ]
+      }
+    },
+    {
+      "year": 2015,
+      "is_winner": false,
+      "analysis": {
+        "title": "The Revenant",
+        "n_characters": 9,
+        "entropy_mean": 3.08258,
+        "entropy_var": 0.019616,
+        "entropy_std": 0.140058,
+        "top_characters": [
+          {
+            "name": "FITZGERALD",
+            "entropy": 3.311007153368766,
+            "chars": 7341
+          },
+          {
+            "name": "GLASS",
+            "entropy": 3.269474796678422,
+            "chars": 4258
+          },
+          {
+            "name": "HENRY",
+            "entropy": 3.1948202230399305,
+            "chars": 3667
+          },
+          {
+            "name": "ANDERSON",
+            "entropy": 3.0564085066894315,
+            "chars": 713
+          },
+          {
+            "name": "BRIDGER",
+            "entropy": 3.0500645011239347,
+            "chars": 1258
+          }
+        ]
+      }
+    },
+    {
+      "year": 2015,
+      "is_winner": false,
+      "analysis": {
+        "title": "Ex Machina",
+        "n_characters": 4,
+        "entropy_mean": 3.298977,
+        "entropy_var": 0.012609,
+        "entropy_std": 0.112292,
+        "top_characters": [
+          {
+            "name": "NATHAN",
+            "entropy": 3.4081202683424516,
+            "chars": 17624
+          },
+          {
+            "name": "CALEB",
+            "entropy": 3.3671572930688605,
+            "chars": 13454
+          },
+          {
+            "name": "AVA",
+            "entropy": 3.30559096743198,
+            "chars": 5721
+          },
+          {
+            "name": "JAY",
+            "entropy": 3.1150388777170743,
+            "chars": 861
+          }
+        ]
+      }
+    }
+  ]
+}
