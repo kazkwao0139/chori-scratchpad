@@ -15,4 +15,4 @@
 | [`entropy_adam/`](./entropy_adam/) | loss trajectory의 Shannon bigram entropy로 학습률을 적응 — Adam 전승 |
 | [`three_laws/`](./three_laws/) | entropy_adam에서 이어지는 사고실험 — AI 윤리란 무엇일까? harm = delta_S > 0 |
 | [`lorenz/`](./lorenz/) | 나비효과 멍때리기. |
-| [`haruhi`](./haruhi.md) | 옵티마이저의 전역 탐색이 쓸모없다는걸 알아내고선 하루히 문제가 갑자기 떠올라서 메모 |
+| [`haruhi/`](./haruhi/) | 옵티마이저의 전역 탐색이 쓸모없다는걸 알아내고선 하루히 문제가 갑자기 떠올라서 메모 |
