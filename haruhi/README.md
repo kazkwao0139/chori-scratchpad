@@ -182,7 +182,7 @@ $n \geq 6$에서:
 
 ---
 
-## 7. 전역 최적화의 불가피성: 왜 일반 공식은 없는가
+## 7. 계산 비축약성: OPT(n)은 수식이 아니라 알고리즘이다
 
 ### 7.1 지역 최적과 전역 최적
 
@@ -202,8 +202,6 @@ $$\text{OPT}(n) < \sum_{k=1}^{n} k! \quad (n \geq 6)$$
 
 ### 7.2 갭이 증명하는 것
 
-갭 $\Delta(n) = \sum k! - \text{OPT}(n) > 0$의 의미를 정밀하게 분석한다.
-
 확장 보조정리의 구성은 **각 층을 독립적으로** 처리한다. 비용이 정확히 $n!$이라는 것은, 이 구성이 **층 간 상호작용을 전혀 활용하지 않는다**는 뜻이다.
 
 그런데 $\text{OPT}(n) < \sum k!$이므로, 실제 최적 초순열은 층 간 상호작용을 활용하여 비용을 줄인다. 이 절약은 **지역 정보(한 층의 구조)만으로는 보이지 않는다** — 만약 보였다면 확장 보조정리의 구성이 이미 활용했을 것이다.
@@ -218,15 +216,13 @@ $\sum k!$ 공식은 $S_n$의 곱셈 구조를 가법적으로 분해한다:
 
 $$S_n \;\xrightarrow{\text{가법 분해}}\; 1! + 2! + \cdots + n!$$
 
-이 분해 과정에서 **층 간 간섭 정보가 파괴된다.** $\Delta(n)$은 이 파괴된 정보의 양이다.
+이 분해 과정에서 **층 간 간섭 정보가 파괴된다.**
 
-파괴된 정보는 가법적 표현 안에서 복구할 수 없다. $\text{OPT}(n) = \sum k! - \Delta(n)$이라는 식은 $\Delta(n)$이 독립적으로 계산 가능한 양인 것처럼 보이게 하지만, 실제로는 $\text{OPT}(n)$을 먼저 알아야 $\Delta(n)$이 결정된다. **순서가 반대이다.**
+$\text{OPT}(n) = \sum k! - \Delta(n)$이라는 식은 $\Delta(n)$이 독립적으로 계산 가능한 양인 것처럼 보이게 하지만, 실제로는 $\text{OPT}(n)$을 먼저 알아야 $\Delta(n)$이 결정된다. **순서가 반대이다.** 파괴된 정보는 가법적 표현 안에서 복구할 수 없다.
 
-$\Delta(n)$을 독립적으로 구하려면, 파괴되기 전의 구조 — $S_n$의 곱셈 구조 전체 — 로 돌아가서 전역 최적화를 수행해야 한다.
+### 7.4 핵심 주장
 
-### 7.4 핵심 정리
-
-**정리.** $\text{OPT}(n)$에 대한 일반 공식은 존재하지 않는다.
+$\text{OPT}(n)$은 computable하다 — 모든 문자열을 길이 순으로 열거하면 언젠가 찾는다. 그러나 이 계산은 $S_n$ 위의 전역 탐색 알고리즘의 실행으로만 가능하며, 닫힌 수식으로 축약할 수 없다.
 
 **논증.**
 
@@ -234,11 +230,11 @@ $\Delta(n)$을 독립적으로 구하려면, 파괴되기 전의 구조 — $S_n
 
 2. $n \geq 6$에서 $\text{OPT}(n) < \sum k!$이다. 따라서 가법적 접근은 전역 최적에 도달하지 못한다.
 
-3. 가법적 최적과 전역 최적의 차이 $\Delta(n)$은 층 간 간섭에서 비롯되며, 이 간섭은 $\mathbb{Z}_n$의 순환군 분해(5절)에 의존한다.
+3. 전역 최적과의 차이 $\Delta(n)$은 층 간 간섭에서 비롯되며, 이 간섭은 $\mathbb{Z}_n$의 순환군 분해(5절)에 의존한다.
 
-4. $\Delta(n)$을 결정하려면 $S_n$ 위의 순열 그래프에서 전역 최적화를 수행해야 한다. 이는 가법 분해에서 파괴된 정보를 원래 구조로 돌아가 탐색하는 과정이며, 어떤 닫힌 식으로도 대체할 수 없다.
+4. $\Delta(n)$을 결정하려면 $S_n$의 곱셈 구조 전체로 돌아가 전역 최적화를 수행해야 한다. 이 과정은 생략할 수 없다 — **답을 알려면 과정을 직접 실행해야 한다.**
 
-5. $\text{OPT}(n) = \sum k! - \Delta(n)$이므로, $\Delta(n)$에 닫힌 공식이 없으면 $\text{OPT}(n)$에도 없다. $\blacksquare$
+이것은 Wolfram의 **계산 비축약성(computational irreducibility)** 과 동일한 구조이다: 셀룰러 오토마타의 $t$번째 상태를 알려면 $t$번 시뮬레이션해야 하듯, $\text{OPT}(n)$을 알려면 $S_n$ 위의 탐색을 실행해야 한다. 수식은 이 과정의 shortcut이 될 수 없다.
 
 ### 7.5 요약
 
@@ -246,12 +242,14 @@ $\Delta(n)$을 독립적으로 구하려면, 파괴되기 전의 구조 — $S_n
 |---|---|---|
 | 구성 방법 | 층별 독립 확장 | $S_n$ 전역 탐색 |
 | 층 간 상호작용 | 무시 | 활용 |
-| 공식 존재 | 예 ($\sum k!$) | 아니오 |
-| 계산 가능성 | $O(n)$ | 전역 최적화 필요 |
+| 답의 형태 | 수식 ($\sum k!$) | 알고리즘 (전역 탐색) |
+| 계산 | $O(n)$ | 축약 불가능 |
 
-$$\boxed{\text{지역 최적} \neq \text{전역 최적} \;\Longrightarrow\; \text{전역 최적화 불가피} \;\Longrightarrow\; \text{일반 공식 부재}}$$
+$$\boxed{\text{OPT}(n)\text{은 computable하지만 축약 불가능하다. 답은 수식이 아니라 알고리즘이다.}}$$
 
-**덧셈은 곱셈 구조를 파괴한다. 파괴된 정보는 복구되지 않는다. 전역 최적에 도달하려면 파괴 이전의 구조로 돌아가 전체를 탐색해야 한다. 이것이 공식이 아닌 이유이다.**
+**덧셈은 곱셈 구조를 파괴한다. 파괴된 정보는 복구되지 않는다. 전역 최적에 도달하려면 파괴 이전의 구조로 돌아가 전체를 탐색해야 한다. 이 탐색 과정 자체가 답이며, 어떤 수식으로도 대체할 수 없다.**
+
+**열려 있는 문제.** 이 전역 탐색의 계산량에 대한 엄밀한 하한(알고리즘적 하한)은 본 분석의 범위를 벗어나며, $P \neq NP$ 류의 문제와 맞닿아 있다.
 
 ---
 
@@ -450,7 +448,7 @@ For $n \geq 6$:
 
 ---
 
-## 7. Inevitability of Global Search: Why No General Formula Exists
+## 7. Computational Irreducibility: OPT(n) Is an Algorithm, Not a Formula
 
 ### 7.1 Local Optimum vs Global Optimum
 
@@ -470,8 +468,6 @@ $$\text{OPT}(n) < \sum_{k=1}^{n} k! \quad (n \geq 6)$$
 
 ### 7.2 What the Gap Proves
 
-We analyze the precise meaning of the gap $\Delta(n) = \sum k! - \text{OPT}(n) > 0$.
-
 The Expansion Lemma construction processes **each layer independently**. The fact that its cost is exactly $n!$ means it **exploits no inter-layer interaction whatsoever**.
 
 Since $\text{OPT}(n) < \sum k!$, the actual optimal superpermutation does exploit inter-layer interaction to reduce cost. This saving is **invisible to local information (the structure of a single layer)** — if it were visible, the Expansion Lemma construction would have already exploited it.
@@ -486,15 +482,13 @@ The $\sum k!$ formula decomposes the multiplicative structure of $S_n$ additivel
 
 $$S_n \;\xrightarrow{\text{additive decomposition}}\; 1! + 2! + \cdots + n!$$
 
-This decomposition **destroys inter-layer interference information**. $\Delta(n)$ is the amount of destroyed information.
+This decomposition **destroys inter-layer interference information**.
 
-Destroyed information cannot be recovered from within the additive representation. The expression $\text{OPT}(n) = \sum k! - \Delta(n)$ makes $\Delta(n)$ appear to be an independently computable quantity, but in reality, $\text{OPT}(n)$ must be known first before $\Delta(n)$ can be determined. **The order is reversed.**
+The expression $\text{OPT}(n) = \sum k! - \Delta(n)$ makes $\Delta(n)$ appear to be an independently computable quantity, but in reality, $\text{OPT}(n)$ must be known first before $\Delta(n)$ can be determined. **The order is reversed.** Destroyed information cannot be recovered from within the additive representation.
 
-To determine $\Delta(n)$ independently, one must return to the pre-destruction structure — the full multiplicative structure of $S_n$ — and perform global optimization.
+### 7.4 Core Claim
 
-### 7.4 Core Result
-
-**Theorem.** No general formula for $\text{OPT}(n)$ exists.
+$\text{OPT}(n)$ is computable — enumerate all strings by length and eventually one is found. But this computation is only possible by executing a global search algorithm over $S_n$, and cannot be reduced to a closed-form expression.
 
 **Argument.**
 
@@ -502,11 +496,11 @@ To determine $\Delta(n)$ independently, one must return to the pre-destruction s
 
 2. For $n \geq 6$, $\text{OPT}(n) < \sum k!$. Therefore the additive approach fails to reach the global optimum.
 
-3. The gap $\Delta(n)$ between additive optimum and global optimum arises from inter-layer interference, which depends on the cyclic group decomposition of $\mathbb{Z}_n$ (Section 5).
+3. The gap $\Delta(n)$ arises from inter-layer interference, which depends on the cyclic group decomposition of $\mathbb{Z}_n$ (Section 5).
 
-4. Determining $\Delta(n)$ requires global optimization over the permutation graph of $S_n$. This is the process of returning to the original structure to search for what was lost in the additive decomposition, and cannot be replaced by any closed-form expression.
+4. Determining $\Delta(n)$ requires returning to the full multiplicative structure of $S_n$ and performing global optimization. This process cannot be skipped — **to know the answer, one must run the process.**
 
-5. Since $\text{OPT}(n) = \sum k! - \Delta(n)$, if $\Delta(n)$ has no closed formula, neither does $\text{OPT}(n)$. $\blacksquare$
+This is the same structure as Wolfram's **computational irreducibility**: just as knowing the $t$-th state of a cellular automaton requires simulating $t$ steps, knowing $\text{OPT}(n)$ requires executing the search over $S_n$. No formula can shortcut this process.
 
 ### 7.5 Summary
 
@@ -514,12 +508,14 @@ To determine $\Delta(n)$ independently, one must return to the pre-destruction s
 |---|---|---|
 | Construction | Layer-independent expansion | Global search over $S_n$ |
 | Inter-layer interaction | Ignored | Exploited |
-| Formula exists | Yes ($\sum k!$) | No |
-| Computability | $O(n)$ | Requires global optimization |
+| Form of the answer | Formula ($\sum k!$) | Algorithm (global search) |
+| Computation | $O(n)$ | Irreducible |
 
-$$\boxed{\text{local optimum} \neq \text{global optimum} \;\Longrightarrow\; \text{global search inevitable} \;\Longrightarrow\; \text{no general formula}}$$
+$$\boxed{\text{OPT}(n) \text{ is computable but irreducible. The answer is an algorithm, not a formula.}}$$
 
-**Addition destroys multiplicative structure. Destroyed information cannot be recovered. To reach the global optimum, one must return to the pre-destruction structure and search it entirely. This is why no formula exists.**
+**Addition destroys multiplicative structure. Destroyed information cannot be recovered. To reach the global optimum, one must return to the pre-destruction structure and search it entirely. The search process itself is the answer, and no formula can replace it.**
+
+**Open problem.** A rigorous lower bound on the computational cost of this global search (an algorithmic lower bound) is beyond the scope of this analysis, and borders on the $P \neq NP$ problem.
 
 ---
 
