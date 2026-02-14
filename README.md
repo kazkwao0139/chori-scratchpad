@@ -16,3 +16,4 @@
 | [`three_laws/`](./three_laws/) | entropy_adam에서 이어지는 사고실험 — AI 윤리란 무엇일까? harm = delta_S > 0 |
 | [`lorenz/`](./lorenz/) | 나비효과 멍때리기. |
 | [`haruhi/`](./haruhi/) | 옵티마이저의 전역 탐색이 쓸모없다는걸 알아내고선 하루히 문제가 갑자기 떠올라서 메모 |
+| [`ballistic_cache/`](./ballistic_cache/) | RK4 탄도 시뮬레이션을 캐싱해서 O(1) 조회하려는 시도. 근데 별 쓸모가 없더라 |
