@@ -31,10 +31,9 @@
 - **열역학 제2법칙** — 우주는 질서에서 무질서로 흐른다. 여기저기서 썼다.
 - **대수의 법칙** — 숫자가 커지면 예측 가능해진다. 여기저기서 썼다.
 
-둘 다 증명이 어렵지 않진 않고. 꽤 어렵다 사실. 근데 무시하면 큰일난다. 수학이 정말로 궁금한 사람만 열어보시길. 경고했다.
+둘 다 증명이 어렵지 않진 않고. 꽤 어렵다 사실. 근데 무시하면 큰일난다. 수학이 정말로 궁금한 사람만 스크롤하시길. 경고했다.
 
-<details>
-<summary><b>열역학 제2법칙</b></summary>
+### 열역학 제2법칙
 
 먼저 제1법칙. 에너지는 생기지도, 사라지지도 않는다. 형태만 바뀐다:
 
@@ -74,10 +73,7 @@ $$E \geq k_B T \ln 2$$
 
 결국 전부 같은 소리다. 세상은 엔트로피가 증가하는 방향으로 굴러간다.
 
-</details>
-
-<details>
-<summary><b>WLLN (약한 대수의 법칙)</b></summary>
+### WLLN (약한 대수의 법칙)
 
 $X_1, X_2, \ldots$ 가 iid이고 $E[X_i] = \mu$, $\text{Var}(X_i) = \sigma^2 < \infty$ 라 하자. 표본 평균
 
@@ -121,10 +117,7 @@ $$P(|\bar{X}_n - \mu| \geq \epsilon) \leq \frac{\text{Var}(\bar{X}_n)}{\epsilon^
 
 $n \to \infty$ 이면 우변이 0으로 간다. $\blacksquare$
 
-</details>
-
-<details>
-<summary><b>SLLN (강한 대수의 법칙)</b></summary>
+### SLLN (강한 대수의 법칙)
 
 WLLN은 "각 $n$ 에서 벗어날 확률이 줄어든다"는 것이고, SLLN은 "경로 자체가 수렴한다"는 것이다. almost sure convergence는 convergence in probability를 함의하지만 역은 성립하지 않는다. 더 강한 결과다.
 
@@ -162,8 +155,6 @@ $$P(\bar{X}_n \not\to \mu) = P\left(\bigcup_{m=1}^{\infty} \{|\bar{X}_n - \mu| >
 
 $$\therefore \quad P\left(\lim_{n \to \infty} \bar{X}_n = \mu\right) = 1 \quad \blacksquare$$
 
-</details>
-
 ---
 
 1. 무질서해지는 건 막을 수 없다.
@@ -171,6 +162,8 @@ $$\therefore \quad P\left(\lim_{n \to \infty} \bar{X}_n = \mu\right) = 1 \quad \
 3. 둘 다 우주의 전제조건이라 자꾸 갖다 쓰게 된다.
 
 ps. 이 스크래치패드만 해도 WLLN으로만 되는 게 있고, SLLN이 필요한 게 있다. 뭔지는 안 쓰겠다(...)
+
+ps2. 원래는 접기 문법으로 테러방지를 하려했으나... LaTeX이 깨지는 문제가 있어서... 스크래치패드인데 뭐 어때?
 
 ---
 
@@ -207,10 +200,9 @@ The reason is simple. They've been v1.0 since the universe began, and there are 
 - **Second Law of Thermodynamics** — The universe flows from order to disorder. Used all over the place.
 - **Law of Large Numbers** — As numbers grow, things become predictable. Used all over the place.
 
-The proofs aren't exactly easy. They're actually pretty hard. But ignore them at your own risk. Only open these if you genuinely want the math. You've been warned.
+The proofs aren't exactly easy. They're actually pretty hard. But ignore them at your own risk. Only scroll down if you genuinely want the math. You've been warned.
 
-<details>
-<summary><b>Second Law of Thermodynamics</b></summary>
+### Second Law of Thermodynamics
 
 First, the First Law. Energy is neither created nor destroyed. It only changes form:
 
@@ -250,10 +242,7 @@ This is the bridge connecting information entropy and thermodynamic entropy.
 
 It all says the same thing. The world rolls in the direction of increasing entropy.
 
-</details>
-
-<details>
-<summary><b>WLLN (Weak Law of Large Numbers)</b></summary>
+### WLLN (Weak Law of Large Numbers)
 
 Let $X_1, X_2, \ldots$ be iid with $E[X_i] = \mu$ and $\text{Var}(X_i) = \sigma^2 < \infty$. For the sample mean
 
@@ -297,10 +286,7 @@ $$P(|\bar{X}_n - \mu| \geq \epsilon) \leq \frac{\text{Var}(\bar{X}_n)}{\epsilon^
 
 As $n \to \infty$, the right side goes to 0. $\blacksquare$
 
-</details>
-
-<details>
-<summary><b>SLLN (Strong Law of Large Numbers)</b></summary>
+### SLLN (Strong Law of Large Numbers)
 
 WLLN says "the probability of deviating decreases at each $n$." SLLN says "the path itself converges." Almost sure convergence implies convergence in probability, but the converse does not hold. This is a stronger result.
 
@@ -340,8 +326,6 @@ $$P(\bar{X}_n \not\to \mu) = P\left(\bigcup_{m=1}^{\infty} \{|\bar{X}_n - \mu| >
 
 $$\therefore \quad P\left(\lim_{n \to \infty} \bar{X}_n = \mu\right) = 1 \quad \blacksquare$$
 
-</details>
-
 ---
 
 1. Disorder is unstoppable.
@@ -349,3 +333,5 @@ $$\therefore \quad P\left(\lim_{n \to \infty} \bar{X}_n = \mu\right) = 1 \quad \
 3. Both are preconditions of the universe, so I keep reaching for them.
 
 ps. Even within this scratchpad alone, some things only need WLLN, while others require SLLN. I won't say which(...)
+
+ps2. I originally tried to use collapsible sections to prevent math terrorism, but... LaTeX breaks inside them, so... it's a scratchpad, who cares?
