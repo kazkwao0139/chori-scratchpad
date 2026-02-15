@@ -22,6 +22,10 @@
 
 ## 왜 자꾸 열역학 제2법칙이랑 대수의 법칙이 나오냐면
 
+> 1. 무질서해지는 건 막을 수 없다.
+> 2. 많이 하면 평균에 수렴하는 것도 막을 수 없다.
+> 3. 둘 다 우주의 전제조건이라 자꾸 갖다 쓰게 된다.
+
 친구가 도대체 왜 그렇게 그 두개에 집착하냐고 물어봐서 대문에 박는다.
 
 좋아서 집착하는 건 아니고, 애증에 가깝다.
@@ -31,7 +35,9 @@
 - **열역학 제2법칙** — 우주는 질서에서 무질서로 흐른다. 여기저기서 썼다.
 - **대수의 법칙** — 숫자가 커지면 예측 가능해진다. 여기저기서 썼다.
 
-둘 다 증명이 어렵지 않진 않고. 꽤 어렵다 사실. 근데 무시하면 큰일난다. 수학이 정말로 궁금한 사람만 스크롤하시길. 경고했다.
+둘 다 증명이 어렵지 않진 않고. 꽤 어렵다 사실. 근데 무시하면 큰일난다.
+
+> **경고: 밑에 가독성 테러. 수학에 자신있는 사람만 내려볼 것. 3줄요약만 알아도 상관없음.**
 
 ### 열역학 제2법칙
 
@@ -157,10 +163,6 @@ $$\therefore \quad P\left(\lim_{n \to \infty} \bar{X}_n = \mu\right) = 1 \quad \
 
 ---
 
-1. 무질서해지는 건 막을 수 없다.
-2. 많이 하면 평균에 수렴하는 것도 막을 수 없다.
-3. 둘 다 우주의 전제조건이라 자꾸 갖다 쓰게 된다.
-
 ps. 이 스크래치패드만 해도 WLLN으로만 되는 게 있고, SLLN이 필요한 게 있다. 뭔지는 안 쓰겠다(...)
 
 ps2. 원래는 접기 문법으로 테러방지를 하려했으나... LaTeX이 깨지는 문제가 있어서... 스크래치패드인데 뭐 어때?
@@ -191,6 +193,10 @@ What started as a joke often needs verification, and some of these may one day b
 
 ## Why the Second Law of Thermodynamics and the Law of Large Numbers keep showing up
 
+> 1. Disorder is unstoppable.
+> 2. With enough samples, convergence to the mean is also unstoppable.
+> 3. Both are preconditions of the universe, so I keep reaching for them.
+
 A buddy asked me why I'm so obsessed with these two. So I'm putting this on the front page.
 
 It's not that I love them. It's closer to a love-hate relationship.
@@ -200,7 +206,9 @@ The reason is simple. They've been v1.0 since the universe began, and there are 
 - **Second Law of Thermodynamics** — The universe flows from order to disorder. Used all over the place.
 - **Law of Large Numbers** — As numbers grow, things become predictable. Used all over the place.
 
-The proofs aren't exactly easy. They're actually pretty hard. But ignore them at your own risk. Only scroll down if you genuinely want the math. You've been warned.
+The proofs aren't exactly easy. They're actually pretty hard. But ignore them at your own risk.
+
+> **Warning: readability terrorism below. Only scroll down if you're confident in math. The 3-line summary above is all you need.**
 
 ### Second Law of Thermodynamics
 
@@ -327,10 +335,6 @@ $$P(\bar{X}_n \not\to \mu) = P\left(\bigcup_{m=1}^{\infty} \{|\bar{X}_n - \mu| >
 $$\therefore \quad P\left(\lim_{n \to \infty} \bar{X}_n = \mu\right) = 1 \quad \blacksquare$$
 
 ---
-
-1. Disorder is unstoppable.
-2. With enough samples, convergence to the mean is also unstoppable.
-3. Both are preconditions of the universe, so I keep reaching for them.
 
 ps. Even within this scratchpad alone, some things only need WLLN, while others require SLLN. I won't say which(...)
 
