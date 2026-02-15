@@ -42,7 +42,7 @@ $\{1, \ldots, n\}$의 $n!$개 순열은 크기 $n$인 $(n-1)!$개의 회전 사�
 
 $\sum k!$ 공식은 다음의 재귀 구성에서 비롯된다:
 
-1. $n-1$개 심볼에 대한 초순열 $S_{n-1}$ (길이 $L(n-1)$)에서 출발한다.
+1. $n-1$개 심볼에 대한 길이 $L(n-1)$의 초순열 $S_{n-1}$에서 출발한다.
 2. $S_{n-1}$ 안의 각 $(n-1)$-순열 $\pi_i$에 대해, 심볼 $n$을 모든 위치에 삽입하여 $n$개 순열로 이루어진 **커널** $K_i$를 생성한다.
 3. 커널들을 $S_{n-1}$이 결정하는 순서대로 연결한다.
 
@@ -122,7 +122,7 @@ $\sum k!$ 공식은 초순열을 독립적인 층들로 분해한다:
 
 $$L(n) = \underbrace{1!}_{\text{1층}} + \underbrace{2!}_{\text{2층}} + \cdots + \underbrace{n!}_{\text{n층}}$$
 
-각 $k!$는 "$k$층을 추가하는 비용"을 나타낸다. 이 공식은 각 층이 독립적으로 기여한다고 가정한다 — 층 사이에 상호작용이 없다. 이것은 **곱셈적 대상**(대칭군 $S_n$)에 대한 순수한 **덧셈 분해**이다.
+각 $k!$는 $k$층을 추가하는 비용을 나타낸다. 이 공식은 각 층이 독립적으로 기여한다고 가정한다 — 층 사이에 상호작용이 없다. 이것은 **곱셈적 대상**(대칭군 $S_n$)에 대한 순수한 **덧셈 분해**이다.
 
 ### 5.2 순환군 구조
 
@@ -308,7 +308,7 @@ Within a superpermutation:
 
 The $\sum k!$ formula arises from the following recursive construction:
 
-1. Start with a superpermutation $S_{n-1}$ on $n-1$ symbols (length $L(n-1)$).
+1. Start with a superpermutation $S_{n-1}$ of length $L(n-1)$ on $n-1$ symbols.
 2. For each $(n-1)$-permutation $\pi_i$ in $S_{n-1}$, insert symbol $n$ into every position to create a **kernel** $K_i$ of $n$ permutations.
 3. Concatenate the kernels in the order determined by $S_{n-1}$.
 
@@ -388,7 +388,7 @@ The $\sum k!$ formula decomposes the superpermutation into independent layers:
 
 $$L(n) = \underbrace{1!}_{\text{layer 1}} + \underbrace{2!}_{\text{layer 2}} + \cdots + \underbrace{n!}_{\text{layer n}}$$
 
-Each $k!$ represents "the cost of adding layer $k$." The formula assumes each layer contributes independently — no interaction between layers. This is a purely **additive decomposition** of a **multiplicative object** (the symmetric group $S_n$).
+Each $k!$ represents the cost of adding layer $k$. The formula assumes each layer contributes independently — no interaction between layers. This is a purely **additive decomposition** of a **multiplicative object** (the symmetric group $S_n$).
 
 ### 5.2 Cyclic Group Structure
 
