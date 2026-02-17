@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Hidden Gems: 평작 중에서 각본이 명작급인 영화 찾기.
 
@@ -15,7 +16,7 @@ import math
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CHECKPOINT = f'{BASE}/screenplay/plot_entropy_checkpoint.json'
 
 KEY_METRICS = ['repeat_ratio', 'arc_shift', 'setup_front', 'bi_entropy']

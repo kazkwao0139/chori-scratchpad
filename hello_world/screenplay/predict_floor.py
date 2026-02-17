@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Asymmetric hypothesis: bad screenplay → guaranteed bad movie.
 The three axes don't predict success, they predict the FLOOR.
@@ -11,7 +12,7 @@ import math
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def main():

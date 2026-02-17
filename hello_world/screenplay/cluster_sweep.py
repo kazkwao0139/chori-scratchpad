@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Sweep k=2..15 on n=845 LLM movies.
 Elbow, silhouette, and within-cluster Δ for each k.
@@ -11,7 +12,7 @@ import random
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def kmeans(data, k, max_iter=100):

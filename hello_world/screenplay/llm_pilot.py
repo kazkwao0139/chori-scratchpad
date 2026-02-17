@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 LLM pilot: top 15 vs bottom 15 rated movies.
 Compare zlib vs LLM perplexity on the same axes.
@@ -15,7 +16,7 @@ from collections import defaultdict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CHECKPOINT = f"{BASE}/screenplay/llm_pilot_checkpoint.json"
 
 

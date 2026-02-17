@@ -1,3 +1,4 @@
+from pathlib import Path
 """Generate influence_data.json for markdown report."""
 
 import json, sys, gzip, math
@@ -6,7 +7,7 @@ from collections import defaultdict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 METRICS = ['dir_ratio', 'dial_zlib', 'dir_zlib', 'char_var', 'narr_std']
 
 

@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 English-only sweet spot comparison.
 All 3 works in English → directly comparable with 83 IMSDB screenplays.
@@ -20,7 +21,7 @@ from typing import Dict, Optional
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 # ─── Entropy functions ─────────────────────────────

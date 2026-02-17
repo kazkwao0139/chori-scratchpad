@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Third axis candidate: Dialogue vs Direction ratio + entropy gap.
 Film is a VISUAL medium. Good screenplays should drive story through
@@ -14,7 +15,7 @@ from collections import Counter
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def bigram_entropy(text):

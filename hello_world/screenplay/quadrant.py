@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 4-Quadrant Analysis: IMDB Rating vs Screenplay Structure Score
 
@@ -16,7 +17,7 @@ import sys
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CHECKPOINT = f'{BASE}/screenplay/plot_entropy_checkpoint.json'
 
 KEY_METRICS = ['repeat_ratio', 'arc_shift', 'setup_front', 'bi_entropy']

@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Local minima with LLM features.
 Cluster on LLM perplexity features, then check WITHIN-cluster
@@ -12,7 +13,7 @@ import random
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def kmeans(data, k, max_iter=100):

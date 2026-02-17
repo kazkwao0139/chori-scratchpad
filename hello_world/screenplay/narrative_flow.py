@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Narrative Flow Analysis — entropy over story time.
 
@@ -23,7 +24,7 @@ from typing import Optional, List
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 N_WINDOWS = 20  # split each screenplay into 20 segments (~5% each)
 
 

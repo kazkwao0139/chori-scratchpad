@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Can we predict IMDB rating from screenplay alone?
 Three axes: char_var (X), narr_std (Y), |dir_ratio - 0.575| (Z).
@@ -12,7 +13,7 @@ from collections import Counter
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def main():

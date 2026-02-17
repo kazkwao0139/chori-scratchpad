@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 2D Scatter: Character Diversity (X) vs Narrative Consistency (Y)
 
@@ -13,7 +14,7 @@ import json
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 # Load both datasets
 with open(f'{BASE}/screenplay/sweetspot_results.json', 'r', encoding='utf-8') as f:

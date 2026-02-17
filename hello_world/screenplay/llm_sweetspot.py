@@ -13,6 +13,7 @@ import time
 import json
 import math
 import os
+from pathlib import Path
 import urllib.request
 from collections import defaultdict
 from typing import Dict, Optional
@@ -24,7 +25,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CACHE_PATH = f"{BASE}/screenplay/imsdb_dialogue_cache.json"
 CHECKPOINT_PATH = f"{BASE}/screenplay/llm_sweetspot_checkpoint.json"
 RESULT_PATH = f"{BASE}/screenplay/llm_sweetspot_results.json"

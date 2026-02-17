@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Live correlation check: read mass_checkpoint and compute
 direction ratio vs IMDB rating correlation as data accumulates.
@@ -13,7 +14,7 @@ from collections import Counter
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def zlib_entropy(text):

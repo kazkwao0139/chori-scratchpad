@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Local minima hypothesis: formulaic, auteur, dialogue-heavy are DIFFERENT clusters.
 Each has its own optimal point. Within-cluster deviation predicts quality better.
@@ -12,7 +13,7 @@ import random
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def kmeans(data, k, max_iter=100):

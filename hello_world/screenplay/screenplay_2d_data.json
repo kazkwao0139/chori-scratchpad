@@ -1,0 +1,705 @@
+{
+  "matched": [
+    {
+      "title": "All About Eve",
+      "char_var": 0.024833,
+      "narr_std": 0.008516,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1950
+    },
+    {
+      "title": "The Apartment",
+      "char_var": 0.029955,
+      "narr_std": 0.013986,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1960
+    },
+    {
+      "title": "Bonnie and Clyde",
+      "char_var": 0.036913,
+      "narr_std": 0.006996,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1967
+    },
+    {
+      "title": "The Graduate",
+      "char_var": 0.029973,
+      "narr_std": 0.027001,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1967
+    },
+    {
+      "title": "The Godfather",
+      "char_var": 0.026112,
+      "narr_std": 0.009882,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1972
+    },
+    {
+      "title": "Chinatown",
+      "char_var": 0.02824,
+      "narr_std": 0.011995,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1974
+    },
+    {
+      "title": "Rocky",
+      "char_var": 0.034488,
+      "narr_std": 0.014217,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1976
+    },
+    {
+      "title": "Taxi Driver",
+      "char_var": 0.037097,
+      "narr_std": 0.018746,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1976
+    },
+    {
+      "title": "Annie Hall",
+      "char_var": 0.045489,
+      "narr_std": 0.013629,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1977
+    },
+    {
+      "title": "Star Wars",
+      "char_var": 0.042641,
+      "narr_std": 0.037584,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1977
+    },
+    {
+      "title": "Kramer vs. Kramer",
+      "char_var": 0.053538,
+      "narr_std": 0.01275,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1979
+    },
+    {
+      "title": "Apocalypse Now",
+      "char_var": 0.034143,
+      "narr_std": 0.015225,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1979
+    },
+    {
+      "title": "Ordinary People",
+      "char_var": 0.028373,
+      "narr_std": 0.026364,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1980
+    },
+    {
+      "title": "Raging Bull",
+      "char_var": 0.043568,
+      "narr_std": 0.024578,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1980
+    },
+    {
+      "title": "Gandhi",
+      "char_var": 0.021297,
+      "narr_std": 0.008054,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1982
+    },
+    {
+      "title": "Amadeus",
+      "char_var": 0.045907,
+      "narr_std": 0.013836,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1984
+    },
+    {
+      "title": "Platoon",
+      "char_var": 0.020066,
+      "narr_std": 0.012418,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1986
+    },
+    {
+      "title": "Top Gun",
+      "char_var": 0.053308,
+      "narr_std": 0.01601,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1986
+    },
+    {
+      "title": "Die Hard",
+      "char_var": 0.030766,
+      "narr_std": 0.00897,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1988
+    },
+    {
+      "title": "Dead Poets Society",
+      "char_var": 0.023739,
+      "narr_std": 0.015748,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1989
+    },
+    {
+      "title": "Dances with Wolves",
+      "char_var": 0.032402,
+      "narr_std": 0.015408,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1990
+    },
+    {
+      "title": "JFK",
+      "char_var": 0.046462,
+      "narr_std": 0.012697,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1991
+    },
+    {
+      "title": "A Few Good Men",
+      "char_var": 0.025834,
+      "narr_std": 0.016224,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1992
+    },
+    {
+      "title": "Schindler's List",
+      "char_var": 0.036012,
+      "narr_std": 0.007794,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1993
+    },
+    {
+      "title": "The Fugitive",
+      "char_var": 0.034598,
+      "narr_std": 0.017232,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1993
+    },
+    {
+      "title": "The Piano",
+      "char_var": 0.011605,
+      "narr_std": 0.011389,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1993
+    },
+    {
+      "title": "Forrest Gump",
+      "char_var": 0.06148,
+      "narr_std": 0.013599,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1994
+    },
+    {
+      "title": "Pulp Fiction",
+      "char_var": 0.053637,
+      "narr_std": 0.018207,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1994
+    },
+    {
+      "title": "The Shawshank Redemption",
+      "char_var": 0.048404,
+      "narr_std": 0.014689,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1994
+    },
+    {
+      "title": "Braveheart",
+      "char_var": 0.014759,
+      "narr_std": 0.007586,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1995
+    },
+    {
+      "title": "Sense and Sensibility",
+      "char_var": 0.022975,
+      "narr_std": 0.011555,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1995
+    },
+    {
+      "title": "Usual Suspects",
+      "char_var": 0.022485,
+      "narr_std": 0.012096,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1995
+    },
+    {
+      "title": "The English Patient",
+      "char_var": 0.034173,
+      "narr_std": 0.011298,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1996
+    },
+    {
+      "title": "Fargo",
+      "char_var": 0.020249,
+      "narr_std": 0.014119,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1996
+    },
+    {
+      "title": "Jerry Maguire",
+      "char_var": 0.032461,
+      "narr_std": 0.014562,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1996
+    },
+    {
+      "title": "Good Will Hunting",
+      "char_var": 0.023382,
+      "narr_std": 0.016461,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1997
+    },
+    {
+      "title": "As Good as It Gets",
+      "char_var": 0.01982,
+      "narr_std": 0.01342,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1997
+    },
+    {
+      "title": "Shakespeare in Love",
+      "char_var": 0.023241,
+      "narr_std": 0.016815,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1998
+    },
+    {
+      "title": "Saving Private Ryan",
+      "char_var": 0.019878,
+      "narr_std": 0.012623,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1998
+    },
+    {
+      "title": "The Truman Show",
+      "char_var": 0.042651,
+      "narr_std": 0.009233,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1998
+    },
+    {
+      "title": "American Beauty",
+      "char_var": 0.009821,
+      "narr_std": 0.015858,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 1999
+    },
+    {
+      "title": "The Sixth Sense",
+      "char_var": 0.02179,
+      "narr_std": 0.013517,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1999
+    },
+    {
+      "title": "The Green Mile",
+      "char_var": 0.02999,
+      "narr_std": 0.012134,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 1999
+    },
+    {
+      "title": "Almost Famous",
+      "char_var": 0.039153,
+      "narr_std": 0.00941,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2000
+    },
+    {
+      "title": "Gladiator",
+      "char_var": 0.0276,
+      "narr_std": 0.013187,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2000
+    },
+    {
+      "title": "Erin Brockovich",
+      "char_var": 0.032195,
+      "narr_std": 0.012428,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2000
+    },
+    {
+      "title": "The Pianist",
+      "char_var": 0.029707,
+      "narr_std": 0.016165,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2002
+    },
+    {
+      "title": "Gangs of New York",
+      "char_var": 0.023762,
+      "narr_std": 0.012271,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2002
+    },
+    {
+      "title": "Minority Report",
+      "char_var": 0.032156,
+      "narr_std": 0.013351,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2002
+    },
+    {
+      "title": "Lost in Translation",
+      "char_var": 0.030246,
+      "narr_std": 0.017069,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2003
+    },
+    {
+      "title": "Finding Nemo",
+      "char_var": 0.017864,
+      "narr_std": 0.025313,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2003
+    },
+    {
+      "title": "Master and Commander",
+      "char_var": 0.038635,
+      "narr_std": 0.010276,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2003
+    },
+    {
+      "title": "Eternal Sunshine",
+      "char_var": 0.035169,
+      "narr_std": 0.012815,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2004
+    },
+    {
+      "title": "Hotel Rwanda",
+      "char_var": 0.034996,
+      "narr_std": 0.017075,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2004
+    },
+    {
+      "title": "Crash",
+      "char_var": 0.007683,
+      "narr_std": 0.010625,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2005
+    },
+    {
+      "title": "The Departed",
+      "char_var": 0.034129,
+      "narr_std": 0.015375,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2006
+    },
+    {
+      "title": "Babel",
+      "char_var": 0.024726,
+      "narr_std": 0.011321,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2006
+    },
+    {
+      "title": "Juno",
+      "char_var": 0.034689,
+      "narr_std": 0.012571,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2007
+    },
+    {
+      "title": "Slumdog Millionaire",
+      "char_var": 0.042184,
+      "narr_std": 0.012577,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2008
+    },
+    {
+      "title": "Milk",
+      "char_var": 0.022517,
+      "narr_std": 0.006913,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2008
+    },
+    {
+      "title": "The Hurt Locker",
+      "char_var": 0.046059,
+      "narr_std": 0.018888,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2009
+    },
+    {
+      "title": "Inglourious Basterds",
+      "char_var": 0.035127,
+      "narr_std": 0.012758,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2009
+    },
+    {
+      "title": "Up",
+      "char_var": 0.041261,
+      "narr_std": 0.018745,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2009
+    },
+    {
+      "title": "The King's Speech",
+      "char_var": 0.050487,
+      "narr_std": 0.021475,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2010
+    },
+    {
+      "title": "Black Swan",
+      "char_var": 0.003061,
+      "narr_std": 0.013823,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2010
+    },
+    {
+      "title": "Inception",
+      "char_var": 0.010644,
+      "narr_std": 0.016775,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2010
+    },
+    {
+      "title": "The Fighter",
+      "char_var": 0.083082,
+      "narr_std": 0.019778,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2010
+    },
+    {
+      "title": "The Kids Are All Right",
+      "char_var": 0.019134,
+      "narr_std": 0.011559,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2010
+    },
+    {
+      "title": "The Descendants",
+      "char_var": 0.021764,
+      "narr_std": 0.017662,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2011
+    },
+    {
+      "title": "Moneyball",
+      "char_var": 0.03328,
+      "narr_std": 0.014945,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2011
+    },
+    {
+      "title": "Drive",
+      "char_var": 0.028451,
+      "narr_std": 0.016656,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2011
+    },
+    {
+      "title": "Argo",
+      "char_var": 0.032175,
+      "narr_std": 0.020263,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2012
+    },
+    {
+      "title": "Django Unchained",
+      "char_var": 0.037611,
+      "narr_std": 0.012846,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2012
+    },
+    {
+      "title": "Silver Linings Playbook",
+      "char_var": 0.051818,
+      "narr_std": 0.01632,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2012
+    },
+    {
+      "title": "Lincoln",
+      "char_var": 0.024159,
+      "narr_std": 0.013081,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2012
+    },
+    {
+      "title": "12 Years a Slave",
+      "char_var": 0.025566,
+      "narr_std": 0.010982,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2013
+    },
+    {
+      "title": "The Wolf of Wall Street",
+      "char_var": 0.093016,
+      "narr_std": 0.017231,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2013
+    },
+    {
+      "title": "Her",
+      "char_var": 0.05652,
+      "narr_std": 0.015956,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2013
+    },
+    {
+      "title": "Birdman",
+      "char_var": 0.023776,
+      "narr_std": 0.014371,
+      "is_winner": true,
+      "is_ours": false,
+      "year": 2014
+    },
+    {
+      "title": "Whiplash",
+      "char_var": 0.025076,
+      "narr_std": 0.014348,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2014
+    },
+    {
+      "title": "Interstellar",
+      "char_var": 0.017435,
+      "narr_std": 0.014356,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2014
+    },
+    {
+      "title": "The Revenant",
+      "char_var": 0.019616,
+      "narr_std": 0.015598,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2015
+    },
+    {
+      "title": "Ex Machina",
+      "char_var": 0.012609,
+      "narr_std": 0.011117,
+      "is_winner": false,
+      "is_ours": false,
+      "year": 2015
+    },
+    {
+      "title": "The Dark Knight (ours)",
+      "char_var": 0.034994,
+      "narr_std": 0.016983,
+      "is_winner": false,
+      "is_ours": true,
+      "year": 0
+    },
+    {
+      "title": "Parasite (EN)",
+      "char_var": 0.010265,
+      "narr_std": 0.011917,
+      "is_winner": true,
+      "is_ours": true,
+      "year": 2019
+    }
+  ],
+  "quadrant_stats": {
+    "median_char_var": 0.030246,
+    "median_narr_std": 0.013836,
+    "Q1_uniform_stable": {
+      "count": 24,
+      "winners": 8
+    },
+    "Q2_diverse_stable": {
+      "count": 18,
+      "winners": 9
+    },
+    "Q3_uniform_volatile": {
+      "count": 18,
+      "winners": 8
+    },
+    "Q4_diverse_volatile": {
+      "count": 25,
+      "winners": 7
+    }
+  },
+  "correlation": 0.237441
+}

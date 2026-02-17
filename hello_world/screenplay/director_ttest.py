@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 감독 영향력 통계적 유의성 검증.
 H0: 감독의 평균 잔차 = 0 (각본 이상의 기여 없음)
@@ -10,7 +11,7 @@ from collections import defaultdict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 METRICS = ['dir_ratio', 'dial_zlib', 'dir_zlib', 'char_var', 'narr_std']
 
 

@@ -23,7 +23,7 @@ from typing import Optional
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CACHE_DIR = Path(f"{BASE}/screenplay/_script_cache")
 CACHE_DIR.mkdir(exist_ok=True)
 CHECKPOINT = f"{BASE}/screenplay/mass_checkpoint.json"

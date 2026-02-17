@@ -9,13 +9,14 @@ import re
 import math
 import time
 import os
+from pathlib import Path
 import urllib.request
 import urllib.error
 
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 API_KEY = open(f'{BASE}/claude apikey.txt').read().strip()
 API_URL = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-haiku-4-5-20251001"

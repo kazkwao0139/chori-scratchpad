@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Bad movies comparison — add notoriously bad screenplays to the 2D map.
 Same analysis as narrative_flow.py + sweetspot_check.py but for bad movies.
@@ -16,7 +17,7 @@ from typing import Optional, Dict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 N_WINDOWS = 20
 
 

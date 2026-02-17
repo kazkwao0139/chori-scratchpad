@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 LLM mass analysis: all ~1000 rated movies.
 Download missing texts from IMSDB, run Qwen2.5-3B perplexity,
@@ -17,7 +18,7 @@ from collections import defaultdict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CHECKPOINT = f"{BASE}/screenplay/llm_mass_checkpoint.json"
 
 

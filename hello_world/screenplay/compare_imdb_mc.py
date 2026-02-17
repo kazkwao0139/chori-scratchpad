@@ -12,7 +12,7 @@ from pathlib import Path
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 IMDB_DIR = f'{BASE}/_copyrighted/screenplay'
 MC_CHECKPOINT = f'{BASE}/screenplay/metacritic_checkpoint.json'
 IMSDB_CHECKPOINT = f'{BASE}/screenplay/mass_v2_checkpoint.json'

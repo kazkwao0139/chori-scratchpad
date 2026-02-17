@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 Genre-based local minima: split by genre, then check within-genre
 center-deviation vs rating correlation.
@@ -12,7 +13,7 @@ import random
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 
 
 def pearson(a, b):

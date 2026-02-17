@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 통합 감독/배우 영향력 분석 — IMSDB + Script Savant 합산.
 
@@ -16,7 +17,7 @@ from collections import defaultdict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 IMSDB_CHECKPOINT = f'{BASE}/screenplay/mass_v2_checkpoint.json'
 SAVANT_CHECKPOINT = f'{BASE}/screenplay/scrape_multi_checkpoint.json'
 IMDB_DIR = f'{BASE}/_copyrighted/screenplay'

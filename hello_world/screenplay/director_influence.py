@@ -23,7 +23,7 @@ from collections import defaultdict
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = "D:/game-portfolio-main/SCRATCHPAD/hello_world"
+BASE = str(Path(__file__).resolve().parent.parent)
 CHECKPOINT = f'{BASE}/screenplay/plot_entropy_checkpoint.json'
 FIXED_RATINGS = f'{BASE}/screenplay/_fixed_ratings.json'
 IMDB_BASICS = f'{BASE}/_copyrighted/screenplay/_imdb_basics.tsv.gz'
