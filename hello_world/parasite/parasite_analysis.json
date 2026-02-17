@@ -1,0 +1,318 @@
+{
+  "entropy": {
+    "기우": {
+      "mean_entropy": 0.5054,
+      "entropy_var": 3.9e-05,
+      "entropy_std": 0.0063,
+      "chunk_entropies": [
+        0.5141,
+        0.5042,
+        0.5068,
+        0.4965
+      ],
+      "total_lines": 490
+    },
+    "기정": {
+      "mean_entropy": 0.5882,
+      "entropy_var": 0.000185,
+      "entropy_std": 0.0136,
+      "chunk_entropies": [
+        0.5876,
+        0.5988,
+        0.6003,
+        0.5663
+      ],
+      "total_lines": 173
+    },
+    "충숙": {
+      "mean_entropy": 0.5944,
+      "entropy_var": 0.000228,
+      "entropy_std": 0.0151,
+      "chunk_entropies": [
+        0.6034,
+        0.5695,
+        0.596,
+        0.6088
+      ],
+      "total_lines": 178
+    },
+    "기택": {
+      "mean_entropy": 0.5147,
+      "entropy_var": 1.2e-05,
+      "entropy_std": 0.0035,
+      "chunk_entropies": [
+        0.5086,
+        0.5165,
+        0.5164,
+        0.5171
+      ],
+      "total_lines": 421
+    },
+    "가게 사장": {
+      "mean_entropy": 0.8361,
+      "entropy_var": 0.002839,
+      "entropy_std": 0.0533,
+      "chunk_entropies": [
+        0.7879,
+        0.7876,
+        0.8526,
+        0.9161
+      ],
+      "total_lines": 25
+    },
+    "민혁": {
+      "mean_entropy": 0.6607,
+      "entropy_var": 0.000948,
+      "entropy_std": 0.0308,
+      "chunk_entropies": [
+        0.6121,
+        0.697,
+        0.6707,
+        0.6631
+      ],
+      "total_lines": 85
+    },
+    "문광": {
+      "mean_entropy": 0.5376,
+      "entropy_var": 0.000215,
+      "entropy_std": 0.0147,
+      "chunk_entropies": [
+        0.5236,
+        0.5377,
+        0.5277,
+        0.5614
+      ],
+      "total_lines": 232
+    },
+    "연교": {
+      "mean_entropy": 0.4963,
+      "entropy_var": 7.1e-05,
+      "entropy_std": 0.0084,
+      "chunk_entropies": [
+        0.5101,
+        0.4959,
+        0.4883,
+        0.4908
+      ],
+      "total_lines": 485
+    },
+    "다혜": {
+      "mean_entropy": 0.8097,
+      "entropy_var": 0.006078,
+      "entropy_std": 0.078,
+      "chunk_entropies": [
+        0.8744,
+        0.8743,
+        0.6835,
+        0.8065
+      ],
+      "total_lines": 42
+    },
+    "다송": {
+      "mean_entropy": 0.7846,
+      "entropy_var": 0.002893,
+      "entropy_std": 0.0538,
+      "chunk_entropies": [
+        0.8681,
+        0.7578,
+        0.7897,
+        0.7225
+      ],
+      "total_lines": 29
+    },
+    "동익": {
+      "mean_entropy": 0.5431,
+      "entropy_var": 0.000151,
+      "entropy_std": 0.0123,
+      "chunk_entropies": [
+        0.5514,
+        0.5503,
+        0.5218,
+        0.5488
+      ],
+      "total_lines": 254
+    },
+    "근세": {
+      "mean_entropy": 0.6839,
+      "entropy_var": 0.000605,
+      "entropy_std": 0.0246,
+      "chunk_entropies": [
+        0.6643,
+        0.6886,
+        0.7222,
+        0.6606
+      ],
+      "total_lines": 74
+    }
+  },
+  "cosine": {
+    "기우": {
+      "mean_cosine": 0.4268,
+      "cosine_var": 0.003444,
+      "cosine_std": 0.0587,
+      "pairwise_sims": [
+        0.3681,
+        0.4078,
+        0.3944,
+        0.391,
+        0.4554,
+        0.5439
+      ],
+      "total_lines": 490
+    },
+    "기정": {
+      "mean_cosine": 0.5641,
+      "cosine_var": 0.007125,
+      "cosine_std": 0.0844,
+      "pairwise_sims": [
+        0.5734,
+        0.7056,
+        0.6382,
+        0.4775,
+        0.4874,
+        0.5026
+      ],
+      "total_lines": 173
+    },
+    "충숙": {
+      "mean_cosine": 0.5222,
+      "cosine_var": 0.007174,
+      "cosine_std": 0.0847,
+      "pairwise_sims": [
+        0.513,
+        0.6099,
+        0.4203,
+        0.6582,
+        0.4621,
+        0.4696
+      ],
+      "total_lines": 178
+    },
+    "기택": {
+      "mean_cosine": 0.5251,
+      "cosine_var": 0.005279,
+      "cosine_std": 0.0727,
+      "pairwise_sims": [
+        0.4934,
+        0.4983,
+        0.5559,
+        0.6669,
+        0.4335,
+        0.5026
+      ],
+      "total_lines": 421
+    },
+    "가게 사장": {
+      "mean_cosine": 0.5852,
+      "cosine_var": 0.00339,
+      "cosine_std": 0.0582,
+      "pairwise_sims": [
+        0.5309,
+        0.5395,
+        0.6098,
+        0.7022,
+        0.5733,
+        0.5556
+      ],
+      "total_lines": 25
+    },
+    "민혁": {
+      "mean_cosine": 0.6401,
+      "cosine_var": 0.013296,
+      "cosine_std": 0.1153,
+      "pairwise_sims": [
+        0.6573,
+        0.4148,
+        0.6858,
+        0.5893,
+        0.7729,
+        0.7203
+      ],
+      "total_lines": 85
+    },
+    "문광": {
+      "mean_cosine": 0.5708,
+      "cosine_var": 0.00398,
+      "cosine_std": 0.0631,
+      "pairwise_sims": [
+        0.6498,
+        0.494,
+        0.557,
+        0.587,
+        0.6437,
+        0.4934
+      ],
+      "total_lines": 232
+    },
+    "연교": {
+      "mean_cosine": 0.4572,
+      "cosine_var": 0.016475,
+      "cosine_std": 0.1284,
+      "pairwise_sims": [
+        0.3585,
+        0.3444,
+        0.2973,
+        0.6079,
+        0.6107,
+        0.5247
+      ],
+      "total_lines": 485
+    },
+    "다혜": {
+      "mean_cosine": 0.5641,
+      "cosine_var": 0.000639,
+      "cosine_std": 0.0253,
+      "pairwise_sims": [
+        0.5363,
+        0.5607,
+        0.5561,
+        0.6166,
+        0.5492,
+        0.5658
+      ],
+      "total_lines": 42
+    },
+    "다송": {
+      "mean_cosine": 0.466,
+      "cosine_var": 0.022723,
+      "cosine_std": 0.1507,
+      "pairwise_sims": [
+        0.2318,
+        0.4815,
+        0.6331,
+        0.3415,
+        0.4483,
+        0.6597
+      ],
+      "total_lines": 29
+    },
+    "동익": {
+      "mean_cosine": 0.7297,
+      "cosine_var": 0.000855,
+      "cosine_std": 0.0292,
+      "pairwise_sims": [
+        0.7578,
+        0.7161,
+        0.7791,
+        0.6983,
+        0.7235,
+        0.7035
+      ],
+      "total_lines": 254
+    },
+    "근세": {
+      "mean_cosine": 0.5083,
+      "cosine_var": 0.02339,
+      "cosine_std": 0.1529,
+      "pairwise_sims": [
+        0.2716,
+        0.615,
+        0.6637,
+        0.4673,
+        0.3628,
+        0.6694
+      ],
+      "total_lines": 74
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "n": 1011,
+  "normality": {
+    "char_var": {
+      "mean": 0.0313478516320475,
+      "std": 0.017855556168564674,
+      "skew": 6.171,
+      "kurtosis": 74.4
+    },
+    "narr_std": {
+      "mean": 0.014374130563798217,
+      "std": 0.0042814933197712545,
+      "skew": 4.53,
+      "kurtosis": 56.418
+    },
+    "dev": {
+      "mean": 0.12006854599406543,
+      "std": 0.08589367072368212,
+      "skew": 1.133,
+      "kurtosis": 2.014
+    }
+  },
+  "linear_regression": {
+    "r_squared": 0.0063,
+    "adj_r_squared": 0.0034,
+    "coefficients": {
+      "intercept": 6.9428,
+      "char_var": 0.0429,
+      "narr_std": -0.0124,
+      "|dev|": -0.0541
+    }
+  },
+  "quadratic_regression": {
+    "r_squared": 0.0229,
+    "adj_r_squared": 0.0171,
+    "rmse": 0.884,
+    "mae": 0.69
+  }
+}

@@ -1,0 +1,5 @@
+# Copyrighted dialogue data (not for distribution)
+_copyrighted/
+
+# API keys
+claude apikey.txt

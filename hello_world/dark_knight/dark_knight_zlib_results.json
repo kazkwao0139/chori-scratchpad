@@ -1,0 +1,77 @@
+{
+  "THE JOKER": {
+    "total_lines": 222,
+    "total_entropy": 0.462737,
+    "entropy_mean": 0.621787,
+    "entropy_std": 0.036498,
+    "cosine_mean": 0.990951,
+    "cosine_std": 0.005325
+  },
+  "DENT": {
+    "total_lines": 234,
+    "total_entropy": 0.471923,
+    "entropy_mean": 0.643889,
+    "entropy_std": 0.044428,
+    "cosine_mean": 0.98788,
+    "cosine_std": 0.008542
+  },
+  "BATMAN": {
+    "total_lines": 118,
+    "total_entropy": 0.522057,
+    "entropy_mean": 0.675759,
+    "entropy_std": 0.056349,
+    "cosine_mean": 0.986095,
+    "cosine_std": 0.006665
+  },
+  "WAYNE": {
+    "total_lines": 118,
+    "total_entropy": 0.514192,
+    "entropy_mean": 0.65588,
+    "entropy_std": 0.034317,
+    "cosine_mean": 0.989275,
+    "cosine_std": 0.005513
+  },
+  "GORDON": {
+    "total_lines": 175,
+    "total_entropy": 0.487462,
+    "entropy_mean": 0.634693,
+    "entropy_std": 0.029506,
+    "cosine_mean": 0.987591,
+    "cosine_std": 0.006293
+  },
+  "RACHEL": {
+    "total_lines": 101,
+    "total_entropy": 0.49856,
+    "entropy_mean": 0.654209,
+    "entropy_std": 0.043563,
+    "cosine_mean": 0.988241,
+    "cosine_std": 0.004916
+  },
+  "ALFRED": {
+    "total_lines": 73,
+    "total_entropy": 0.527822,
+    "entropy_mean": 0.638379,
+    "entropy_std": 0.049627,
+    "cosine_mean": 0.989857,
+    "cosine_std": 0.004447
+  },
+  "FOX": {
+    "total_lines": 76,
+    "total_entropy": 0.537386,
+    "entropy_mean": 0.651698,
+    "entropy_std": 0.033331,
+    "cosine_mean": 0.989572,
+    "cosine_std": 0.0068
+  },
+  "DENT_PRE": {
+    "total_lines": 114,
+    "entropy_mean": 0.636708,
+    "entropy_std": 0.02737
+  },
+  "DENT_POST": {
+    "total_lines": 120,
+    "entropy_mean": 0.655102,
+    "entropy_std": 0.053671
+  },
+  "BATMAN_WAYNE_CROSS_COSINE": 0.990048
+}

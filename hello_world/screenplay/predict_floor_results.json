@@ -1,0 +1,8 @@
+{
+  "optimal": {
+    "char_var": 0.033,
+    "narr_std": 0.0143,
+    "dir_ratio": 0.575
+  },
+  "n": 1011
+}

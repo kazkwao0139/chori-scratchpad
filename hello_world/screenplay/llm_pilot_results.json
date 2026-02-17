@@ -1,0 +1,336 @@
+{
+  "top": [
+    {
+      "title": "Amadeus",
+      "rating": 8.4,
+      "zlib_narr_std": 0.013835842021431585,
+      "llm_narr_std": 2.7416134667818777,
+      "zlib_char_var": 0.003948294216465284,
+      "llm_char_var": 17.47083446517233,
+      "dir_ratio": 0.5354674523096743,
+      "llm_dial_ppl": 11.46878592771089,
+      "llm_dir_ppl": 12.668716596168624
+    },
+    {
+      "title": "Apocalypse Now",
+      "rating": 8.4,
+      "zlib_narr_std": 0.015224548569080676,
+      "llm_narr_std": 4.7277714534450235,
+      "zlib_char_var": 0.002924209675913561,
+      "llm_char_var": 63.55351436732374,
+      "dir_ratio": 0.6236273445586045,
+      "llm_dial_ppl": 26.337096292540043,
+      "llm_dir_ppl": 23.03631417335829
+    },
+    {
+      "title": "Good Will Hunting",
+      "rating": 8.4,
+      "zlib_narr_std": 0.016460975150671818,
+      "llm_narr_std": 2.757175579354219,
+      "zlib_char_var": 0.005414913026260392,
+      "llm_char_var": 30.260195266007962,
+      "dir_ratio": 0.3566604002728377,
+      "llm_dial_ppl": 15.954304390778324,
+      "llm_dir_ppl": 15.76348064752857
+    },
+    {
+      "title": "Inglourious Basterds",
+      "rating": 8.4,
+      "zlib_narr_std": 0.012758331281308278,
+      "llm_narr_std": 4.145284622930257,
+      "zlib_char_var": 0.0032708793097812015,
+      "llm_char_var": 39.226705980633035,
+      "dir_ratio": 0.2286507027649113,
+      "llm_dial_ppl": 13.5880593443031,
+      "llm_dir_ppl": 28.53210975987845
+    },
+    {
+      "title": "Alien",
+      "rating": 8.5,
+      "zlib_narr_std": 0.014995124637703998,
+      "llm_narr_std": 3.0905221502279643,
+      "zlib_char_var": 0.0008216511792871907,
+      "llm_char_var": 25.781696193713632,
+      "dir_ratio": 0.6142496377561582,
+      "llm_dial_ppl": 20.081107803812692,
+      "llm_dir_ppl": 18.14455479455673
+    },
+    {
+      "title": "American History X",
+      "rating": 8.5,
+      "zlib_narr_std": 0.013848200803411802,
+      "llm_narr_std": 3.8205147860274518,
+      "zlib_char_var": 0.002245653435077988,
+      "llm_char_var": 26.113729261472077,
+      "dir_ratio": 0.5598783327788603,
+      "llm_dial_ppl": 25.84252298053398,
+      "llm_dir_ppl": 18.11752015725676
+    },
+    {
+      "title": "Django Unchained",
+      "rating": 8.5,
+      "zlib_narr_std": 0.012845806724561896,
+      "llm_narr_std": 4.588069422782293,
+      "zlib_char_var": 0.0030446705447000765,
+      "llm_char_var": 18.161178330446084,
+      "dir_ratio": 0.38367087131445454,
+      "llm_dial_ppl": 27.57354015076087,
+      "llm_dir_ppl": 25.819034319963958
+    },
+    {
+      "title": "Gladiator",
+      "rating": 8.5,
+      "zlib_narr_std": 0.013186516382101643,
+      "llm_narr_std": 2.630473291881266,
+      "zlib_char_var": 0.003888510467439816,
+      "llm_char_var": 71.81948607221406,
+      "dir_ratio": 0.6530500146725758,
+      "llm_dial_ppl": 18.25244893391482,
+      "llm_dir_ppl": 17.547668515849846
+    },
+    {
+      "title": "Whiplash",
+      "rating": 8.5,
+      "zlib_narr_std": 0.01434803080871964,
+      "llm_narr_std": 3.7683738681850825,
+      "zlib_char_var": 0.004206867730605887,
+      "llm_char_var": 78.80065058756176,
+      "dir_ratio": 0.647489980194314,
+      "llm_dial_ppl": 20.349173649988696,
+      "llm_dir_ppl": 17.017932078653065
+    },
+    {
+      "title": "Saving Private Ryan",
+      "rating": 8.6,
+      "zlib_narr_std": 0.01262305533211502,
+      "llm_narr_std": 2.4948937950037724,
+      "zlib_char_var": 0.0038107494789516244,
+      "llm_char_var": 29.762656948547342,
+      "dir_ratio": 0.5479746472700302,
+      "llm_dial_ppl": 30.40597077272159,
+      "llm_dir_ppl": 15.775383938341276
+    },
+    {
+      "title": "Interstellar",
+      "rating": 8.7,
+      "zlib_narr_std": 0.014356292772886131,
+      "llm_narr_std": 2.4825257099513887,
+      "zlib_char_var": 0.003243711798936444,
+      "llm_char_var": 7.836463501276565,
+      "dir_ratio": 0.7303641051440071,
+      "llm_dial_ppl": 17.92388013009412,
+      "llm_dir_ppl": 15.001459941320164
+    },
+    {
+      "title": "Forrest Gump",
+      "rating": 8.8,
+      "zlib_narr_std": 0.013599029622495108,
+      "llm_narr_std": 1.852283168066966,
+      "zlib_char_var": 0.005726985396642663,
+      "llm_char_var": 33.77517336195915,
+      "dir_ratio": 0.5017689922601707,
+      "llm_dial_ppl": 10.249048946196243,
+      "llm_dir_ppl": 10.042301548715692
+    },
+    {
+      "title": "Inception",
+      "rating": 8.8,
+      "zlib_narr_std": 0.016775046486769956,
+      "llm_narr_std": 2.8780464983335436,
+      "zlib_char_var": 0.0017412599978701634,
+      "llm_char_var": 30.955906109960793,
+      "dir_ratio": 0.5715427496809725,
+      "llm_dial_ppl": 19.454091231312212,
+      "llm_dir_ppl": 15.492026169801168
+    },
+    {
+      "title": "Pulp Fiction",
+      "rating": 8.8,
+      "zlib_narr_std": 0.01820748801396816,
+      "llm_narr_std": 2.973784053177445,
+      "zlib_char_var": 0.003490731432816805,
+      "llm_char_var": 4.8935306387604065,
+      "dir_ratio": 0.5003651081763368,
+      "llm_dial_ppl": 14.456394694508408,
+      "llm_dir_ppl": 12.825568477298942
+    },
+    {
+      "title": "Schindler's List",
+      "rating": 9.0,
+      "zlib_narr_std": 0.007794495411463843,
+      "llm_narr_std": 3.489835759778754,
+      "zlib_char_var": 0.0043222972198170544,
+      "llm_char_var": 73.16370539518931,
+      "dir_ratio": 0.7513500736403804,
+      "llm_dial_ppl": 20.222394682707595,
+      "llm_dir_ppl": 23.127589568477816
+    }
+  ],
+  "bottom": [
+    {
+      "title": "Alone in the Dark",
+      "rating": 2.4,
+      "zlib_narr_std": 0.01391925841316703,
+      "llm_narr_std": 2.2895425362267483,
+      "zlib_char_var": 0.0028546854542050686,
+      "llm_char_var": 30.716600794282563,
+      "dir_ratio": 0.8402270585463542,
+      "llm_dial_ppl": 14.965404446020761,
+      "llm_dir_ppl": 9.773860096562425
+    },
+    {
+      "title": "Amityville Asylum, The",
+      "rating": 2.6,
+      "zlib_narr_std": 0.015756618244797148,
+      "llm_narr_std": 2.1056364484672465,
+      "zlib_char_var": 0.002878736570898797,
+      "llm_char_var": 15.165483592606815,
+      "dir_ratio": 0.48487082434751994,
+      "llm_dial_ppl": 11.683820069414468,
+      "llm_dir_ppl": 10.850982703750164
+    },
+    {
+      "title": "Authors Anonymous",
+      "rating": 4.4,
+      "zlib_narr_std": 0.013778036697174006,
+      "llm_narr_std": 3.995686438000464,
+      "zlib_char_var": 0.00264367720550711,
+      "llm_char_var": 39.59373083653222,
+      "dir_ratio": 0.5514739269402328,
+      "llm_dial_ppl": 22.02531888067829,
+      "llm_dir_ppl": 16.48266585876218
+    },
+    {
+      "title": "After School Special",
+      "rating": 4.7,
+      "zlib_narr_std": 0.011515875773036189,
+      "llm_narr_std": 1.812467311768988,
+      "zlib_char_var": 0.004153106651258888,
+      "llm_char_var": 13.209541683729993,
+      "dir_ratio": 0.2755844883102338,
+      "llm_dial_ppl": 19.679505804914253,
+      "llm_dir_ppl": 10.454988961177481
+    },
+    {
+      "title": "All About Steve",
+      "rating": 4.8,
+      "zlib_narr_std": 0.013102987102189708,
+      "llm_narr_std": 4.542286797357103,
+      "zlib_char_var": 0.003457216077731109,
+      "llm_char_var": 13.27045012862908,
+      "dir_ratio": 0.3004156207563475,
+      "llm_dial_ppl": 22.617816491201943,
+      "llm_dir_ppl": 22.62050211945417
+    },
+    {
+      "title": "Arctic Blue",
+      "rating": 5.1,
+      "zlib_narr_std": 0.012798423984238092,
+      "llm_narr_std": 1.6207111269400987,
+      "zlib_char_var": 0.0011015102477363518,
+      "llm_char_var": 13.8357533741352,
+      "dir_ratio": 0.7181280626351666,
+      "llm_dial_ppl": 25.86094578221831,
+      "llm_dir_ppl": 15.616375928819442
+    },
+    {
+      "title": "Back-up Plan, The",
+      "rating": 5.3,
+      "zlib_narr_std": 0.012278907643999996,
+      "llm_narr_std": 1.7707326821047655,
+      "zlib_char_var": 0.0031992462475415643,
+      "llm_char_var": 8.293012275586854,
+      "dir_ratio": 0.4712950600801068,
+      "llm_dial_ppl": 13.008112684618645,
+      "llm_dir_ppl": 11.717468816860038
+    },
+    {
+      "title": "Being Human",
+      "rating": 5.3,
+      "zlib_narr_std": 0.011126063622005635,
+      "llm_narr_std": 2.1075307395044933,
+      "zlib_char_var": 0.002788893761800363,
+      "llm_char_var": 9.691981409817025,
+      "dir_ratio": 0.5534714818763327,
+      "llm_dial_ppl": 18.142582246253802,
+      "llm_dir_ppl": 20.81960041746758
+    },
+    {
+      "title": "Autumn in New York",
+      "rating": 5.6,
+      "zlib_narr_std": 0.014759951606086782,
+      "llm_narr_std": 1.8745313366795753,
+      "zlib_char_var": 0.004078124350934785,
+      "llm_char_var": 14.443131300771794,
+      "dir_ratio": 0.5639957147133426,
+      "llm_dial_ppl": 14.579663648472195,
+      "llm_dir_ppl": 17.219847796841446
+    },
+    {
+      "title": "Alien vs. Predator",
+      "rating": 5.7,
+      "zlib_narr_std": 0.017567588240030907,
+      "llm_narr_std": 2.5326361588647406,
+      "zlib_char_var": 0.0031633559455827324,
+      "llm_char_var": 58.1038974483222,
+      "dir_ratio": 0.7977124041419349,
+      "llm_dial_ppl": 30.501318399889637,
+      "llm_dir_ppl": 21.907419530410547
+    },
+    {
+      "title": "Angel Eyes",
+      "rating": 5.7,
+      "zlib_narr_std": 0.016056487092111812,
+      "llm_narr_std": 3.0740581085681264,
+      "zlib_char_var": 0.004956349084838588,
+      "llm_char_var": 33.79141730595654,
+      "dir_ratio": 0.6598365308207516,
+      "llm_dial_ppl": 22.497839769514588,
+      "llm_dir_ppl": 21.122105549933693
+    },
+    {
+      "title": "Arthur",
+      "rating": 5.7,
+      "zlib_narr_std": 0.011074123084060762,
+      "llm_narr_std": 3.422474814320912,
+      "zlib_char_var": 0.0022187090771524968,
+      "llm_char_var": 105.03373968212071,
+      "dir_ratio": 0.487390263367917,
+      "llm_dial_ppl": 48.37327522323113,
+      "llm_dir_ppl": 24.734181406680047
+    },
+    {
+      "title": "Bad Dreams",
+      "rating": 5.7,
+      "zlib_narr_std": 0.017130852483452634,
+      "llm_narr_std": 4.324826237905765,
+      "zlib_char_var": 0.00382350256635874,
+      "llm_char_var": 21.324247769708805,
+      "dir_ratio": 0.6192491950051049,
+      "llm_dial_ppl": 22.302444109958405,
+      "llm_dir_ppl": 21.22564485348207
+    },
+    {
+      "title": "Bad Teacher",
+      "rating": 5.7,
+      "zlib_narr_std": 0.010874530456768623,
+      "llm_narr_std": 2.7691665674423724,
+      "zlib_char_var": 0.003207660969814423,
+      "llm_char_var": 14.377628889562878,
+      "dir_ratio": 0.38866194625998546,
+      "llm_dial_ppl": 20.271154279100276,
+      "llm_dir_ppl": 15.227812877883524
+    },
+    {
+      "title": "Amelia",
+      "rating": 5.8,
+      "zlib_narr_std": 0.012825641883904618,
+      "llm_narr_std": 3.468897266916742,
+      "zlib_char_var": 0.003334405668353936,
+      "llm_char_var": 45.968440118096815,
+      "dir_ratio": 0.31579579309154493,
+      "llm_dial_ppl": 33.409747992721364,
+      "llm_dir_ppl": 21.049727952743122
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "our_works_english": [
+    {
+      "title": "Parasite (EN)",
+      "n_chars": 10,
+      "bigram_var": 0.010265,
+      "bigram_std": 0.101318,
+      "zlib_var": 0.00117,
+      "zlib_std": 0.034208,
+      "characters": [
+        {
+          "name": "YON-KYO",
+          "bigram": 3.430417,
+          "zlib": 0.441766,
+          "chars": 12818
+        },
+        {
+          "name": "KI-WOO",
+          "bigram": 3.438769,
+          "zlib": 0.462914,
+          "chars": 10678
+        },
+        {
+          "name": "KI-TEK",
+          "bigram": 3.410119,
+          "zlib": 0.461815,
+          "chars": 10004
+        },
+        {
+          "name": "DONG-IK",
+          "bigram": 3.360756,
+          "zlib": 0.462398,
+          "chars": 6621
+        },
+        {
+          "name": "MUN-KWANG",
+          "bigram": 3.385082,
+          "zlib": 0.483228,
+          "chars": 5217
+        },
+        {
+          "name": "KI-JUNG",
+          "bigram": 3.420188,
+          "zlib": 0.495125,
+          "chars": 4718
+        },
+        {
+          "name": "CHUNG-SOOK",
+          "bigram": 3.367052,
+          "zlib": 0.511628,
+          "chars": 4213
+        },
+        {
+          "name": "MIN-HYUK",
+          "bigram": 3.24467,
+          "zlib": 0.534653,
+          "chars": 1818
+        },
+        {
+          "name": "KUN-SAE",
+          "bigram": 3.245954,
+          "zlib": 0.539737,
+          "chars": 1749
+        },
+        {
+          "name": "DA-HAE",
+          "bigram": 3.111377,
+          "zlib": 0.536553,
+          "chars": 1491
+        }
+      ]
+    },
+    {
+      "title": "Code Geass (EN)",
+      "n_chars": 4,
+      "bigram_var": 0.01988,
+      "bigram_std": 0.140996,
+      "zlib_var": 0.001075,
+      "zlib_std": 0.032783,
+      "characters": [
+        {
+          "name": "LELOUCH",
+          "bigram": 3.258585,
+          "zlib": 0.532997,
+          "chars": 2576
+        },
+        {
+          "name": "RIVALZ",
+          "bigram": 3.011184,
+          "zlib": 0.602484,
+          "chars": 805
+        },
+        {
+          "name": "C.C.",
+          "bigram": 2.880613,
+          "zlib": 0.575597,
+          "chars": 754
+        },
+        {
+          "name": "SUZAKU",
+          "bigram": 2.962092,
+          "zlib": 0.619938,
+          "chars": 642
+        }
+      ]
+    },
+    {
+      "title": "Dark Knight (EN)",
+      "n_chars": 20,
+      "bigram_var": 0.034994,
+      "bigram_std": 0.187067,
+      "zlib_var": 0.003276,
+      "zlib_std": 0.057233,
+      "characters": [
+        {
+          "name": "THE JOKER",
+          "bigram": 3.373272,
+          "zlib": 0.45527,
+          "chars": 13843
+        },
+        {
+          "name": "DENT",
+          "bigram": 3.3929,
+          "zlib": 0.464414,
+          "chars": 12180
+        },
+        {
+          "name": "GORDON",
+          "bigram": 3.398957,
+          "zlib": 0.479211,
+          "chars": 9298
+        },
+        {
+          "name": "WAYNE",
+          "bigram": 3.40288,
+          "zlib": 0.505935,
+          "chars": 5791
+        },
+        {
+          "name": "BATMAN",
+          "bigram": 3.31091,
+          "zlib": 0.513774,
+          "chars": 5160
+        },
+        {
+          "name": "RACHEL",
+          "bigram": 3.2763,
+          "zlib": 0.489918,
+          "chars": 4838
+        },
+        {
+          "name": "FOX",
+          "bigram": 3.406283,
+          "zlib": 0.532061,
+          "chars": 4485
+        },
+        {
+          "name": "ALFRED",
+          "bigram": 3.343976,
+          "zlib": 0.5201,
+          "chars": 4384
+        },
+        {
+          "name": "ENGEL",
+          "bigram": 3.278668,
+          "zlib": 0.564016,
+          "chars": 2056
+        },
+        {
+          "name": "LAU",
+          "bigram": 3.283149,
+          "zlib": 0.546046,
+          "chars": 1994
+        }
+      ]
+    }
+  ],
+  "sweet_spot": [
+    0.024,
+    0.039
+  ]
+}
