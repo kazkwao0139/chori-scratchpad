@@ -17,6 +17,7 @@
 | [`lorenz/`](./lorenz/) | 나비효과 멍때리기. |
 | [`haruhi/`](./haruhi/) | 옵티마이저의 전역 탐색이 쓸모없다는걸 알아내고선 하루히 문제가 갑자기 떠올라서 메모 |
 | [`ballistic_cache/`](./ballistic_cache/) | RK4 탄도 시뮬레이션을 캐싱해서 O(1) 조회하려는 시도. 근데 별 쓸모가 없더라 |
+| [`three_body_game/`](./three_body_game/) | 게임이론의 삼체문제 — 2인은 선형, 3인은 곱. 그래서 고정점이 없다 |
 
 ---
 
@@ -188,6 +189,7 @@ What started as a joke often needs verification, and some of these may one day b
 | [`lorenz/`](./lorenz/) | Staring at the butterfly effect. |
 | [`haruhi/`](./haruhi/) | Realized global search in optimizers is useless, then the Haruhi problem suddenly came to mind |
 | [`ballistic_cache/`](./ballistic_cache/) | Attempting to cache RK4 ballistic simulations for O(1) lookup. Turned out to be pretty useless |
+| [`three_body_game/`](./three_body_game/) | The three-body problem of game theory — 2 players are linear, 3 are product. So no fixed point |
 
 ---
 
