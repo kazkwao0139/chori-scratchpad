@@ -125,12 +125,48 @@ class DamageCalculator:
         if ability_fx.get("stab_mod") and move_type in all_stab_types:
             stab = ability_fx["stab_mod"]
 
-        # 타입 상성
+        # 타입 상성 (특성 연동)
         def_types = defender.get("types", [])
+        def_ability = defender.get("ability", "")
+        def_ability_fx = ABILITY_EFFECTS.get(def_ability, {})
+        is_mold_breaker = ability_fx.get("mold_breaker", False)
+
         type_eff = self.gd.effectiveness(move_type, def_types)
 
+        # 1) 타입 면역(0배)을 특성이 뚫는 경우
         if type_eff == 0:
-            return (0, 0, 0)
+            can_hit = False
+            # 심안/배짱: 노말/격투 → 고스트 면역 무시
+            if ability_fx.get("ignore_ghost_immune"):
+                if move_type in ("Normal", "Fighting") and "Ghost" in def_types:
+                    can_hit = True
+                    type_eff = 1.0
+                    # 다른 타입과의 상성은 다시 계산 (Ghost 제외)
+                    other_types = [t for t in def_types if t != "Ghost"]
+                    if other_types:
+                        type_eff = self.gd.effectiveness(move_type, other_types)
+                    if type_eff == 0:
+                        type_eff = 1.0  # 최소 등배
+            if not can_hit:
+                return (0, 0, 0)
+
+        # 2) 특성 기반 면역 (틀깨기가 아니면 적용)
+        if not is_mold_breaker:
+            # 부유/먹보/전기엔진 등: 특성으로 인한 면역
+            ability_immune_map = {
+                "ground_immune": "Ground",   # 부유, 먹보(대지)
+                "fire_immune": "Fire",       # 타오르는몸
+                "electric_immune": "Electric",  # 축전, 피뢰침, 전기엔진
+                "water_immune": "Water",     # 저수, 폭풍흡수, 건조피부
+                "grass_immune": "Grass",     # 초식
+            }
+            for key, immune_type in ability_immune_map.items():
+                if def_ability_fx.get(key) and move_type == immune_type:
+                    return (0, 0, 0)
+
+            # 불가사의부적: 효과발군 아니면 면역
+            if def_ability_fx.get("wonder_guard") and type_eff <= 1.0:
+                return (0, 0, 0)
 
         # 날씨 보정
         weather_mod = 1.0
