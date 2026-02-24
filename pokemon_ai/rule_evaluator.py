@@ -228,7 +228,8 @@ class RuleBasedEvaluator:
         # ── 매크로 서브골 보너스 ──
         score += self._macro_subgoal_bonus(my, opp, phase)
 
-        return math.tanh(score)
+        # 0.95 스케일: 극단에서도 해상도 보존 (±1.0은 진짜 종료에만)
+        return math.tanh(score) * 0.95
 
     # ─── 매크로 서브골 시스템 ─────────────────────────────────────
 
@@ -1410,10 +1411,38 @@ class RuleBasedEvaluator:
             if move_type in all_stab:
                 stab = ab_fx["stab_mod"]
 
-        # 타입상성
+        # 타입상성 (특성 연동)
+        def_ability = defender.ability
+        def_ab_fx_imm = ABILITY_EFFECTS.get(def_ability, {})
+        is_mold_breaker = ab_fx.get("mold_breaker", False)
+
         type_eff = self.gd.effectiveness(move_type, defender.types)
+
+        # 타입 면역을 특성이 뚫는 경우 (심안/배짱)
         if type_eff == 0:
-            return 0
+            if ab_fx.get("ignore_ghost_immune"):
+                if move_type in ("Normal", "Fighting") and "Ghost" in defender.types:
+                    other = [t for t in defender.types if t != "Ghost"]
+                    type_eff = self.gd.effectiveness(move_type, other) if other else 1.0
+                    if type_eff == 0:
+                        type_eff = 1.0
+            if type_eff == 0:
+                return 0
+
+        # 특성 기반 면역 (틀깨기가 아니면)
+        if not is_mold_breaker:
+            ability_immune_map = {
+                "ground_immune": "Ground",
+                "fire_immune": "Fire",
+                "electric_immune": "Electric",
+                "water_immune": "Water",
+                "grass_immune": "Grass",
+            }
+            for key, imm_type in ability_immune_map.items():
+                if def_ab_fx_imm.get(key) and move_type == imm_type:
+                    return 0
+            if def_ab_fx_imm.get("wonder_guard") and type_eff <= 1.0:
+                return 0
 
         # 날씨
         weather_mod = 1.0
