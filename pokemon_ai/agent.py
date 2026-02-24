@@ -35,6 +35,7 @@ try:
     from poke_env.battle.weather import Weather as PEWeather
     from poke_env.battle.field import Field as PEField
     from poke_env.battle.side_condition import SideCondition as PESideCondition
+    from poke_env.battle.effect import Effect as PEEffect
     POKE_ENV_AVAILABLE = True
 except ImportError:
     POKE_ENV_AVAILABLE = False
@@ -636,6 +637,27 @@ class MCTSPlayer(Player):
         if is_tera and tera_type:
             types = [tera_type]
 
+        # volatile 상태 읽기
+        encore_move = ""
+        encore_turns = 0
+        taunt_turns = 0
+        disabled_move = ""
+        disable_turns = 0
+        torment = False
+        if POKE_ENV_AVAILABLE and hasattr(pe, 'effects'):
+            for eff, counter in pe.effects.items():
+                if eff == PEEffect.ENCORE:
+                    encore_turns = max(counter, 1)
+                    # poke-env의 last move를 앵콜 기술로
+                    if hasattr(pe, 'moved') and pe.moved:
+                        encore_move = _to_id(pe.moved.id) if hasattr(pe.moved, 'id') else ""
+                elif eff == PEEffect.TAUNT:
+                    taunt_turns = max(counter, 1)
+                elif eff == PEEffect.DISABLE:
+                    disable_turns = max(counter, 1)
+                elif eff == PEEffect.TORMENT:
+                    torment = True
+
         return Pokemon(
             species_id=_to_id(pe.species),
             name=pe.species,
@@ -654,6 +676,12 @@ class MCTSPlayer(Player):
             tera_type=tera_type,
             is_tera=is_tera,
             fainted=pe.fainted,
+            encore_move=encore_move,
+            encore_turns=encore_turns,
+            taunt_turns=taunt_turns,
+            disabled_move=disabled_move,
+            disable_turns=disable_turns,
+            torment=torment,
         )
 
     def _pe_pokemon_to_sim_opponent(self, pe: PEPokemon) -> Pokemon:
@@ -1157,6 +1185,174 @@ class NashPlayer(MCTSPlayer):
         self.nash = nash_solver
         # poke-env는 protect_count를 안 줌 → 내부 추적
         self._used_protect_last: dict[str, bool] = {}  # species → True/False
+        # 구애류 추론 상태
+        self._opp_choice_infer: dict[str, dict] = {}
+        # species → {"item": "choicescarf"|"choiceband"|"choicespecs"|"",
+        #            "locked_move": str, "confidence": float}
+
+    def _infer_choice_item(self, battle):
+        """턴 로그에서 상대 구애 아이템 추론.
+
+        - 스카프: 상대가 우리보다 선공인데 기본 스피드가 더 낮음 → 스카프
+        - 띠/안경: 데미지가 예상보다 ~1.4배 이상 → 물리면 띠, 특수면 안경
+        - 같은 기술만 반복 사용 → 구애 확정도 올림
+        """
+        if not POKE_ENV_AVAILABLE or battle.turn < 2:
+            return
+
+        opp_active = battle.opponent_active_pokemon
+        if opp_active is None or opp_active.fainted:
+            return
+
+        sp_id = _to_id(opp_active.species)
+
+        # 이미 아이템 확정이면 스킵
+        if opp_active.item and opp_active.item != "unknown_item":
+            return
+
+        info = self._opp_choice_infer.get(sp_id, {
+            "item": "", "locked_move": "", "confidence": 0.0,
+            "last_move": "", "same_move_count": 0,
+            "moved_first_count": 0, "turns_seen": 0,
+        })
+
+        # 이전 턴 events 분석
+        prev_obs = battle.observations.get(battle.turn - 1)
+        if not prev_obs or not prev_obs.events:
+            self._opp_choice_infer[sp_id] = info
+            return
+
+        opp_role = "p2" if battle.player_role == "p1" else "p1"
+        my_role = battle.player_role or "p1"
+
+        # 이벤트에서 move 순서 + 기술명 추출
+        move_order = []  # [(role, move_id), ...]
+        for event in prev_obs.events:
+            if len(event) >= 3 and event[0] == "move":
+                ident = event[1]  # "p1a: Miraidon"
+                move_name = event[2]
+                role = ident.split(":")[0].replace("a", "").replace("b", "")
+                move_order.append((role, _to_id(move_name)))
+
+        # 상대가 사용한 기술
+        opp_move = ""
+        opp_moved_first = False
+        for i, (role, mid) in enumerate(move_order):
+            if role == opp_role:
+                opp_move = mid
+                if i == 0:
+                    opp_moved_first = True
+                break
+
+        if not opp_move:
+            self._opp_choice_infer[sp_id] = info
+            return
+
+        info["turns_seen"] += 1
+
+        # ── 같은 기술 반복 체크 ──
+        if info["last_move"] and info["last_move"] == opp_move:
+            info["same_move_count"] += 1
+        else:
+            info["same_move_count"] = 0
+        info["last_move"] = opp_move
+
+        # ── 스피드 기반 스카프 추론 ──
+        if opp_moved_first:
+            info["moved_first_count"] += 1
+            # 내 스피드와 비교
+            my_active = battle.active_pokemon
+            if my_active and my_active.stats and opp_active.base_stats:
+                my_spe = my_active.stats.get("spe", 100)
+                # 상대 예상 스피드: base stat 기반 추정 (무보정)
+                opp_base_spe = opp_active.base_stats.get("spe", 80)
+                opp_est_spe = int(opp_base_spe * 0.9 + 52)  # lv50 대략 추정
+                # 선공했는데 기본 스피드가 내 실스탯보다 확실히 낮으면 스카프 의심
+                if opp_est_spe < my_spe * 0.85:
+                    info["item"] = "choicescarf"
+                    info["confidence"] = min(1.0, info["confidence"] + 0.4)
+                    info["locked_move"] = opp_move
+
+        # ── 같은 기술 2회 이상 → 구애 확정도 올림 ──
+        if info["same_move_count"] >= 1:
+            info["confidence"] = min(1.0, info["confidence"] + 0.2)
+            info["locked_move"] = opp_move
+            # 아직 아이템 미확정이면 기술 카테고리로 추론
+            if not info["item"]:
+                move_data = self.gd.get_move(opp_move)
+                if move_data:
+                    if move_data["is_physical"]:
+                        info["item"] = "choiceband"
+                    elif move_data["is_special"]:
+                        info["item"] = "choicespecs"
+
+        # ── 데미지 역산 (HP 변화 기반) ──
+        # 내 포켓몬의 HP 변화로 데미지 추정
+        my_obs = prev_obs.active_pokemon
+        curr_obs = battle.current_observation.active_pokemon if battle.current_observation else None
+        if my_obs and curr_obs and hasattr(my_obs, 'current_hp_fraction') and hasattr(curr_obs, 'current_hp_fraction'):
+            hp_before = my_obs.current_hp_fraction
+            hp_after = curr_obs.current_hp_fraction
+            hp_lost = hp_before - hp_after
+            if hp_lost > 0 and opp_move and battle.active_pokemon:
+                # 예상 데미지 계산 (구애 없이)
+                move_data = self.gd.get_move(opp_move)
+                if move_data and not move_data["is_status"]:
+                    opp_sim = self._pe_pokemon_to_sim_opponent(opp_active)
+                    my_sim = self._pe_pokemon_to_sim(battle.active_pokemon)
+                    atk_d = {"types": opp_sim.types, "stats": opp_sim.stats,
+                             "ability": opp_sim.ability, "item": "",
+                             "status": opp_sim.status, "boosts": {}}
+                    def_d = {"types": my_sim.types, "stats": my_sim.stats,
+                             "ability": my_sim.ability, "item": my_sim.item,
+                             "status": my_sim.status, "boosts": {},
+                             "cur_hp": my_sim.cur_hp}
+                    _, _, expected = self.dc.calc_damage(atk_d, def_d, move_data)
+                    if expected > 0 and my_sim.max_hp > 0:
+                        actual_dmg = hp_lost * my_sim.max_hp
+                        ratio = actual_dmg / expected
+                        # 1.35배 이상이면 구애 의심
+                        if ratio > 1.35:
+                            info["confidence"] = min(1.0, info["confidence"] + 0.3)
+                            info["locked_move"] = opp_move
+                            if not info["item"]:
+                                if move_data["is_physical"]:
+                                    info["item"] = "choiceband"
+                                elif move_data["is_special"]:
+                                    info["item"] = "choicespecs"
+
+        self._opp_choice_infer[sp_id] = info
+
+        # 로깅
+        if info["confidence"] >= 0.4 and info["item"] and self.log_decisions:
+            _ITEM_KR = {"choicescarf": "구애스카프",
+                        "choiceband": "구애머리띠",
+                        "choicespecs": "구애안경"}
+            print(f"[구애추론] {opp_active.species}: "
+                  f"{_ITEM_KR.get(info['item'], info['item'])} "
+                  f"(확신: {info['confidence']:.0%}, "
+                  f"잠금: {info['locked_move']})")
+
+    def _apply_choice_inference(self, state: BattleState, battle):
+        """추론된 구애 정보를 상대 상태에 반영."""
+        opp_active = battle.opponent_active_pokemon
+        if opp_active is None:
+            return
+
+        sp_id = _to_id(opp_active.species)
+        info = self._opp_choice_infer.get(sp_id)
+        if not info or info["confidence"] < 0.5:
+            return
+
+        # 이미 아이템 확정이면 스킵
+        if opp_active.item and opp_active.item != "unknown_item":
+            return
+
+        opp_sim = state.sides[1].active
+        if info["item"] and not opp_sim.item:
+            opp_sim.item = info["item"]
+        if info["locked_move"]:
+            opp_sim.choice_locked_move = info["locked_move"]
 
     def _build_opponent_variants(self, battle, base_state: BattleState,
                                  max_variants: int = 3
@@ -1223,6 +1419,10 @@ class NashPlayer(MCTSPlayer):
 
         # 1. poke-env Battle → 내부 BattleState
         state = self._battle_to_state(battle)
+
+        # 1.3. 구애류 추론 + 반영
+        self._infer_choice_item(battle)
+        self._apply_choice_inference(state, battle)
 
         # 1.5. protect_count 패치 — poke-env가 안 줌, 내부 추적
         active_sp = state.sides[0].active.name
@@ -1312,6 +1512,7 @@ class NashPlayer(MCTSPlayer):
         # 새 배틀 시작 시 초기화
         self.set_inferencer.reset()
         self._used_protect_last.clear()
+        self._opp_choice_infer.clear()
 
         my_team_pe = list(battle.team.values())
         my_team = [self._pe_pokemon_to_sim(p) for p in my_team_pe]

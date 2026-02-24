@@ -83,6 +83,14 @@ class Pokemon:
     choice_locked_move: str = ""  # 초이스 잠금 기술
     substitute_hp: int = 0      # 대타출동 HP
     item_consumed: bool = False
+    # volatile 상태
+    encore_move: str = ""       # 앵콜된 기술 ID ("" = 없음)
+    encore_turns: int = 0       # 남은 앵콜 턴
+    taunt_turns: int = 0        # 남은 도발 턴 (>0이면 변화기 금지)
+    disabled_move: str = ""     # 사슬묶기된 기술 ID
+    disable_turns: int = 0      # 남은 사슬묶기 턴
+    torment: bool = False       # 트집 (같은 기술 연속 사용 금지)
+    last_move: str = ""         # 직전 사용 기술 (트집용)
     pp: list[int] = field(default_factory=lambda: [0, 0, 0, 0])
     max_pp: list[int] = field(default_factory=lambda: [0, 0, 0, 0])
 
@@ -134,6 +142,13 @@ class Pokemon:
             item_consumed=self.item_consumed,
             pp=list(self.pp),
             max_pp=list(self.max_pp),
+            encore_move=self.encore_move,
+            encore_turns=self.encore_turns,
+            taunt_turns=self.taunt_turns,
+            disabled_move=self.disabled_move,
+            disable_turns=self.disable_turns,
+            torment=self.torment,
+            last_move=self.last_move,
         )
 
 
@@ -246,21 +261,53 @@ class BattleSimulator:
         opp = state.sides[1 - player].active
         immune_indices: set[int] = set()
 
-        # 면역 체크 (filter_immune 모드)
+        # 면역 체크 (filter_immune 모드) — 특성 연동
         if filter_immune and opp and not opp.fainted:
+            atk_ability_fx = ABILITY_EFFECTS.get(active.ability, {})
+            def_ability_fx = ABILITY_EFFECTS.get(opp.ability, {})
+            is_mold_breaker = atk_ability_fx.get("mold_breaker", False)
+
             for i, move_id in enumerate(active.moves):
                 if i >= 4:
                     break
                 move = self.gd.get_move(move_id)
                 if move and not move["is_status"]:
-                    eff = self.gd.effectiveness(move["type"], opp.types)
+                    move_type = move["type"]
+                    eff = self.gd.effectiveness(move_type, opp.types)
+
+                    # 타입 면역을 특성이 뚫는 경우
                     if eff == 0:
-                        immune_indices.add(i)
+                        if atk_ability_fx.get("ignore_ghost_immune"):
+                            if move_type in ("Normal", "Fighting") and "Ghost" in opp.types:
+                                eff = 1.0  # 심안/배짱 → 고스트 관통
+                        if eff == 0:
+                            immune_indices.add(i)
+                            continue
+
+                    # 특성 기반 면역 (틀깨기가 아니면)
+                    if not is_mold_breaker:
+                        ability_immune_map = {
+                            "ground_immune": "Ground",
+                            "fire_immune": "Fire",
+                            "electric_immune": "Electric",
+                            "water_immune": "Water",
+                            "grass_immune": "Grass",
+                        }
+                        for key, imm_type in ability_immune_map.items():
+                            if def_ability_fx.get(key) and move_type == imm_type:
+                                immune_indices.add(i)
+                                break
+                        # 불가사의부적
+                        if def_ability_fx.get("wonder_guard") and eff <= 1.0:
+                            immune_indices.add(i)
 
         # 초이스 잠금 체크
         choice_item = ITEM_EFFECTS.get(active.item, {}).get("choice_lock")
         is_choice_locked = (choice_item and active.choice_locked_move
                             and not active.item_consumed)
+
+        # 앵콜 체크: 앵콜 중이면 해당 기술만 사용 가능
+        is_encored = (active.encore_turns > 0 and active.encore_move)
 
         # 기술 사용
         for i, move_id in enumerate(active.moves):
@@ -268,6 +315,19 @@ class BattleSimulator:
                 if active.pp[i] <= 0:
                     continue
                 if is_choice_locked and move_id != active.choice_locked_move:
+                    continue
+                if is_encored and move_id != active.encore_move:
+                    continue
+                # 도발: 변화기 금지
+                if active.taunt_turns > 0:
+                    move = self.gd.get_move(move_id)
+                    if move and move["is_status"]:
+                        continue
+                # 사슬묶기: 해당 기술 금지
+                if active.disable_turns > 0 and move_id == active.disabled_move:
+                    continue
+                # 트집: 직전과 같은 기술 금지
+                if active.torment and move_id == active.last_move:
                     continue
                 if i not in immune_indices:
                     actions.append(ActionType.MOVE1 + i)
@@ -278,13 +338,22 @@ class BattleSimulator:
                 if i < 4:
                     if active.pp[i] <= 0:
                         continue
+                    if is_encored and move_id != active.encore_move:
+                        continue
+                    if is_choice_locked and move_id != active.choice_locked_move:
+                        continue
                     move = self.gd.get_move(move_id)
                     if move and not move["is_status"]:
-                        # 면역 필터: 기술 타입 기준 (테라는 STAB만 바꿈, 기술 타입 불변)
-                        if filter_immune and opp and not opp.fainted:
-                            eff = self.gd.effectiveness(move["type"], opp.types)
-                            if eff == 0:
-                                continue
+                        # 도발 중이면 이미 변화기 아닌 것만 통과
+                        # 사슬묶기: 해당 기술 금지
+                        if active.disable_turns > 0 and move_id == active.disabled_move:
+                            continue
+                        # 트집: 직전과 같은 기술 금지
+                        if active.torment and move_id == active.last_move:
+                            continue
+                        # 면역 필터 (특성 연동) — immune_indices 재활용
+                        if i in immune_indices:
+                            continue
                         actions.append(ActionType.TERA_MOVE1 + i)
 
         # 교체
@@ -454,9 +523,17 @@ class BattleSimulator:
         side = state.sides[player]
         old = side.active
 
-        # 부스트 초기화
+        # 부스트 + volatile 초기화 (교체하면 해제)
         old.boosts = {k: 0 for k in STAT_KEYS[1:]}
         old.protect_count = 0
+        old.encore_move = ""
+        old.encore_turns = 0
+        old.taunt_turns = 0
+        old.disabled_move = ""
+        old.disable_turns = 0
+        old.torment = False
+        old.last_move = ""
+        old.choice_locked_move = ""
 
         side.active_idx = target_idx
         new = side.active
@@ -763,6 +840,22 @@ class BattleSimulator:
         if atk_item_fx.get("choice_lock") and not attacker.item_consumed:
             attacker.choice_locked_move = move_id
 
+        # last_move 기록 (트집용)
+        attacker.last_move = move_id
+
+        # 변화기 효과: 앵콜/도발/사슬묶기/트집
+        if not defender.fainted and defender.cur_hp > 0:
+            if move_id == "encore" and defender.last_move:
+                defender.encore_move = defender.last_move
+                defender.encore_turns = 3
+            elif move_id == "taunt":
+                defender.taunt_turns = 3
+            elif move_id == "disable" and defender.last_move:
+                defender.disabled_move = defender.last_move
+                defender.disable_turns = 4
+            elif move_id == "torment":
+                defender.torment = True
+
         # 기절 처리
         if defender.cur_hp <= 0:
             defender.fainted = True
@@ -1003,6 +1096,18 @@ class BattleSimulator:
             # Grassy Terrain 회복
             if state.terrain == Terrain.GRASSY:
                 poke.cur_hp = min(poke.max_hp, poke.cur_hp + poke.max_hp // 16)
+
+            # volatile 턴 감소
+            if poke.encore_turns > 0:
+                poke.encore_turns -= 1
+                if poke.encore_turns <= 0:
+                    poke.encore_move = ""
+            if poke.taunt_turns > 0:
+                poke.taunt_turns -= 1
+            if poke.disable_turns > 0:
+                poke.disable_turns -= 1
+                if poke.disable_turns <= 0:
+                    poke.disabled_move = ""
 
             # 스크린 턴 감소
             if side.reflect_turns > 0:
@@ -1250,6 +1355,14 @@ def make_pokemon_from_set_dict(
         poke.choice_locked_move = observed_pokemon.choice_locked_move
         poke.substitute_hp = observed_pokemon.substitute_hp
         poke.item_consumed = observed_pokemon.item_consumed
+        # volatile 상태 동기화
+        poke.encore_move = observed_pokemon.encore_move
+        poke.encore_turns = observed_pokemon.encore_turns
+        poke.taunt_turns = observed_pokemon.taunt_turns
+        poke.disabled_move = observed_pokemon.disabled_move
+        poke.disable_turns = observed_pokemon.disable_turns
+        poke.torment = observed_pokemon.torment
+        poke.last_move = observed_pokemon.last_move
 
         # 이미 테라한 경우 타입 갱신
         if poke.is_tera and poke.tera_type:
