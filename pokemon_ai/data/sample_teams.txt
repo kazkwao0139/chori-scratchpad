@@ -1,0 +1,376 @@
+=== Team 1 ===
+Koraidon @ Assault Vest
+Ability: Orichalcum Pulse
+Tera Type: Fire
+EVs: 172 HP / 212 Atk / 12 Def / 12 SpD / 100 Spe
+Adamant Nature
+- Drain Punch
+- Flame Charge
+- Flare Blitz
+- Outrage
+
+Zamazenta-Crowned @ Rusted Shield
+Ability: Dauntless Shield
+Tera Type: Normal
+EVs: 252 HP / 92 Def / 164 Spe
+Impish Nature
+- Body Press
+- Heavy Slam
+- Iron Defense
+- Agility
+
+Dragonite (F) @ Loaded Dice
+Ability: Multiscale
+Tera Type: Steel
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Scale Shot
+- Encore
+- Iron Head
+- Dragon Dance
+
+Flutter Mane @ Choice Specs
+Ability: Protosynthesis
+Tera Type: Normal
+EVs: 4 HP / 108 Def / 140 SpA / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Moonblast
+- Shadow Ball
+- Perish Song
+- Mystical Fire
+
+Garganacl (F) @ Leftovers
+Ability: Purifying Salt
+Tera Type: Ghost
+EVs: 252 HP / 4 Def / 252 SpD
+Careful Nature
+- Salt Cure
+- Recover
+- Curse
+- Protect
+
+Glimmora (F) @ Focus Sash
+Ability: Toxic Debris
+Tera Type: Steel
+EVs: 252 SpA / 4 SpD / 252 Spe
+Timid Nature
+- Stealth Rock
+- Dazzling Gleam
+- Mud Shot
+- Mortal Spin
+
+=== Team 2 ===
+Koraidon @ Choice Band
+Ability: Orichalcum Pulse
+Tera Type: Fire
+EVs: 4 HP / 252 Atk / 252 Spe
+Jolly Nature
+- Flare Blitz
+- Close Combat
+- Flame Charge
+- U-turn
+
+Calyrex-Shadow @ Choice Scarf
+Ability: As One (Spectrier)
+Tera Type: Fairy
+EVs: 140 HP / 12 Def / 196 SpA / 4 SpD / 156 Spe
+Timid Nature
+IVs: 0 Atk
+- Astral Barrage
+- Trick
+- Psychic
+- Draining Kiss
+
+Flutter Mane @ Choice Specs
+Ability: Protosynthesis
+Tera Type: Normal
+EVs: 4 Def / 252 SpA / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Moonblast
+- Perish Song
+- Shadow Ball
+- Mystical Fire
+
+Chien-Pao @ Focus Sash
+Ability: Sword of Ruin
+Tera Type: Electric
+EVs: 252 Atk / 4 Def / 252 Spe
+Jolly Nature
+- Icicle Crash
+- Swords Dance
+- Sucker Punch
+- Tera Blast
+
+Dondozo (F) @ Covert Cloak
+Ability: Unaware
+Tera Type: Fairy
+EVs: 212 HP / 252 Def / 44 SpD
+Impish Nature
+- Curse
+- Rest
+- Wave Crash
+- Fissure
+
+Ting-Lu @ Assault Vest
+Ability: Vessel of Ruin
+Tera Type: Fire
+EVs: 36 HP / 252 Atk / 220 SpD
+Adamant Nature
+- Earthquake
+- Ruination
+- Heavy Slam
+- Payback
+
+=== Team 3 ===
+Miraidon @ Choice Scarf
+Ability: Hadron Engine
+Tera Type: Fairy
+EVs: 60 HP / 124 Def / 252 SpA / 4 SpD / 68 Spe
+Modest Nature
+- Electro Drift
+- Draco Meteor
+- Dazzling Gleam
+- Volt Switch
+
+Ho-Oh @ Heavy-Duty Boots
+Ability: Regenerator
+Tera Type: Fairy
+EVs: 204 HP / 4 Atk / 236 Def / 44 SpD / 20 Spe
+Impish Nature
+- Sacred Fire
+- Brave Bird
+- Substitute
+- Recover
+
+Gliscor (F) @ Toxic Orb
+Ability: Poison Heal
+Tera Type: Steel
+EVs: 244 HP / 36 Def / 228 SpD
+Careful Nature
+- Earthquake
+- Substitute
+- Toxic
+- Protect
+
+Urshifu-Rapid-Strike (F) @ Focus Sash
+Ability: Unseen Fist
+Tera Type: Water
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Surging Strikes
+- Close Combat
+- Ice Spinner
+- Aqua Jet
+
+Dondozo (F) @ Chesto Berry
+Ability: Unaware
+Tera Type: Fairy
+EVs: 212 HP / 252 Def / 44 SpD
+Impish Nature
+- Wave Crash
+- Curse
+- Fissure
+- Rest
+
+Ursaluna-Bloodmoon @ Assault Vest
+Ability: Mind's Eye
+Tera Type: Normal
+EVs: 36 HP / 228 SpA / 244 SpD
+Modest Nature
+IVs: 0 Atk
+- Blood Moon
+- Earth Power
+- Vacuum Wave
+- Hyper Voice
+
+=== Team 4 ===
+Miraidon @ Choice Scarf
+Ability: Hadron Engine
+Tera Type: Fairy
+EVs: 4 Def / 252 SpA / 252 Spe
+Timid Nature
+- Electro Drift
+- U-turn
+- Dazzling Gleam
+- Draco Meteor
+
+Calyrex-Ice @ Custap Berry
+Ability: As One (Glastrier)
+Tera Type: Electric
+EVs: 212 HP / 252 Atk / 44 Spe
+Adamant Nature
+- Glacial Lance
+- Tera Blast
+- Taunt
+- High Horsepower
+
+Iron Hands @ Leftovers
+Ability: Quark Drive
+Tera Type: Fire
+EVs: 108 HP / 116 Atk / 252 Def / 4 SpD / 28 Spe
+Impish Nature
+- Thunder Punch
+- Drain Punch
+- Substitute
+- Swords Dance
+
+Snorlax @ Assault Vest
+Ability: Immunity
+Tera Type: Fairy
+EVs: 172 HP / 4 Atk / 92 Def / 236 SpD / 4 Spe
+Careful Nature
+- Earthquake
+- Fissure
+- Tera Blast
+- Crunch
+
+Flutter Mane @ Focus Sash
+Ability: Protosynthesis
+Tera Type: Stellar
+EVs: 252 SpA / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Power Gem
+- Moonblast
+- Taunt
+- Shadow Ball
+
+Iron Moth @ Booster Energy
+Ability: Quark Drive
+Tera Type: Water
+EVs: 252 HP / 124 Def / 132 Spe
+Timid Nature
+IVs: 0 Atk
+- Fiery Dance
+- Sludge Wave
+- Acid Spray
+- Morning Sun
+
+=== Team 5 ===
+Calyrex-Shadow @ Choice Specs
+Ability: As One (Spectrier)
+Tera Type: Fairy
+EVs: 252 SpA / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Astral Barrage
+- Psychic
+- Grass Knot
+- Nasty Plot
+
+Kyogre @ Choice Scarf
+Ability: Drizzle
+Tera Type: Water
+EVs: 252 SpA / 4 SpD / 252 Spe
+Timid Nature
+IVs: 0 Atk
+- Water Spout
+- Origin Pulse
+- Ice Beam
+- Thunder
+
+Ting-Lu @ Sitrus Berry
+Ability: Vessel of Ruin
+Tera Type: Fire
+EVs: 252 HP / 4 Def / 252 SpD
+Careful Nature
+- Stealth Rock
+- Earthquake
+- Payback
+- Ruination
+
+Chien-Pao @ Focus Sash
+Ability: Sword of Ruin
+Tera Type: Ice
+EVs: 252 Atk / 4 SpD / 252 Spe
+Jolly Nature
+- Ice Spinner
+- Ice Shard
+- Crunch
+- Swords Dance
+
+Dragonite @ Choice Band
+Ability: Multiscale
+Tera Type: Normal
+EVs: 252 Atk / 4 SpD / 252 Spe
+Adamant Nature
+- Outrage
+- Fire Punch
+- Earthquake
+- Extreme Speed
+
+Dondozo @ Rocky Helmet
+Ability: Unaware
+Tera Type: Fighting
+EVs: 252 HP / 252 Def / 4 Spe
+Impish Nature
+IVs: 0 Atk
+- Body Press
+- Fissure
+- Sleep Talk
+- Rest
+
+=== Team 6 ===
+Koraidon @ Choice Scarf
+Ability: Orichalcum Pulse
+Tera Type: Fire
+EVs: 252 Atk / 4 Def / 252 Spe
+Jolly Nature
+- Flare Blitz
+- U-turn
+- Close Combat
+- Outrage
+
+Ho-Oh @ Heavy-Duty Boots
+Ability: Regenerator
+Tera Type: Ground
+EVs: 204 HP / 44 Atk / 252 Def / 4 SpD / 4 Spe
+Impish Nature
+- Sacred Fire
+- Brave Bird
+- Earthquake
+- Recover
+
+Raging Bolt @ Assault Vest
+Ability: Protosynthesis
+Tera Type: Fairy
+EVs: 244 HP / 12 Def / 252 SpA
+Modest Nature
+- Thunderclap
+- Draco Meteor
+- Thunderbolt
+- Tera Blast
+
+Chien-Pao @ Focus Sash
+Ability: Sword of Ruin
+Tera Type: Ghost
+EVs: 252 Atk / 4 Def / 252 Spe
+Jolly Nature
+- Swords Dance
+- Sucker Punch
+- Icicle Crash
+- Sacred Sword
+
+Iron Moth @ Booster Energy
+Ability: Quark Drive
+Tera Type: Water
+EVs: 252 HP / 124 Def / 132 Spe
+Timid Nature
+IVs: 0 Atk
+- Fiery Dance
+- Sludge Wave
+- Acid Spray
+- Morning Sun
+
+Ursaluna-Bloodmoon @ Leftovers
+Ability: Mind's Eye
+Tera Type: Poison
+EVs: 244 HP / 76 Def / 188 SpD
+Bold Nature
+IVs: 0 Atk
+- Moonlight
+- Blood Moon
+- Calm Mind
+- Vacuum Wave
