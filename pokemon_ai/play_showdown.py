@@ -1,89 +1,24 @@
-"""인간 vs AI — Showdown 서버 대전 (Nash 균형 기반)."""
+"""인간 vs AI — Showdown 서버 대전 (Nash 균형 기반).
+
+사용법:
+  python play_showdown.py --paste data/my_team.txt
+  python play_showdown.py --paste data/my_team.txt --budget 20 --games 3
+  python play_showdown.py --paste data/my_team.txt --format gen9bssregi --username NashBot
+"""
+import argparse
 import asyncio
 import os
 import sys
-import torch
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "entropy_adam"))
+sys.path.insert(0, os.path.dirname(__file__))
 
-from data_loader import GameData, _to_id
-from neural_net import (
-    PokemonNet, NetworkEvaluator,
-    TeamPreviewNet, PreviewEvaluator,
-)
+from data_loader import GameData
 from rule_evaluator import RuleBasedEvaluator
-from battle_sim import BattleSimulator, make_pokemon_from_stats, load_sample_teams
+from battle_sim import BattleSimulator, parse_showdown_paste
 from nash_solver import NashSolver
 from endgame_solver import EndgameNashSolver
 from poke_env import AccountConfiguration
 from agent import NashPlayer, team_to_showdown_paste
-
-CHECKPOINT_DIR = os.path.join(os.path.dirname(__file__), "checkpoints")
-
-# Gen 9 SV에 없는 포켓몬 (Min Source Gen = 9 위반)
-NOT_IN_GEN9 = {
-    _to_id(n) for n in [
-        "Ho-Oh", "Zacian-Crowned", "Eternatus", "Smeargle",
-        "Muk-Alola", "Weezing-Galar",
-    ]
-}
-
-# 제한전설 (Reg J: 2마리까지)
-RESTRICTED = {
-    _to_id(n) for n in [
-        "Koraidon", "Miraidon", "Calyrex-Shadow", "Calyrex-Ice",
-        "Kyogre", "Lugia", "Lunala", "Rayquaza",
-        "Necrozma-Dusk-Mane", "Terapagos",
-    ]
-}
-
-
-def load_model(cls, path, device):
-    """체크포인트 로드."""
-    model = cls().to(device)
-    ckpt = torch.load(path, map_location=device, weights_only=False)
-    if "model_state_dict" in ckpt:
-        model.load_state_dict(ckpt["model_state_dict"])
-    else:
-        model.load_state_dict(ckpt)
-    model.eval()
-    return model
-
-
-def build_legal_team(build_eval, gd, max_restricted=2):
-    """Reg J 합법 팀 생성. 빌드 모델로 뽑되 불법 포켓몬 교체."""
-    team, _ = build_eval.build_team(temperature=0.3)
-
-    # 합법 필터링
-    legal_team = []
-    restricted_count = 0
-    for p in team:
-        pid = _to_id(p.name)
-        if pid in NOT_IN_GEN9:
-            continue
-        if pid in RESTRICTED:
-            if restricted_count >= max_restricted:
-                continue
-            restricted_count += 1
-        legal_team.append(p)
-
-    # 부족하면 후보 풀에서 채우기
-    if len(legal_team) < 6:
-        used = {_to_id(p.name) for p in legal_team}
-        for candidate in build_eval.candidate_pokemon:
-            if len(legal_team) >= 6:
-                break
-            cid = _to_id(candidate.name)
-            if cid in used or cid in NOT_IN_GEN9:
-                continue
-            if cid in RESTRICTED and restricted_count >= max_restricted:
-                continue
-            if cid in RESTRICTED:
-                restricted_count += 1
-            legal_team.append(candidate)
-            used.add(cid)
-
-    return legal_team
 
 
 def show_team(label, team):
@@ -100,70 +35,99 @@ def show_team(label, team):
 
 
 def main():
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Device: {device}")
+    parser = argparse.ArgumentParser(description="Nash 균형 Showdown 대전 봇")
+    parser.add_argument("--paste", type=str, default=None,
+                        help="Showdown paste 팀 파일 경로 (예: data/my_team.txt)")
+    parser.add_argument("--budget", type=float, default=30.0,
+                        help="Nash 시간 예산 (초, 기본 30)")
+    parser.add_argument("--format", type=str, default="gen9bssregi",
+                        help="배틀 포맷 (기본 gen9bssregi)")
+    parser.add_argument("--username", type=str, default="MacroNash",
+                        help="AI 닉네임 (기본 MacroNash)")
+    parser.add_argument("--games", type=int, default=1,
+                        help="연속 대전 수 (기본 1)")
+    args = parser.parse_args()
 
+    # ── 엔진 초기화 ──
+    print("GameData 로드 중...")
     gd = GameData(device="cpu")
     sim = BattleSimulator(gd)
 
-    # ── 룰 기반 평가 (신경망 대체) ──
     print("RuleBasedEvaluator 초기화...")
-    net_eval = RuleBasedEvaluator(gd)
+    evaluator = RuleBasedEvaluator(gd)
 
-    # Nash Solver 생성 (인간 대전: 시간 기반 iterative deepening)
-    endgame = EndgameNashSolver(sim, gd, net_eval, max_depth=20)
-    nash = NashSolver(sim, gd, net_eval, endgame_solver=endgame,
-                      move_time_budget=40)
+    endgame = EndgameNashSolver(sim, gd, evaluator, max_depth=20)
+    nash = NashSolver(sim, gd, evaluator, endgame_solver=endgame,
+                      move_time_budget=args.budget)
 
-    # ── 프리뷰/빌드 모델 ──
-    preview_path = os.path.join(CHECKPOINT_DIR, "preview_best.pt")
-    if not os.path.exists(preview_path):
-        preview_path = os.path.join(CHECKPOINT_DIR, "preview_final.pt")
-    build_path = os.path.join(CHECKPOINT_DIR, "build_best.pt")
-    if not os.path.exists(build_path):
-        build_path = os.path.join(CHECKPOINT_DIR, "build_final.pt")
+    # ── 팀 로드 ──
+    # format ID에서 내부 format_name 추출 (gen9bssregi → bss)
+    fmt_id = args.format.lower()
+    if "bss" in fmt_id or "battlestadium" in fmt_id:
+        format_name = "bss"
+    elif "ou" in fmt_id:
+        format_name = "ou"
+    else:
+        format_name = "bss"
 
-    preview_model = load_model(TeamPreviewNet, preview_path, device)
+    if args.paste:
+        paste_path = args.paste
+        if not os.path.isabs(paste_path):
+            paste_path = os.path.join(os.path.dirname(__file__), paste_path)
+        with open(paste_path, "r", encoding="utf-8") as f:
+            paste_text = f.read()
+        ai_team = parse_showdown_paste(gd, paste_text)
+        if not ai_team:
+            print(f"[에러] {paste_path}에서 팀을 파싱할 수 없습니다.")
+            sys.exit(1)
+        # paste 원문을 그대로 poke-env에 전달 (Showdown 포맷 그대로)
+        team_paste = paste_text
+        print(f"\n팀 로드: {paste_path} ({len(ai_team)}마리)")
+    else:
+        # --paste 없으면 Smogon 통계 기반 자동 팀 생성
+        from battle_sim import load_sample_teams
+        teams_path = os.path.join(os.path.dirname(__file__), "data", "sample_teams.txt")
+        if not os.path.exists(teams_path):
+            print("[에러] --paste 플래그로 팀 파일을 지정하거나,")
+            print(f"       {teams_path}에 sample_teams.txt를 넣어주세요.")
+            sys.exit(1)
+        import random
+        sample_teams = load_sample_teams(gd, teams_path)
+        ai_team = random.choice(sample_teams)
+        team_names = [p.name for p in ai_team]
+        team_paste = team_to_showdown_paste(gd, team_names, format_name, level=50)
+        print(f"\nSample teams: {len(sample_teams)}개 중 1개 랜덤 선택")
 
-    # AI 팀 — sample_teams에서 선택
-    import random
-    teams_path = os.path.join(os.path.dirname(__file__), "data", "sample_teams.txt")
-    sample_teams = load_sample_teams(gd, teams_path)
-    ai_team_full = random.choice(sample_teams)
-    team_names = [p.name for p in ai_team_full]
-    team_paste = team_to_showdown_paste(gd, team_names, "bss", level=50)
-    print(f"\nSample teams: {len(sample_teams)}개 중 1개 선택")
-    show_team("AI의 팀", ai_team_full)
+    show_team("AI의 팀", ai_team)
 
-    # NashPlayer 생성
+    # ── NashPlayer 생성 ──
     print(f"\n{'='*50}")
     print("  Showdown 접속 중... (Nash Equilibrium)")
     print(f"{'='*50}")
 
     player = NashPlayer(
         game_data=gd,
-        format_name="bss",
+        format_name=format_name,
         log_decisions=True,
         nash_solver=nash,
-        network_evaluator=net_eval,
-        preview_checkpoint_path=preview_path,
-        battle_format="gen9bssregi",
+        network_evaluator=evaluator,
+        preview_checkpoint_path=None,
+        battle_format=args.format,
         team=team_paste,
         max_concurrent_battles=1,
-        account_configuration=AccountConfiguration("MacroNash", None),
+        account_configuration=AccountConfiguration(args.username, None),
     )
 
     print(f"\n  AI 준비 완료!")
     print(f"  브라우저: http://localhost:8000")
     print(f"  AI 유저명: {player.username}")
-    print(f"  포맷: [Gen 9] BSS Reg I")
-    print(f"  → 위 유저명에게 챌린지를 보내세요!")
+    print(f"  포맷: {args.format}")
+    print(f"  Nash 예산: {args.budget}초")
+    print(f"  → http://localhost:8000 에서 {args.username}에게 챌린지를 보내세요!")
     print(f"\n  대기 중...\n")
 
-    n_games = int(sys.argv[2]) if len(sys.argv) > 2 else 1
-
     async def run():
-        await player.accept_challenges(None, n_challenges=n_games)
+        await player.accept_challenges(None, n_challenges=args.games)
         print(f"\n{'='*50}")
         print(f"  대전 완료!")
         print(f"  승: {player.n_won_battles} / 패: {player.n_lost_battles}")

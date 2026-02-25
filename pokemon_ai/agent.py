@@ -26,7 +26,7 @@ import torch
 # ── poke-env 임포트 (없으면 오프라인 모드) ───────────────────
 try:
     from poke_env.player import Player
-    from poke_env.player.battle_order import BattleOrder
+    from poke_env.player.battle_order import BattleOrder, ForfeitBattleOrder
     from poke_env.battle import (
         Battle, Pokemon as PEPokemon, Move as PEMove,
     )
@@ -1171,6 +1171,13 @@ class NashPlayer(MCTSPlayer):
         network_evaluator=None,
         **kwargs,
     ):
+        # network_evaluator가 없으면 RuleBasedEvaluator 자동 생성
+        if network_evaluator is None:
+            from rule_evaluator import RuleBasedEvaluator
+            network_evaluator = RuleBasedEvaluator(game_data)
+            if log_decisions:
+                print("[NashPlayer] network_evaluator=None → RuleBasedEvaluator 자동 생성")
+
         # MCTSPlayer.__init__이 MCTS를 만들지만, 우리는 쓰지 않음
         super().__init__(
             game_data=game_data,
@@ -1436,6 +1443,18 @@ class NashPlayer(MCTSPlayer):
         p1_dict, p2_dict, gv, _, _, _, _ = self.nash.get_nash_strategies_both(
             state, add_noise=False, opp_variants=variants)
 
+        # 3.5. 서렌 판정 — GV가 연속으로 절망적이면 포기
+        if not hasattr(self, '_forfeit_counter'):
+            self._forfeit_counter = 0
+        if gv < -0.90:
+            self._forfeit_counter += 1
+        else:
+            self._forfeit_counter = 0
+        if self._forfeit_counter >= 3 and battle.turn >= 5:
+            if self.log_decisions:
+                print(f"[서렌] GV={gv:+.3f} (연속 {self._forfeit_counter}턴 < -0.90)")
+            return ForfeitBattleOrder()
+
         # 4. 최적 액션 선택 (greedy: 최대 확률 액션)
         if p1_dict:
             best_action = max(p1_dict, key=p1_dict.get)
@@ -1499,11 +1518,13 @@ class NashPlayer(MCTSPlayer):
         return self._action_to_order(battle, state, best_action)
 
     def teampreview(self, battle: Battle) -> str:
-        """팀 프리뷰 — 20×20 매치업 시뮬레이션 기반 최적 선출.
+        """팀 프리뷰 — 매크로 전략 우선, minimax 보조.
 
-        1단계: 내 6C3=20 × 상대 6C3=20 = 400 초기 상태를 value net 배치 평가
-        2단계: 20×20 보상행렬 → Nash 균형으로 최적 선출 결정
-        3단계: 상위 후보에서 리드 순서 최적화
+        0단계: 내 팀 매크로 판정 + 상대 매크로 추정
+        1단계: 매크로 기반 후보 축소 (20 → 5~8)
+        2단계: 축소된 후보에서 minimax
+        3단계: 매크로별 리드 순서 보정
+        4단계: evaluator에 매크로 설정
         """
         from itertools import combinations
 
@@ -1513,6 +1534,7 @@ class NashPlayer(MCTSPlayer):
         self.set_inferencer.reset()
         self._used_protect_last.clear()
         self._opp_choice_infer.clear()
+        self._forfeit_counter = 0
 
         my_team_pe = list(battle.team.values())
         my_team = [self._pe_pokemon_to_sim(p) for p in my_team_pe]
@@ -1535,10 +1557,42 @@ class NashPlayer(MCTSPlayer):
         if evaluator is None:
             return super().teampreview(battle)
 
-        # ── 1단계: 400 매치업 배치 평가 ──
-        my_combos = list(combinations(range(6), 3))   # 20
-        opp_combos = list(combinations(range(6), 3))  # 20
+        # ── 0단계: 매크로 판정 (복수 매크로 + RPS 카운터 선택) ──
+        from macro_search import (
+            classify_team_macros, estimate_opponent_macro,
+            select_macro_vs_opponent,
+            classify_role, search_macros,
+        )
+        _MACRO_KR = {
+            "face": "대면", "offensive_cycle": "공사이클",
+            "stall_cycle": "막사이클", "hazard_offense": "전개(스락)",
+            "screen_offense": "전개(벽)", "baton_pass": "전개(배턴)",
+            "unknown": "?",
+        }
 
+        my_macros = classify_team_macros(my_team)
+        opp_macro, opp_info = estimate_opponent_macro(
+            self.gd, opp_names, self.format_name)
+
+        # 상대 매크로 기반 최적 매크로 선택
+        my_macro, my_info = select_macro_vs_opponent(
+            my_macros, opp_macro, my_team, opp_team)
+
+        if self.log_decisions:
+            all_m = [_MACRO_KR.get(m, m) for m, _ in my_macros]
+            print(f"[매크로] 내 팀 가능: {all_m}")
+            print(f"[매크로] 상대: {_MACRO_KR.get(opp_macro, opp_macro)} "
+                  f"({', '.join(opp_names[:3])}...)")
+            print(f"[매크로] → 선택: {_MACRO_KR.get(my_macro, my_macro)}")
+
+        # ── 1단계: 매크로 기반 후보 축소 ──
+        all_combos = list(combinations(range(6), 3))  # 20
+        preferred = self._macro_preferred_combos(
+            my_team, my_macro, my_info, opp_macro)
+        my_combos = preferred if preferred else all_combos
+        opp_combos = all_combos
+
+        # ── 2단계: 매치업 배치 평가 + minimax ──
         states = []
         for my_idx in my_combos:
             for opp_idx in opp_combos:
@@ -1548,34 +1602,32 @@ class NashPlayer(MCTSPlayer):
                 states.append(st)
 
         values = evaluator.evaluate_values_batch(states, 0)
-        M = np.array(values, dtype=np.float64).reshape(20, 20)
+        n_my = len(my_combos)
+        M = np.array(values, dtype=np.float64).reshape(n_my, 20)
 
-        # ── 2단계: 각 내 선출의 worst-case (minimax) ──
-        minimax_scores = M.min(axis=1)  # 상대가 최적으로 골랐을 때
-        top5_idx = np.argsort(minimax_scores)[::-1][:5]
+        minimax_scores = M.min(axis=1)
+        n_top = min(5, n_my)
+        top_idx = np.argsort(minimax_scores)[::-1][:n_top]
 
         if self.log_decisions:
-            print(f"[선출/심층] 상대: {opp_names}")
-            print(f"[선출/심층] 20×20 행렬 평가 완료 ({time.time()-t0:.1f}s)")
-            for rank, ci in enumerate(top5_idx):
+            print(f"[선출] {n_my}×20 행렬 ({time.time()-t0:.1f}s)")
+            for rank, ci in enumerate(top_idx):
                 names = [my_team[i].name for i in my_combos[ci]]
                 print(f"  #{rank+1} {names}  "
                       f"minimax={minimax_scores[ci]:+.3f}  "
                       f"avg={M[ci].mean():+.3f}")
 
-        # ── 3단계: 상위 후보 리드 순서 최적화 ──
-        # 각 상위 후보의 3가지 리드 순서를 평가
+        # ── 3단계: 리드 순서 최적화 (매크로 보정 포함) ──
+        roles = {i: classify_role(my_team[i]) for i in range(6)}
         best_score = -2.0
-        best_order = list(my_combos[top5_idx[0]])
+        best_order = list(my_combos[top_idx[0]])
 
-        # 상대 예상 선출: 상대 minimax 기준 상위 3개 가중 평균
-        opp_minimax = (-M).min(axis=0)  # 상대 관점 minimax
+        opp_minimax = (-M).min(axis=0)
         opp_top3 = np.argsort(opp_minimax)[::-1][:3]
 
-        for ci in top5_idx:
+        for ci in top_idx:
             combo = list(my_combos[ci])
             for lead_pos in range(3):
-                # lead_pos번째를 선발로
                 ordered = [combo[lead_pos]] + [combo[j] for j in range(3)
                                                 if j != lead_pos]
                 lead_states = []
@@ -1587,7 +1639,19 @@ class NashPlayer(MCTSPlayer):
                         self.sim.create_battle_state(mt, ot))
 
                 lead_vals = evaluator.evaluate_values_batch(lead_states, 0)
-                score = float(min(lead_vals))  # worst-case
+                score = float(min(lead_vals))
+
+                # 매크로별 리드 보정
+                lead_role = roles[ordered[0]]
+                if my_macro in ("hazard_offense", "screen_offense"):
+                    if lead_role == "lead_support":
+                        score += 0.3
+                elif my_macro == "face":
+                    if lead_role in ("breaker", "lead_pivot"):
+                        score += 0.2
+                elif my_macro in ("offensive_cycle",):
+                    if lead_role == "lead_pivot":
+                        score += 0.2
 
                 if score > best_score:
                     best_score = score
@@ -1597,33 +1661,39 @@ class NashPlayer(MCTSPlayer):
 
         if self.log_decisions:
             names = [my_team[i].name for i in best_order]
-            print(f"[선출/심층] 최종: {names}  "
-                  f"score={best_score:+.3f}  ({elapsed:.1f}s)")
+            r = [roles[i] for i in best_order]
+            print(f"[선출] 최종: {names}")
+            print(f"[선출] 역할: {r}  score={best_score:+.3f} ({elapsed:.1f}s)")
 
-        # ── 4단계: 선출된 3마리로 매크로 탐색 + evaluator 설정 ──
+        # ── 4단계: evaluator 매크로 설정 ──
+        picked_team = [my_team[i] for i in best_order[:3]]
+
+        # 세부 실행 전략 (에이스/앵커)은 기존 search_macros로 보강
+        eval_macro = my_macro
+        eval_info = dict(my_info)  # 복사
+
         try:
-            from macro_search import search_macros
-            picked_team = [my_team[i] for i in best_order[:3]]
-            macros = search_macros(picked_team, top_per_pattern=1)
-            if macros:
-                best_pat = max(macros.items(), key=lambda x: x[1][0][1])
-                pat_name = best_pat[0]
-                pat_info = best_pat[1][0][2]  # detail dict
-                self.active_macro = (pat_name, pat_info)
-                if hasattr(evaluator, 'set_macro'):
-                    evaluator.set_macro(pat_name, pat_info)
-                if self.log_decisions:
-                    _PAT_KR = {"setup_sweep": "세팅>스윕",
-                               "break_clean": "브레이크>클린",
-                               "cycle": "사이클"}
-                    print(f"[매크로] {_PAT_KR.get(pat_name, pat_name)}: "
-                          f"{pat_info}")
-            else:
-                self.active_macro = None
-                if hasattr(evaluator, 'set_macro'):
-                    evaluator.set_macro(None)
-        except ImportError:
-            self.active_macro = None
+            detail = search_macros(picked_team, top_per_pattern=1)
+            if detail:
+                # 기존 3마리 패턴에서 세부 정보 병합
+                if my_macro in ("hazard_offense", "screen_offense"):
+                    if "setup_sweep" in detail:
+                        eval_info.update(detail["setup_sweep"][0][2])
+                elif my_macro in ("offensive_cycle", "stall_cycle"):
+                    if "cycle" in detail:
+                        eval_info.update(detail["cycle"][0][2])
+                elif my_macro == "face":
+                    if "break_clean" in detail:
+                        eval_info.update(detail["break_clean"][0][2])
+        except Exception:
+            pass
+
+        self.active_macro = (eval_macro, eval_info)
+        if hasattr(evaluator, 'set_macro'):
+            evaluator.set_macro(eval_macro, eval_info)
+
+        if self.log_decisions:
+            print(f"[매크로] 실행: {_MACRO_KR.get(eval_macro, eval_macro)}")
 
         # best_order는 my_team 인덱스 (0~5)
         pick = best_order[:3]
@@ -1631,6 +1701,53 @@ class NashPlayer(MCTSPlayer):
         full_order = pick + remaining
 
         return "/team " + "".join(str(i + 1) for i in full_order)
+
+    def _macro_preferred_combos(self, team, my_macro, my_info, opp_macro):
+        """매크로 유형에 따라 유효한 3마리 조합만 반환."""
+        from itertools import combinations
+        from macro_search import classify_role, HAZARDS, SCREENS
+
+        roles = {i: classify_role(team[i]) for i in range(6)}
+        all_combos = list(combinations(range(6), 3))
+        combos = []
+
+        if my_macro == "face":
+            for c in all_combos:
+                c_roles = [roles[i] for i in c]
+                if "wall" not in c_roles:
+                    combos.append(c)
+
+        elif my_macro == "offensive_cycle":
+            for c in all_combos:
+                c_roles = [roles[i] for i in c]
+                if "cycle_tank" in c_roles:
+                    combos.append(c)
+
+        elif my_macro == "hazard_offense":
+            hl = [i for i in range(6)
+                  if roles[i] == "lead_support"
+                  and set(team[i].moves) & HAZARDS]
+            for c in all_combos:
+                if any(i in c for i in hl):
+                    combos.append(c)
+
+        elif my_macro == "screen_offense":
+            sl = [i for i in range(6)
+                  if roles[i] == "lead_support"
+                  and set(team[i].moves) & SCREENS]
+            sw = [i for i in range(6) if roles[i] == "sweeper"]
+            for c in all_combos:
+                if any(i in c for i in sl) and any(i in c for i in sw):
+                    combos.append(c)
+
+        elif my_macro == "stall_cycle":
+            for c in all_combos:
+                c_roles = [roles[i] for i in c]
+                wc = c_roles.count("wall") + c_roles.count("setup_tank")
+                if wc >= 2:
+                    combos.append(c)
+
+        return combos if combos else None
 
     def _nash_action_name(self, state, action: int) -> str:
         """디버그용 액션 이름."""
